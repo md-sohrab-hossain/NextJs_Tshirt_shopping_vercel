@@ -1,0 +1,37 @@
+{
+  "name": "teshirt_design",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "export": "next build && next export"
+  },
+  "dependencies": {
+    "@netlify/plugin-nextjs": "^3.4.2",
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.26.0",
+    "critters": "0.0.10",
+    "mongodb-client-encryption": "^1.2.5",
+    "mongoose": "^5.12.14",
+    "next": "^11.0.1",
+    "next-absolute-url": "^1.2.2",
+    "next-auth": "^3.27.0",
+    "next-connect": "^0.10.1",
+    "next-redux-wrapper": "^6.0.2",
+    "nodemailer": "^6.6.2",
+    "react": "17.0.2",
+    "react-bootstrap": "^1.6.1",
+    "react-dom": "17.0.2",
+    "react-js-pagination": "^3.0.3",
+    "react-redux": "^7.2.4",
+    "react-toastify": "^7.0.4",
+    "redux": "^4.1.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0",
+    "sass": "^1.35.1",
+    "validator": "^13.6.0"
+  }
+}

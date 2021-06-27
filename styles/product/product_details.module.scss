@@ -1,0 +1,100 @@
+@import "../mixins.module";
+$custom__font1: "Dancing Script", cursive;
+
+#review {
+  padding-left: 5px;
+}
+
+.productDetails {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  &__name {
+    font-family: $custom__font1;
+    margin-top: 50px;
+  }
+
+  &__ratings {
+    padding: 0.5rem 0;
+  }
+
+  &__description {
+    @include display_row;
+    margin-top: 20px;
+
+    &__feature {
+      width: 80%;
+    }
+
+    &__card {
+      width: 20%;
+
+      &__price {
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11),
+          0 5px 56px rgba(0, 0, 0, 0.4);
+        &__text {
+          padding: 0.5rem 0.5rem;
+          font-size: 25px;
+        }
+        &__info {
+          padding: 0.5rem 0.5rem;
+        }
+      }
+
+      &__button {
+        @include custom_button;
+      }
+    }
+  }
+
+  @include screen(750px) {
+    &__description {
+      @include display_column;
+
+      &__feature {
+        width: 100%;
+      }
+
+      &__card {
+        width: 50%;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+.review {
+  width: 65%;
+
+  &__user {
+    font-size: 0.8rem;
+    color: grey;
+  }
+}
+.slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+
+  &__img {
+    width: calc(100% - 60%);
+    height: auto;
+    cursor: pointer;
+  }
+}
+
+.datePicker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+@include rating;

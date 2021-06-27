@@ -1,0 +1,133 @@
+@mixin screen($width) {
+  @media only screen and (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin display_column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@mixin display_row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Ratings */
+@mixin rating {
+  .ratingOuter {
+    display: inline-block;
+    position: relative;
+    font-family: FontAwesome;
+    color: #f1c40f;
+
+    &::before {
+      content: "\f006 \f006 \f006 \f006 \f006";
+    }
+  }
+
+  .ratingInner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+
+    &::before {
+      content: "\f005 \f005 \f005 \f005 \f005";
+      color: #f1c40f;
+    }
+  }
+}
+
+@mixin custom_button {
+  border: 0;
+  outline: 0;
+  width: calc(100% - 30px);
+  height: 40px;
+  background: #26de81;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 5px;
+
+  &:hover {
+    color: #fff;
+    cursor: pointer;
+    background-color: #7795f8;
+    transform: translateY(-0.5px);
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+  }
+
+  &:focus {
+    border: 0;
+    outline: 0;
+  }
+}
+
+@mixin custom_animated_button1 {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  margin-top: 30px;
+  background: #7d5fff;
+  height: 30px;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+
+  &::before {
+    content: "";
+    top: 0;
+    left: 0;
+    position: absolute;
+    background: #9980fa;
+    height: 100%;
+    width: 100%;
+    transform-origin: left bottom;
+    transform: translateX(-100%);
+    transition: transform 0.5s ease-in;
+    z-index: -1;
+  }
+
+  &:hover {
+    &:before {
+      transform: translateX(0);
+    }
+  }
+}
+
+@mixin custom_loading_animation {
+  @content;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border: 4px solid transparent;
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: button_loading_spinner 1s ease infinite;
+  }
+
+  @keyframes button_loading_spinner {
+    from {
+      transform: rotate(0turn);
+    }
+
+    to {
+      transform: rotate(1turn);
+    }
+  }
+}

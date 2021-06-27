@@ -1,0 +1,74 @@
+@import "../mixins.module";
+
+#review {
+  padding-left: 5px;
+}
+
+.product_item {
+  margin: 5px;
+  box-sizing: border-box;
+  @include display_column;
+  position: relative;
+
+  &__card {
+    width: 300px;
+    margin: 10px;
+    @include display_column;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+      rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    border-radius: 19px 19px 19px 19px;
+    // border-radius: 0% 100% 0% 100% / 83% 18% 82% 17%;
+    transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
+    padding: 15px;
+
+    &:hover {
+      opacity: 1;
+      z-index: 999;
+      background: linear-gradient(to right, #77a1d3, #79cbca, #e684ae);
+      transform: scale(1.1, 1.1);
+    }
+
+    &__img {
+      width: 60%;
+      height: 200px;
+      border-radius: 20px;
+    }
+
+    &__body {
+      width: 100%;
+      margin-top: 15px;
+
+      &__title a {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        text-decoration: none;
+        text-transform: capitalize;
+      }
+    }
+
+    @include screen(700px) {
+      width: calc(100vw - 50%);
+    }
+  }
+
+  &__details {
+    &__price {
+      display: flex;
+      justify-content: flex-start;
+      width: 100%;
+    }
+  }
+
+  &__button {
+    @include custom_animated_button1;
+    margin-bottom: 10px;
+    > a {
+      color: white;
+      text-decoration: none;
+    }
+  }
+}
+
+@include rating;
