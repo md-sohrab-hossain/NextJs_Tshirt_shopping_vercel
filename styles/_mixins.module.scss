@@ -100,6 +100,11 @@
       transform: translateX(0);
     }
   }
+
+  &:focus {
+    border: 0;
+    outline: 0;
+  }
 }
 
 @mixin custom_loading_animation {

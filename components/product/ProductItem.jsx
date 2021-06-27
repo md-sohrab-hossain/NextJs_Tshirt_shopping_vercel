@@ -1,6 +1,7 @@
 /** library */
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 /** library */
 
 /** css */
@@ -8,6 +9,8 @@ import style from "../../styles/product/product_item.module.scss";
 /** css */
 
 function ProductItem({ product }) {
+  const router = useRouter();
+
   return (
     <div className={style.product_item}>
       <div className={style.product_item__card}>
@@ -37,10 +40,11 @@ function ProductItem({ product }) {
             <span id={style.review}>({product.numOfReviews} Reviews)</span>
           </div>
 
-          <button className={style.product_item__button}>
-            <Link href={`/customPages/product/${product._id}`}>
-              View Details
-            </Link>
+          <button
+            className={style.product_item__button}
+            onClick={() => router.push(`/customPages/product/${product._id}`)}
+          >
+            View Details
           </button>
         </div>
       </div>

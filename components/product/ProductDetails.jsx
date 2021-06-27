@@ -36,71 +36,49 @@ export default function ProductDetails({ product, title }) {
       </Head>
 
       <div className={style.productDetails}>
-        <Carousel>
-          {images &&
-            images.map((img, indx) => (
-              <Carousel.Item key={img.public_id}>
-                <div key={indx} className={style.slider}>
-                  <img
-                    src={img.url}
-                    alt={product?.name}
-                    className={style.slider__img}
-                  />
-                </div>
-              </Carousel.Item>
-            ))}
-        </Carousel>
-
-        <h2 className={style.productDetails__name}>{product?.name}</h2>
-
-        <div className={style.productDetails__ratings}>
-          <div className={style.ratingOuter}>
-            <div
-              className={style.ratingInner}
-              style={{ width: `${(product?.ratings / 5) * 100}%` }}
-            ></div>
-          </div>
-          <span id={style.review}>({product?.numOfReviews} Reviews)</span>
+        <div className={style.productDetails__img}>
+          <Carousel>
+            {images &&
+              images.map((img, indx) => (
+                <Carousel.Item key={img.public_id}>
+                  <div key={indx} className={style.slider}>
+                    <img
+                      src={img.url}
+                      alt={product?.name}
+                      className={style.slider__img}
+                    />
+                  </div>
+                </Carousel.Item>
+              ))}
+          </Carousel>
         </div>
 
-        <div className={style.roomDetails__description}>
-          <div className={style.roomDetails__description__feature}>
-            <h3>Description</h3>
-            <p>{product?.description}</p>
-          </div>
+        <div className={style.productDetails__info}>
+          <div className={style.productDetails__info__card}>
+            <h2 className={style.productDetails__info__card__name}>
+              {product?.name}
+            </h2>
 
-          <div className={style.roomDetails__description__card}>
-            <div className={style.roomDetails__description__card__price}>
-              <p className={style.roomDetails__description__card__price__text}>
-                <b>${product?.price}</b>
-              </p>
+            <b> BDT {product?.price}/=</b>
 
-              <hr />
-              <p className={style.roomDetails__description__card__price__info}>
-                Pick Check In & Check Out Date
-              </p>
-
-              <button className={style.roomDetails__description__card__button}>
-                Pay
-              </button>
+            <div className={style.productDetails__info__card__description}>
+              {product?.description}
             </div>
-          </div>
-        </div>
-
-        <div className={style.review}>
-          <h3>Reviews:</h3>
-          <hr />
-          <div>
-            <p className={style.review__user}>by John</p>
-            <p>Good Quality</p>
-            <hr />
-          </div>
-
-          <div>
-            <p className={style.review__user}>by John</p>
-            <p>Good Quality</p>
+            <div className={style.productDetails__info__card__ratings}>
+              <div className={style.ratingOuter}>
+                <div
+                  className={style.ratingInner}
+                  style={{ width: `${(product?.ratings / 5) * 100}%` }}
+                ></div>
+              </div>
+              <span id={style.review}>({product?.numOfReviews} Reviews)</span>
+            </div>
 
             <hr />
+
+            <button className={style.productDetails__info__card__button}>
+              Add To Cart
+            </button>
           </div>
         </div>
       </div>
