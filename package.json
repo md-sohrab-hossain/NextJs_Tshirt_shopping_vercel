@@ -9,7 +9,6 @@
     "export": "next build && next export"
   },
   "dependencies": {
-    "@netlify/plugin-nextjs": "^3.4.2",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.26.0",
