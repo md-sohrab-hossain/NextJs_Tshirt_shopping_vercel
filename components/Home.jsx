@@ -1,5 +1,5 @@
 /** Library */
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Pagination from "react-js-pagination";
 /** Library */
@@ -15,20 +15,43 @@ import style from "../styles/home.module.scss";
 
 function Home({ productsData }) {
   const router = useRouter();
-
-  const { loading, products, productsCount, resultPerPage } = productsData;
+  const [allProduct, setAllproducts] = useState(() => productsData);
+  const { loading, products, productsCount, resultPerPage } = allProduct;
 
   const handlePagination = (pageNumber) => {
-    let url = window.location.href + `/?page=${pageNumber}`;
+    window.location.href = `/?page=${pageNumber}`;
+    // let url = window.location.href + `/?page=${pageNumber}`;
 
-    url = url.replace(/\b\?page=([1-9])(\/)?/g, "");
+    // url = url.replace(/\b\/\?page=([1-9])(\/)?/g, "");
 
-    router.push(url);
+    // router.push(url);
+    // router.push({ pathname: "/", query: { page: pageNumber } });
   };
 
   let { page = 1 } = router.query;
   let count = productsCount;
   page = Number(page);
+
+  const filterItem = (e) => {
+    const productList = products;
+    const filterProduct = productList.filter((item) =>
+      item.name.toLowerCase().includes(e.target.value.trim().toLowerCase())
+    );
+
+    if (e.target.value.trim() == "") {
+      count = productsCount;
+      setAllproducts({
+        ...allProduct,
+        products: productsData.products,
+      });
+    } else {
+      count = filterProduct.length;
+      setAllproducts({
+        ...allProduct,
+        products: filterProduct.length ? filterProduct : productsData.products,
+      });
+    }
+  };
 
   if (loading) {
     return <Loading />;
@@ -42,6 +65,7 @@ function Home({ productsData }) {
             type="text"
             className="form-control w-25 m-5 float-right"
             placeholder="Search.."
+            onChange={filterItem}
           />
         </div>
 

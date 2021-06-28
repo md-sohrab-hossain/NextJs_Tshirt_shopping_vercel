@@ -27,7 +27,9 @@ const Header = () => {
       <div className={style.navbar__container}>
         <div className={style.navbar__container__brand}>
           <Link href="/">
-            <label>T-shirt Shopping</label>
+            <label onClick={() => (window.location.href = "/")}>
+              T-shirt Shopping
+            </label>
           </Link>
         </div>
 
