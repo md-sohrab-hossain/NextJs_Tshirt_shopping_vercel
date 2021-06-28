@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import style from "../../styles/layout_header.module.scss";
 
 //?--- Redux --- //
@@ -11,8 +11,12 @@ import { loadUser } from "../../redux/actions/userAction";
 import { signOut } from "next-auth/client";
 //? --- Next-auth ---//
 
+import CartIcon from "../shopping/cart";
+import CartDropdown from "../shopping/cartDropdown";
+
 const Header = () => {
   const dispatch = useDispatch();
+  const [openCart, setOpenCart] = useState(() => false);
   const { user, loading } = useSelector((state) => state.loadedUser);
   const { isUpdated } = useSelector((state) => state.user);
 
@@ -21,6 +25,10 @@ const Header = () => {
       dispatch(loadUser());
     }
   }, [dispatch, isUpdated]);
+
+  const handleOpenCart = useCallback(() => {
+    setOpenCart((open) => !open);
+  }, []);
 
   return (
     <nav className={style.navbar}>
@@ -97,6 +105,8 @@ const Header = () => {
               </Link>
             )
           )}
+          {user && <CartIcon openCart={handleOpenCart} />}
+          <CartDropdown open={openCart} openCart={handleOpenCart} />
         </div>
       </div>
     </nav>

@@ -1,0 +1,42 @@
+@import "../../mixins.module";
+
+.cart {
+  position: absolute;
+  width: 240px;
+  height: 340px;
+  padding: 20px;
+  box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+  border-radius: 5px;
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+  top: 60px;
+  right: 10px;
+  @include display_column;
+  text-transform: uppercase;
+  text-align: center;
+  z-index: 5;
+
+  &__items {
+    height: 340px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+
+    &__msg {
+      color: black;
+      font-size: 20px;
+      margin: 50px auto;
+    }
+  }
+
+  &__button {
+    @include custom_button;
+    background: #192a56;
+    height: auto;
+    width: 100%;
+    padding: 5px;
+
+    &:hover {
+      background: #273c75;
+    }
+  }
+}

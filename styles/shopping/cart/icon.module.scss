@@ -1,0 +1,24 @@
+.cart {
+  width: 45px;
+  height: 45px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &__icon {
+    height: 32px;
+    width: 45px;
+    filter: invert(100%) sepia(0%) saturate(7443%) hue-rotate(198deg)
+      brightness(126%) contrast(50%);
+  }
+
+  &__count {
+    color: white;
+    position: absolute;
+    font-size: 10px;
+    font-weight: bold;
+    bottom: 12px;
+  }
+}
