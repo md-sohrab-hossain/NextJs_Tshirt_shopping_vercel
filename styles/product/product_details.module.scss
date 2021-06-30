@@ -30,12 +30,52 @@ $custom__font1: "Dancing Script", cursive;
         margin-top: 20px;
       }
 
+      &__quantity {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 10px 0 10px 0;
+        width: 100%;
+
+        select {
+          width: 150px;
+        }
+        span {
+          width: 80px;
+        }
+      }
+
       &__ratings {
         padding: 0.5rem 0;
       }
 
       &__button {
         @include custom_button;
+      }
+
+      &__buttonWait {
+        margin: 15px;
+        position: relative;
+        border: 0;
+        outline: 0;
+        width: calc(100% - 30px);
+        height: 40px;
+        background: #9980fa;
+        color: #fff;
+        font-size: 20px;
+        border-radius: 5px;
+
+        span {
+          visibility: hidden;
+          opacity: 0;
+        }
+
+        &:focus {
+          border: 0;
+          outline: 0;
+        }
+
+        @include custom_loading_animation;
       }
     }
   }

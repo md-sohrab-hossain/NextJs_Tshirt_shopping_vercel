@@ -1,5 +1,6 @@
 import Head from "next/head";
-import React, { useState, useEffect } from "react";
+import { useSession } from "next-auth/client";
+import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { clearErrors } from "../../redux/actions/productAction";
@@ -8,8 +9,15 @@ import { Carousel } from "react-bootstrap";
 import Loading from "../atoms/Loading";
 import style from "../../styles/product/product_details.module.scss";
 
+import { NewProductOrder } from "../../redux/actions/productOrderAction";
+
 export default function ProductDetails({ product, title }) {
+  const [session] = useSession();
   const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(1);
+
+  let quantityOptions = [];
+  for (let i = 1; i <= 10; i++) quantityOptions.push(i);
 
   const {
     price,
@@ -22,17 +30,53 @@ export default function ProductDetails({ product, title }) {
     images,
   } = product;
 
+  const {
+    error: orderError,
+    loading,
+    success,
+  } = useSelector((state) => state.productOrder);
+
   useEffect(() => {
-    toast.error(error);
+    if (success) {
+      toast.success("Product Order Successfully!");
+    }
+  }, [success]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+    if (orderError) {
+      toast.error(orderError);
+    }
     dispatch(clearErrors());
-  }, []);
+  }, [orderError, error]);
+
+  const handleOrder = useCallback(() => {
+    if (!session) {
+      toast.error("Please login first to order this product");
+      return;
+    }
+    const order = {
+      product: product._id,
+      quantity,
+      price,
+      images,
+      paymentInfo: {
+        id: "STRIPE_PAYMENT_ID",
+        status: "STRIPE_PAYMENT_STATUS",
+      },
+    };
+
+    dispatch(NewProductOrder(order));
+  }, [quantity]);
 
   if (!product) return <Loading />;
 
   return (
     <>
       <Head>
-        <title>{title} - Tshirt-Design</title>
+        <title>{title} - Tshirt-Shopping</title>
       </Head>
 
       <div className={style.productDetails}>
@@ -55,29 +99,47 @@ export default function ProductDetails({ product, title }) {
 
         <div className={style.productDetails__info}>
           <div className={style.productDetails__info__card}>
-            <h2 className={style.productDetails__info__card__name}>
-              {product?.name}
-            </h2>
+            <h2 className={style.productDetails__info__card__name}>{name}</h2>
 
-            <b> BDT {product?.price}/=</b>
+            <b> BDT {price}/=</b>
 
             <div className={style.productDetails__info__card__description}>
-              {product?.description}
+              {description}
+            </div>
+            <div className={style.productDetails__info__card__quantity}>
+              <span>Quantity:</span>
+              <select
+                className="form-control"
+                onChange={(e) => setQuantity(e.target.value)}
+              >
+                {quantityOptions.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className={style.productDetails__info__card__ratings}>
               <div className={style.ratingOuter}>
                 <div
                   className={style.ratingInner}
-                  style={{ width: `${(product?.ratings / 5) * 100}%` }}
+                  style={{ width: `${(ratings / 5) * 100}%` }}
                 ></div>
               </div>
-              <span id={style.review}>({product?.numOfReviews} Reviews)</span>
+              <span id={style.review}>({numOfReviews} Reviews)</span>
             </div>
 
             <hr />
 
-            <button className={style.productDetails__info__card__button}>
-              Add To Cart
+            <button
+              className={
+                loading
+                  ? style.productDetails__info__card__buttonWait
+                  : style.productDetails__info__card__button
+              }
+              onClick={handleOrder}
+            >
+              <span> Add To Cart</span>
             </button>
           </div>
         </div>

@@ -93,97 +93,93 @@ const Profile = () => {
     [user, avatar, avatarPreview]
   );
 
+  if (loading) return <Loading />;
+
   return (
-    <>
-      {loading ? (
-        <Loading />
-      ) : (
-        <div className={style.profile}>
-          <div className="row wrapper">
-            <div className="col-10 col-lg-5">
-              <form className={style.profile__form} onSubmit={submitHandler}>
-                <h1 className={style.profile__form__header}>Update Profile</h1>
+    <div className={style.profile}>
+      <div className="row wrapper">
+        <div className="col-10 col-lg-5">
+          <form className={style.profile__form} onSubmit={submitHandler}>
+            <h1 className={style.profile__form__header}>Update Profile</h1>
 
-                <div className={style.profile__form__name}>
-                  <label htmlFor="name_field">Name</label>
-                  <input
-                    required
-                    type="text"
-                    id="name_field"
-                    className="form-control"
-                    name="name"
-                    value={name || ""}
-                    onChange={onChange}
-                  />
-                </div>
-
-                <div className={style.profile__form__email}>
-                  <label htmlFor="email_field">Email</label>
-                  <input
-                    required
-                    type="email"
-                    id="email_field"
-                    className="form-control"
-                    name="email"
-                    value={email || ""}
-                    onChange={onChange}
-                  />
-                </div>
-
-                <div className={style.profile__form__password}>
-                  <label htmlFor="password_field">Password</label>
-                  <input
-                    required
-                    type="password"
-                    id="password_field"
-                    className="form-control"
-                    name="password"
-                    value={password || ""}
-                    onChange={onChange}
-                  />
-                </div>
-
-                <div className={style.profile__form__avatar}>
-                  <label htmlFor="avatar_upload">Avatar</label>
-                  <div className={style.profile__form__avatar__items}>
-                    <img
-                      src={avatarPreview}
-                      className={style.profile__form__avatar__items__img}
-                      alt="image"
-                    />
-
-                    <div className="custom-file">
-                      <input
-                        required={avatarPreview ? false : true}
-                        type="file"
-                        name="avatar"
-                        className="form-control"
-                        id="customFile"
-                        accept="images/*"
-                        onChange={onChange}
-                      />
-                      <label className="custom-file-label" htmlFor="customFile">
-                        Choose Avatar
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  className={
-                    updateLoading ? style.button__wait : style.button__profile
-                  }
-                  disabled={updateLoading ? true : false}
-                >
-                  <span>Update</span>
-                </button>
-              </form>
+            <div className={style.profile__form__name}>
+              <label htmlFor="name_field">Name</label>
+              <input
+                required
+                type="text"
+                id="name_field"
+                className="form-control"
+                name="name"
+                value={name || ""}
+                onChange={onChange}
+              />
             </div>
-          </div>
+
+            <div className={style.profile__form__email}>
+              <label htmlFor="email_field">Email</label>
+              <input
+                required
+                type="email"
+                id="email_field"
+                className="form-control"
+                name="email"
+                value={email || ""}
+                onChange={onChange}
+              />
+            </div>
+
+            <div className={style.profile__form__password}>
+              <label htmlFor="password_field">Password</label>
+              <input
+                required
+                type="password"
+                id="password_field"
+                className="form-control"
+                name="password"
+                value={password || ""}
+                onChange={onChange}
+              />
+            </div>
+
+            <div className={style.profile__form__avatar}>
+              <label htmlFor="avatar_upload">Avatar</label>
+              <div className={style.profile__form__avatar__items}>
+                <img
+                  src={avatarPreview}
+                  className={style.profile__form__avatar__items__img}
+                  alt="image"
+                />
+
+                <div className="custom-file">
+                  <input
+                    required={avatarPreview ? false : true}
+                    type="file"
+                    name="avatar"
+                    className="form-control"
+                    id="customFile"
+                    accept="images/*"
+                    onChange={onChange}
+                  />
+                  <label className="custom-file-label" htmlFor="customFile">
+                    Choose Avatar
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className={
+                updateLoading ? style.button__wait : style.button__profile
+              }
+              disabled={updateLoading ? true : false}
+            >
+              <span>Update</span>
+            </button>
+          </form>
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 };
 

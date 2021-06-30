@@ -5,6 +5,7 @@ import style from "../../styles/layout_header.module.scss";
 //?--- Redux --- //
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "../../redux/actions/userAction";
+import { getMyOrders } from "../../redux/actions/productOrderAction";
 //?--- Redux --- //
 
 //? --- Next-auth ---//
@@ -17,14 +18,22 @@ import CartDropdown from "../shopping/cartDropdown";
 const Header = () => {
   const dispatch = useDispatch();
   const [openCart, setOpenCart] = useState(() => false);
+
   const { user, loading } = useSelector((state) => state.loadedUser);
   const { isUpdated } = useSelector((state) => state.user);
+
+  const { order } = useSelector((state) => state.getMyOrderList);
+  const { success } = useSelector((state) => state.productOrder);
 
   useEffect(() => {
     if (!isUpdated) {
       dispatch(loadUser());
     }
   }, [dispatch, isUpdated]);
+
+  useEffect(() => {
+    dispatch(getMyOrders());
+  }, [success]);
 
   const handleOpenCart = useCallback(() => {
     setOpenCart((open) => !open);
@@ -105,8 +114,12 @@ const Header = () => {
               </Link>
             )
           )}
-          {user && <CartIcon openCart={handleOpenCart} />}
-          <CartDropdown open={openCart} openCart={handleOpenCart} />
+          <CartIcon openCart={handleOpenCart} orderList={order} />
+          <CartDropdown
+            open={openCart}
+            openCart={handleOpenCart}
+            orderList={order}
+          />
         </div>
       </div>
     </nav>

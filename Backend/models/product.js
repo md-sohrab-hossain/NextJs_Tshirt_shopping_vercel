@@ -3,9 +3,9 @@ import mongoose, { model, Schema } from "mongoose";
 const productSchema = new Schema({
   name: {
     type: String,
-    required: [true, "Please enter room name"],
+    required: [true, "Please enter product name"],
     trim: true,
-    maxLength: [100, "Room name can't exceed 100 characters"],
+    maxLength: [100, "Product name can't exceed 100 characters"],
   },
   price: {
     type: Number,

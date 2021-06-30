@@ -18,6 +18,8 @@ import {
   updateProductReducer,
 } from "./productReducer";
 
+import { productOrderReducer, getMyOrdersReducer } from "./productOrderReducer";
+
 const reducer = combineReducers({
   //*-- user --//
   auth: authReducer,
@@ -36,6 +38,11 @@ const reducer = combineReducers({
   getProductDetails: productDetailsReducer,
   updateProduct: updateProductReducer,
   //*-- product --//
+
+  //*-- product order --//
+  productOrder: productOrderReducer,
+  getMyOrderList: getMyOrdersReducer,
+  //*-- product order --//
 });
 
 export default reducer;

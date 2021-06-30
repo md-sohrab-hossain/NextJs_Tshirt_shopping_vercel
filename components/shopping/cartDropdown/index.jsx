@@ -1,5 +1,11 @@
+//?-- library --//
 import React, { useRef, useState, useEffect, memo } from "react";
+//?-- library --//
+
+//?-- components---//
+import CartItems from "../cart/CartItems";
 import style from "../../../styles/shopping/cartDropdown/cartDropdown.module.scss";
+//?-- components---//
 
 let useClickOutside = (handler) => {
   let domNode = useRef();
@@ -21,8 +27,9 @@ let useClickOutside = (handler) => {
   return domNode;
 };
 
-const CartDropdown = ({ open, openCart }) => {
+const CartDropdown = ({ open, openCart, orderList }) => {
   const [IsOpen, setIsOpen] = useState(null);
+  // const { orders } = orderList;
 
   useEffect(() => {
     setIsOpen(open);
@@ -40,11 +47,13 @@ const CartDropdown = ({ open, openCart }) => {
     IsOpen && (
       <div ref={domNode} className={style.cart}>
         <div className={style.cart__items}>
-          {/* {cartItems.length ? (
-        cartItems.map((item) => <CartItems key={item.id} item={item} />)
-      ) : (
-      )} */}
-          <span className={style.cart__items__msg}> Your Cart Is Empty!</span>
+          {orderList?.orders.length ? (
+            orderList?.orders.map((item) => (
+              <CartItems key={item._id} item={item} />
+            ))
+          ) : (
+            <span className={style.cart__items__msg}> Your Cart Is Empty!</span>
+          )}
         </div>
         <div className={style.cart__button} onClick={() => {}}>
           checkout

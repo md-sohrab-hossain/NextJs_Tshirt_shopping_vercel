@@ -32,6 +32,7 @@ const Register = () => {
 
   useEffect(() => {
     if (success) {
+      toast.success("User register successfully!");
       router.push("/customPages/user/login");
     }
 
