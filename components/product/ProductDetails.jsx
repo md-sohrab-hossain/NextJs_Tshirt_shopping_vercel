@@ -54,7 +54,7 @@ export default function ProductDetails({ product, title }) {
 
   const handleOrder = useCallback(() => {
     if (!session) {
-      toast.error("Please login first to order this product");
+      toast.warning("Please login first to order this product");
       return;
     }
     const order = {

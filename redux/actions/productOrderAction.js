@@ -44,14 +44,21 @@ export const NewProductOrder = (productData) => async (dispatch) => {
 };
 
 //! 👇 Get all orders current user
-export const getMyOrders = (req) => async (dispatch) => {
+export const getMyOrders = (authCookie, req) => async (dispatch) => {
   try {
     dispatch({ type: GET_ITEM_REQUEST });
+
+    const config = {
+      headers: {
+        cookie: authCookie,
+      },
+      withCredentials: true,
+    };
 
     const { origin } = absoluteUrl(req);
     let link = `${origin}/api/productOrder/myOrder`;
 
-    const { data } = await axios.get(link);
+    const { data } = await axios.get(link, config);
 
     dispatch({
       type: GET_ITEM_SUCCESS,

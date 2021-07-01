@@ -1,5 +1,6 @@
 //?-- library --//
-import React, { useRef, useState, useEffect, memo } from "react";
+import React, { useRef, useState, useEffect, useCallback, memo } from "react";
+import { useRouter } from "next/router";
 //?-- library --//
 
 //?-- components---//
@@ -29,7 +30,7 @@ let useClickOutside = (handler) => {
 
 const CartDropdown = ({ open, openCart, orderList }) => {
   const [IsOpen, setIsOpen] = useState(null);
-  // const { orders } = orderList;
+  const router = useRouter();
 
   useEffect(() => {
     setIsOpen(open);
@@ -37,6 +38,10 @@ const CartDropdown = ({ open, openCart, orderList }) => {
       setIsOpen(false);
     };
   }, [open]);
+
+  const handleRoute = useCallback(() => {
+    router.push("/customPages/shopping");
+  }, []);
 
   let domNode = useClickOutside(() => {
     setIsOpen(false);
@@ -55,7 +60,7 @@ const CartDropdown = ({ open, openCart, orderList }) => {
             <span className={style.cart__items__msg}> Your Cart Is Empty!</span>
           )}
         </div>
-        <div className={style.cart__button} onClick={() => {}}>
+        <div className={style.cart__button} onClick={handleRoute}>
           checkout
         </div>
       </div>

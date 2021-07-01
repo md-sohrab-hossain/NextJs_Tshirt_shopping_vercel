@@ -87,7 +87,7 @@ const Header = () => {
                   </>
                 )}
 
-                <Link href="/customPages/bookings/userInfo">
+                <Link href="/customPages/shopping">
                   <a className="dropdown-item">My Orders</a>
                 </Link>
 

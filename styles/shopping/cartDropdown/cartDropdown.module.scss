@@ -19,7 +19,8 @@
     height: 340px;
     display: flex;
     flex-direction: column;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     &__msg {
       color: black;
