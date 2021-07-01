@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { useSession } from "next-auth/client";
 import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
@@ -12,7 +11,6 @@ import style from "../../styles/product/product_details.module.scss";
 import { NewProductOrder } from "../../redux/actions/productOrderAction";
 
 export default function ProductDetails({ product, title }) {
-  const [session] = useSession();
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
 
@@ -38,7 +36,7 @@ export default function ProductDetails({ product, title }) {
 
   useEffect(() => {
     if (success) {
-      toast.success("Product Order Successfully!");
+      toast.success("Product Added Successfully!");
     }
   }, [success]);
 
@@ -53,10 +51,6 @@ export default function ProductDetails({ product, title }) {
   }, [orderError, error]);
 
   const handleOrder = useCallback(() => {
-    if (!session) {
-      toast.warning("Please login first to order this product");
-      return;
-    }
     const order = {
       product: product._id,
       quantity,

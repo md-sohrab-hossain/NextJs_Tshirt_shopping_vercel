@@ -4,6 +4,7 @@ const productSchema = new Schema({
   name: {
     type: String,
     required: [true, "Please enter product name"],
+    unique: true,
     trim: true,
     maxLength: [100, "Product name can't exceed 100 characters"],
   },

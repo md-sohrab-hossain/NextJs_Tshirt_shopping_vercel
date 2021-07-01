@@ -18,7 +18,11 @@ import {
   updateProductReducer,
 } from "./productReducer";
 
-import { productOrderReducer, getMyOrdersReducer } from "./productOrderReducer";
+import {
+  productOrderReducer,
+  getMyOrdersReducer,
+  removeSingleItemReducer,
+} from "./productOrderReducer";
 
 const reducer = combineReducers({
   //*-- user --//
@@ -42,6 +46,7 @@ const reducer = combineReducers({
   //*-- product order --//
   productOrder: productOrderReducer,
   getMyOrderList: getMyOrdersReducer,
+  removeItem: removeSingleItemReducer,
   //*-- product order --//
 });
 

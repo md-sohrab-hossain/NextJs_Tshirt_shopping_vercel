@@ -1,26 +1,41 @@
 import { ProductOrder } from "../models/productOrder";
 
-// import ErrorHandler from "../utils/errorHandler";
+import ErrorHandler from "../utils/errorHandler";
 import catchError from "../middlewares/catchAsyncError";
 import mongoose from "mongoose";
 
-//! 👇 order new Product
+//! 👇 ------- order new Product -----------//
 export const newProductOrder = catchError(async (req, res) => {
   const { product, quantity, price, paymentInfo, images } = req.body;
 
-  const order = await ProductOrder.create({
-    product,
-    user: req.user._id,
-    quantity,
-    price,
-    paymentInfo,
-    images,
-    paidAt: Date.now(),
-  });
+  await ProductOrder.updateOne(
+    { product: product },
+    {
+      $inc: { quantity: quantity },
+      $set: { price, paymentInfo, images, user: req.user._id },
+    },
+    { upsert: true }
+  );
 
   res.status(200).json({
     success: true,
-    order,
+    message: "Product update Successfully!",
+  });
+});
+
+//!👇 -------------- remove item => /api/productOrder/myOrder/:id ---------------------//
+export const removeItems = catchError(async (req, res, next) => {
+  const product = await ProductOrder.findOne({ product: req.query.id });
+
+  if (!product) {
+    return next(new ErrorHandler("Product not found with this ID", 404));
+  }
+
+  await product.remove();
+
+  res.status(200).json({
+    success: true,
+    message: "item is removed!",
   });
 });
 
@@ -41,7 +56,7 @@ export const myOrders = catchError(async (req, res) => {
     {
       $lookup: {
         from: "products",
-        localField: "product",
+        localField: "product", // ai product er sob data nicci
         foreignField: "_id",
         as: "productInfo",
       },
@@ -49,7 +64,7 @@ export const myOrders = catchError(async (req, res) => {
     {
       $lookup: {
         from: "users",
-        localField: "user",
+        localField: "user", // ai product j user korce tar info nicci
         foreignField: "_id",
         as: "userInfo",
       },
@@ -57,8 +72,7 @@ export const myOrders = catchError(async (req, res) => {
     {
       $group: {
         _id: "$product",
-        totalPrice: { $sum: "$price" }, // ai khane group by product korci r sob gula same type er product er price sum korci
-        count: { $sum: 1 },
+        totalPrice: { $sum: { $multiply: ["$price", "$quantity"] } }, // ai khane group by product korci r sob gula same type er product er price sum korci
         doc: { $first: "$$ROOT" },
       },
     },
@@ -73,6 +87,9 @@ export const myOrders = catchError(async (req, res) => {
           ],
         },
       },
+    },
+    {
+      $sort: { createdAt: 1 },
     },
   ]);
   //*---------- process 2-----------//

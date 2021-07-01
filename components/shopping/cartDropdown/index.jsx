@@ -1,6 +1,7 @@
 //?-- library --//
 import React, { useRef, useState, useEffect, useCallback, memo } from "react";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 //?-- library --//
 
 //?-- components---//
@@ -39,7 +40,10 @@ const CartDropdown = ({ open, openCart, orderList }) => {
     };
   }, [open]);
 
-  const handleRoute = useCallback(() => {
+  const handleRoute = useCallback((orderList) => {
+    if (!orderList?.orders.length) {
+      return toast.warning("Your cart is empty!");
+    }
     router.push("/customPages/shopping");
   }, []);
 
@@ -60,7 +64,10 @@ const CartDropdown = ({ open, openCart, orderList }) => {
             <span className={style.cart__items__msg}> Your Cart Is Empty!</span>
           )}
         </div>
-        <div className={style.cart__button} onClick={handleRoute}>
+        <div
+          className={style.cart__button}
+          onClick={() => handleRoute(orderList)}
+        >
           checkout
         </div>
       </div>

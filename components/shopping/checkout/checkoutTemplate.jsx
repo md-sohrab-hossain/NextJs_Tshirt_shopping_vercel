@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useEffect, useCallback, memo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 //?-- components--//
 import CheckoutItems from "./checkoutItems";
+import { getMyOrders } from "../../../redux/actions/productOrderAction";
 import style from "../../../styles/shopping/checkout/checkout_template.module.scss";
-import Loading from "../../atoms/Loading";
 //?-- components--//
 
-const CheckoutTemplate = ({ orders }) => {
-  const { order, loading } = orders;
+const CheckoutTemplate = () => {
+  const dispatch = useDispatch();
+
+  const { order } = useSelector((state) => state.getMyOrderList);
+  const { success } = useSelector((state) => state.productOrder);
+  const { success: remove } = useSelector((state) => state.removeItem);
+
+  const getRecentOrder = useCallback(() => {
+    dispatch(getMyOrders());
+  }, [success, remove]);
+
   var totalPrice = 0;
+
+  useEffect(async () => {
+    if (success) getRecentOrder();
+    if (remove) getRecentOrder();
+  }, [success, remove]);
 
   const totalOrder = order?.orders;
   if (totalOrder?.length) {
@@ -17,7 +32,6 @@ const CheckoutTemplate = ({ orders }) => {
     }, 0);
   }
 
-  if (loading) return <Loading />;
   return (
     <div className={style.checkoutPage}>
       <div className={style.checkoutPage__header}>
@@ -51,4 +65,4 @@ const CheckoutTemplate = ({ orders }) => {
   );
 };
 
-export default CheckoutTemplate;
+export default memo(CheckoutTemplate);

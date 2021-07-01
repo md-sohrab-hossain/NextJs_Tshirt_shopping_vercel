@@ -10,7 +10,6 @@ import {
   REMOVE_ITEM_SUCCESS,
   REMOVE_ITEM_RESET,
   REMOVE_ITEM_FAIL,
-  CLEAR_CART_ITEM,
   CLEAR_ERRORS,
 } from "../types/productOrderType";
 
@@ -63,6 +62,40 @@ export const getMyOrdersReducer = (state = {}, action) => {
       return {
         loading: false,
         error: payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
+  }
+};
+
+export const removeSingleItemReducer = (state = {}, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case REMOVE_ITEM_REQUEST:
+      return {
+        loading: true,
+      };
+    case REMOVE_ITEM_SUCCESS:
+      return {
+        success: true,
+        loading: false,
+        isDeleted: true,
+      };
+    case REMOVE_ITEM_FAIL:
+      return {
+        loading: false,
+        error: payload,
+      };
+    case REMOVE_ITEM_RESET:
+      return {
+        loading: false,
+        success: false,
+        isDeleted: false,
       };
     case CLEAR_ERRORS:
       return {

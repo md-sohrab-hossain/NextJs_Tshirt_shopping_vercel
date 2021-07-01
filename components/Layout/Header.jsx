@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, memo } from "react";
 import style from "../../styles/layout_header.module.scss";
 
 //?--- Redux --- //
@@ -31,8 +31,12 @@ const Header = () => {
     }
   }, [dispatch, isUpdated]);
 
-  useEffect(() => {
+  const getRecentOrder = useCallback(() => {
     dispatch(getMyOrders());
+  }, [success]);
+
+  useEffect(async () => {
+    getRecentOrder();
   }, [success]);
 
   const handleOpenCart = useCallback(() => {
@@ -126,4 +130,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);
