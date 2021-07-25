@@ -54,7 +54,10 @@ export const webhookCheckout = catchAsyncErrors(async (req, res) => {
       };
 
       await ProductOrder.updateMany(
-        { user: { $eq: mongoose.Types.ObjectId(session.client_reference_id) } },
+        {
+          user: { $eq: mongoose.Types.ObjectId(session.client_reference_id) },
+          "paymentInfo.status": { $ne: "paid" },
+        },
         {
           $set: {
             paymentInfo: paymentInfo,
