@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 /** library */
 
 /** css */
-import style from "../../styles/product/product_item.module.scss";
+import style from "./productitem.module.scss";
 /** css */
 
 function ProductItem({ product }) {

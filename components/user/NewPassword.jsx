@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { resetPassword, clearErrors } from "../../redux/actions/userAction";
 
-import style from "../../styles/new_password.module.scss";
+import style from "./new_password.module.scss";
 
 const NewPassword = () => {
   const [password, setPassword] = useState("");

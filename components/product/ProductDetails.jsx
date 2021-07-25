@@ -6,7 +6,7 @@ import { clearErrors } from "../../redux/actions/productAction";
 import { Carousel } from "react-bootstrap";
 
 import Loading from "../atoms/Loading";
-import style from "../../styles/product/product_details.module.scss";
+import style from "./productdetails.module.scss";
 
 import { NewProductOrder } from "../../redux/actions/productOrderAction";
 

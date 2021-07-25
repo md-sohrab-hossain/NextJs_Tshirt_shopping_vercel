@@ -12,7 +12,7 @@ import {
 
 import { UPDATE_PRODUCT_RESET } from "../../redux/types/productsType";
 
-import style from "../../styles/admin/products/updateNewProduct.module.scss";
+import style from "./updateProduct.module.scss";
 
 const EditProduct = () => {
   const [name, setName] = useState("");

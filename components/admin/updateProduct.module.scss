@@ -1,18 +1,19 @@
-@import "./mixins.module";
+@import "../../styles/mixins.module";
 
 $custom__font1: "Dancing Script", cursive;
 $custom__font2: "Kanit", sans-serif;
 
-.login {
+.updateNew {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
+  margin-bottom: 20px;
 
   &__form {
-    min-width: 350px;
-    height: 400px;
+    width: minmax(50%, 50%);
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,6 +22,7 @@ $custom__font2: "Kanit", sans-serif;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
       rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
       rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    border-radius: 19px 19px 19px 19px;
     border-radius: 10px;
     padding: 10px;
 
@@ -28,37 +30,34 @@ $custom__font2: "Kanit", sans-serif;
       font-family: $custom__font1;
     }
 
-    &__email,
-    &__password {
+    &__name,
+    &__price,
+    &__description,
+    &__image {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
       width: 90%;
-    }
 
-    &__forgotPassword {
-      text-decoration: none;
-      float: left;
-      width: 90%;
+      &__preview {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        margin-top: 10px;
 
-      &:hover {
-        text-decoration: none;
-      }
-    }
-
-    &__new__user {
-      text-decoration: none;
-      margin-bottom: 15px;
-
-      &:hover {
-        text-decoration: none;
+        &__size {
+          width: 50px;
+          height: 50px;
+          padding: 2px;
+        }
       }
     }
   }
 }
 
-.button__login {
+.button__update {
   margin: 15px;
   @include custom_button;
   span {

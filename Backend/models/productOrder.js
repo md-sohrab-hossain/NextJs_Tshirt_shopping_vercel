@@ -8,7 +8,6 @@ const productOrderSchema = new Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    unique: true,
     required: true,
     ref: "User",
   },
@@ -32,7 +31,7 @@ const productOrderSchema = new Schema({
   },
   paidAt: {
     type: Date,
-    required: true,
+    required: false,
   },
   createdAt: {
     type: Date,

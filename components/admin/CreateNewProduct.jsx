@@ -11,7 +11,7 @@ import {
 
 import { NEW_PRODUCT_RESET } from "../../redux/types/productsType";
 
-import style from "../../styles/admin/products/createNewProduct.module.scss";
+import style from "./createNewProduct.module.scss";
 
 const createnewProduct = () => {
   const [name, setName] = useState("");

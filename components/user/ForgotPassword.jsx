@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { forgotPassword, clearErrors } from "../../redux/actions/userAction";
 
-import style from "../../styles/forgot_password.module.scss";
+import style from "./forgot_password.module.scss";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");

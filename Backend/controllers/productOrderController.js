@@ -51,7 +51,10 @@ export const myOrders = catchError(async (req, res) => {
   //*---------- process 2-----------//
   const orders = await ProductOrder.aggregate([
     {
-      $match: { user: { $eq: mongoose.Types.ObjectId(req.user._id) } }, // this match is check user==id
+      $match: {
+        user: { $eq: mongoose.Types.ObjectId(req.user._id) }, // this match is check user==id
+        "paymentInfo.status": { $ne: "paid" }, // this match is check paymentInfo.status!==paid
+      },
     },
     {
       $lookup: {

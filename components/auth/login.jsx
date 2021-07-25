@@ -4,7 +4,7 @@ import Link from "next/link";
 import { signIn } from "next-auth/client";
 import { toast } from "react-toastify";
 
-import style from "../../styles/login.module.scss";
+import style from "./login.module.scss";
 
 const Login = () => {
   const [email, setEmail] = useState("");

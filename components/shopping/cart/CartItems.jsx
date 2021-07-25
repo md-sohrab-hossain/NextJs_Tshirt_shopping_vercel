@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import style from "../../../styles/shopping/cart/cart_item.module.scss";
+import style from "./cartitem.module.scss";
 
 const CartItems = ({ item }) => {
   return (

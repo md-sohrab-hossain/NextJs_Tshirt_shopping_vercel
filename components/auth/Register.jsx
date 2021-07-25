@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerUser, clearErrors } from "../../redux/actions/userAction";
 //? ----- Redux ------
 
-import style from "../../styles/register.module.scss";
+import style from "./register.module.scss";
 
 const Register = () => {
   const dispatch = useDispatch();

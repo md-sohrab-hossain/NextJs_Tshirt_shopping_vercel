@@ -1,10 +1,13 @@
 import React, { useEffect, useCallback, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import getStripe from "../../../Backend/utils/getStripe";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 //?-- components--//
 import CheckoutItems from "./checkoutItems";
 import { getMyOrders } from "../../../redux/actions/productOrderAction";
-import style from "../../../styles/shopping/checkout/checkout_template.module.scss";
+import style from "./index.module.scss";
 //?-- components--//
 
 const CheckoutTemplate = () => {
@@ -32,6 +35,22 @@ const CheckoutTemplate = () => {
     }, 0);
   }
 
+  const handleCheckout = async (orderImg, priceTotal) => {
+    try {
+      const link = `/api/payment`;
+      const { data } = await axios.get(link, {
+        params: { priceTotal, orderImg },
+      });
+
+      const stripe = await getStripe();
+
+      // Redirect to checkout
+      stripe.redirectToCheckout({ sessionId: data.id });
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   return (
     <div className={style.checkoutPage}>
       <div className={style.checkoutPage__header}>
@@ -55,12 +74,25 @@ const CheckoutTemplate = () => {
           <b>Remove</b>
         </div>
       </div>
+
       {order?.orders.map((item) => (
         <CheckoutItems key={item._id} cartItem={item} />
       ))}
+
       <div className={style.checkoutPage__total}>
         <b>TOTAL: {totalPrice}/= </b>
       </div>
+
+      {totalPrice > 0 && (
+        <button
+          className={style.checkoutPage__button}
+          onClick={() => {
+            handleCheckout(order?.orders[0].images[0].url, totalPrice);
+          }}
+        >
+          Checkout
+        </button>
+      )}
     </div>
   );
 };

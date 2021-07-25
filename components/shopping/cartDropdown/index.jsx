@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 //?-- components---//
 import CartItems from "../cart/CartItems";
-import style from "../../../styles/shopping/cartDropdown/cartDropdown.module.scss";
+import style from "./index.module.scss";
 //?-- components---//
 
 let useClickOutside = (handler) => {

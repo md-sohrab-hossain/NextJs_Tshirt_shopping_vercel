@@ -9,10 +9,12 @@
     "export": "next build && next export"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^1.16.0",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.26.0",
     "critters": "0.0.10",
+    "micro": "^9.3.4",
     "mongodb-client-encryption": "^1.2.5",
     "mongoose": "^5.12.14",
     "next": "^11.0.1",
@@ -31,6 +33,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "sass": "^1.35.1",
+    "stripe": "^8.165.0",
     "validator": "^13.6.0"
   }
 }

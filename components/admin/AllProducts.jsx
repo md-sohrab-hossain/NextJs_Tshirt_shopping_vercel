@@ -19,7 +19,7 @@ import { DELETE_PRODUCT_RESET } from "../../redux/types/productsType";
 //? -- redux -- */
 
 //? -- css -- */
-import style from "../../styles/admin/products/allProducts.module.scss";
+import style from "./allProducts.module.scss";
 //? -- css -- */
 
 const AllProducts = ({ productsData }) => {

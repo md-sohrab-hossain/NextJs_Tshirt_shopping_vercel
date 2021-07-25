@@ -1,12 +1,12 @@
 import React, { useState, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import {
   NewProductOrder,
   removeItems,
 } from "../../../redux/actions/productOrderAction";
-import style from "../../../styles/shopping/checkout/checkout_item.module.scss";
 import DeleteModal from "../../atoms/DeleteModal";
+import style from "./index.module.scss";
 
 const CheckoutItem = ({ cartItem }) => {
   const [openModal, setOpenModal] = useState({

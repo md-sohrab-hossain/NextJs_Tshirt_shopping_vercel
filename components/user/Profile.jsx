@@ -8,7 +8,7 @@ import { updateProfile, clearErrors } from "../../redux/actions/userAction";
 import { UPDATE_PROFILE_RESET } from "../../redux/types/userTypes";
 
 import Loading from "../atoms/Loading";
-import style from "../../styles/profile.module.scss";
+import style from "./profile.module.scss";
 
 const Profile = () => {
   const dispatch = useDispatch();
