@@ -8,7 +8,7 @@ module.exports = {
     STRIPE_SECRET_KEY:
       "sk_test_51ISme0GtkNlPUttpLuX3cNOsMMFgFjIHnHX5ubDbSONcv61AibFna2hyLbgh9PO1i5x8f0anbfsbcRiTjyeipGNf00HaU7SJzq",
 
-    STRIPE_WEBHOOK_SECRET: "whsec_XKCjlMBgmlJ90Ws2NCLD4uZv5VYgLBU4",
+    STRIPE_WEBHOOK_SECRET: "whsec_2GPHvjWQlQe3PUEmvwXPE98Z0Vz3tCo3",
 
     CLOUDINARY_CLOUD_NAME: "sajal-cnq",
     CLOUDINARY_API_KEY: "572156839876236",
@@ -20,5 +20,7 @@ module.exports = {
     SMTP_PASSWORD: "a4d7b80183c4d5",
     STMP_FROM_NAME: "T-shirt Design",
     STMP_FROM_EMAIL: "noreply@tshirtShopping.com",
+
+    NEXTAUTH_URL: "https://next-js-tshirt-shopping.vercel.app/",
   },
 };
