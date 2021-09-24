@@ -11,7 +11,7 @@
   position: relative;
 
   &__card {
-    width: 300px;
+    width: 300px !important;
     margin: 10px;
     @include display_column;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
