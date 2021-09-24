@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     DB_LOCAL_URI:
-      "mongodb+srv://sohrab:tshirtDesign123@cluster0.pnfzd.mongodb.net/TshirtDesign?retryWrites=true&w=majority",
+      "mongodb://sohrab:siVekSGCQpCC0UBx@cluster0-shard-00-00.pnfzd.mongodb.net:27017,cluster0-shard-00-01.pnfzd.mongodb.net:27017,cluster0-shard-00-02.pnfzd.mongodb.net:27017/TshirtDesign?ssl=true&replicaSet=atlas-c3m839-shard-0&authSource=admin&retryWrites=true&w=majority",
 
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:
       "pk_test_51ISme0GtkNlPUttpxdSphCv9nNrcv5qg16fdirky6tHXPJzHyxGp6Lf3fhvW6seQIttlJK7BdjaUF1hdBWCsVeyO00xQxAQw3a",
