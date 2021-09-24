@@ -34,6 +34,10 @@ $custom__font2: "Kanit", sans-serif;
     margin-top: 20px;
     flex-wrap: wrap;
     @include display_row;
+
+    @include sp() {
+      flex-direction: column;
+    }
   }
 }
 
