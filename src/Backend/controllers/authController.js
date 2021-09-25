@@ -197,3 +197,70 @@ export const resetPassword = catchError(async (req, res, next) => {
   });
 });
 //*------------------------------❌❌❌--------------------------------- */
+
+//TODO: ------------ get All admin user profile   =>   /api/admin/users -------------
+export const allAdminUsers = catchError(async (req, res) => {
+  const users = await User.find();
+
+  res.status(200).json({
+    success: true,
+    users,
+  });
+});
+//*------------------------------❌❌❌--------------------------------- */
+
+//TODO: ------------ Get user details  =>   /api/admin/users/:id -------------
+export const getUserDetails = catchError(async (req, res) => {
+  const user = await User.findById(req.query.id);
+
+  if (!user) {
+    return next(new ErrorHandler("User not found with this ID.", 400));
+  }
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+//*------------------------------❌❌❌--------------------------------- */
+
+//TODO:------------ Update user details  =>   /api/admin/users/:id ----------
+export const updateUser = catchError(async (req, res) => {
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+    role: req.body.role,
+  };
+
+  const user = await User.findByIdAndUpdate(req.query.id, newUserData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+  });
+});
+//*------------------------------❌❌❌--------------------------------- */
+
+//TODO: ------------- Delete user    =>   /api/admin/users/:id -------------
+export const deleteUser = catchError(async (req, res) => {
+  const user = await User.findById(req.query.id);
+
+  if (!user) {
+    return next(new ErrorHandler("User not found with this ID.", 400));
+  }
+
+  // Remove avatar
+  const image_id = user.avatar.public_id;
+  await cloudinary.v2.uploader.destroy(image_id);
+
+  await user.remove();
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+//*------------------------------❌❌❌--------------------------------- */
