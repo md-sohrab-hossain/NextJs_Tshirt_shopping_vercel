@@ -210,7 +210,7 @@ export const allAdminUsers = catchError(async (req, res) => {
 //*------------------------------❌❌❌--------------------------------- */
 
 //TODO: ------------ Get user details  =>   /api/admin/users/:id -------------
-export const getUserDetails = catchError(async (req, res) => {
+export const getUserDetails = catchError(async (req, res, next) => {
   const user = await User.findById(req.query.id);
 
   if (!user) {
@@ -245,11 +245,14 @@ export const updateUser = catchError(async (req, res) => {
 //*------------------------------❌❌❌--------------------------------- */
 
 //TODO: ------------- Delete user    =>   /api/admin/users/:id -------------
-export const deleteUser = catchError(async (req, res) => {
+export const deleteUser = catchError(async (req, res, next) => {
   const user = await User.findById(req.query.id);
 
   if (!user) {
     return next(new ErrorHandler("User not found with this ID.", 400));
+  }
+  if (user.role == "admin") {
+    return next(new ErrorHandler("Can't delete user admin!!", 400));
   }
 
   // Remove avatar

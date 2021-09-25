@@ -54,7 +54,7 @@ const AllUsers = () => {
       router.push("/customPages/admin/users");
       dispatch({ type: DELETE_USER_RESET });
     }
-  }, [dispatch, error, isDeleted]);
+  }, [dispatch, error, deleteError, isDeleted]);
 
   const deleteUserHandler = useCallback((id, Delete) => {
     if (Delete) {
