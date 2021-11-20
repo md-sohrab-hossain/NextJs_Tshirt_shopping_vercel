@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "next build && next export"
+    "export": "next build && next export",
+    "test:e2e": "cross-env NODE_ENV=test jest --clearCache && jest -c jest.config.js --detectOpenHandles --forceExit",
+    "test:e2e:watch": "cross-env NODE_ENV=test HEADLESS=false jest -c jest.config.js --watch",
+    "test:unit": "cross-env NODE_ENV=test jest -c jest.config.unit.js"
   },
   "dependencies": {
     "@stripe/stripe-js": "^1.16.0",
@@ -23,6 +26,7 @@
     "next-connect": "^0.10.1",
     "next-redux-wrapper": "^6.0.2",
     "nodemailer": "^6.6.2",
+    "puppeteer": "^11.0.0",
     "react": "17.0.2",
     "react-bootstrap": "^1.6.1",
     "react-dom": "17.0.2",
@@ -35,5 +39,10 @@
     "sass": "^1.35.1",
     "stripe": "^8.165.0",
     "validator": "^13.6.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "jest": "^27.3.1",
+    "jest-puppeteer": "^6.0.0"
   }
 }
