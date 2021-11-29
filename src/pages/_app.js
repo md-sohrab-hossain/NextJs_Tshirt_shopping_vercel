@@ -1,4 +1,5 @@
 import "../styles/globals.scss";
+import React from "react";
 
 //!👇 here we customize our page default behaviour
 import Layout from "../components/Layout/Layout";

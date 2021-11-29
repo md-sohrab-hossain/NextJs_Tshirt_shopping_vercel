@@ -1,3 +1,4 @@
+import React from "react";
 import Register from "../../../components/auth/Register";
 
 import { getSession } from "next-auth/client";

@@ -10,6 +10,7 @@ describe("Tshirt prenting design site test", () => {
       headless: false,
       args: ["--no-sandbox", "--start-maximized"],
       defaultViewport: null,
+      slowMo: 50,
     });
     const pages = await browser.pages();
     page = pages[0];

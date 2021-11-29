@@ -1,3 +1,5 @@
+import React from "react";
+import "regenerator-runtime/runtime";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
 //!👇 this is the absolute base template for rendering your page

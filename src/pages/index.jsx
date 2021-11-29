@@ -1,3 +1,4 @@
+import React from "react";
 import Home from "../components/Home";
 import { getAllProducts } from "../redux/actions/productAction";
 

@@ -7,7 +7,7 @@ module.exports = {
   },
   transformIgnorePatterns: ["<rootDir>/node_modules/"],
   transformIgnorePatterns: ["<rootDir>/build/", "<rootDir>/node_modules/"],
-  testMatch: ["**/tests/**/*.[jt]s?(x)?", "**/?(*.)+(e2e).[jt]s?(x)?"],
+  testRegex: "\\.e2e-test\\.[js]sx?$",
   globals: {
     URL: "http://localhost:3000",
   },
