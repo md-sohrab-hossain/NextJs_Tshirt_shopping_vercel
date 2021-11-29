@@ -11,7 +11,10 @@ http: module.exports = {
   testRegex: "\\.test\\.[jt]sx?$",
   transformIgnorePatterns: ["<rootDir>/node_modules/"],
   transformIgnorePatterns: ["<rootDir>/build/", "<rootDir>/node_modules/"],
-  setupFilesAfterEnv: ["<rootDir>/setupEnzyme.js"],
+  setupFilesAfterEnv: [
+    "<rootDir>/setupEnzyme.js",
+    "<rootDir>/node_modules/jest-enzyme/lib/index.js",
+  ],
   collectCoverage: true,
   coverageDirectory: "coverage",
   coverageThreshold: {
