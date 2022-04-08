@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 
-import { useDispatch, useSelector } from "react-redux";
-import { forgotPassword, clearErrors } from "../../redux/actions/userAction";
+import { useDispatch, useSelector } from 'react-redux';
+import { forgotPassword, clearErrors } from '../../redux/actions/userAction';
 
-import style from "./forgot_password.module.scss";
+import style from './forgot_password.module.scss';
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
 
   const dispatch = useDispatch();
 
-  const { error, loading, message } = useSelector(
-    (state) => state.forgotPassword
-  );
+  const { error, loading, message } = useSelector(state => state.forgotPassword);
 
   useEffect(() => {
     if (error) {
@@ -27,7 +25,7 @@ const ForgotPassword = () => {
     }
   }, [dispatch, message, error]);
 
-  const submitHandler = (e) => {
+  const submitHandler = e => {
     e.preventDefault();
 
     const userData = {
@@ -40,9 +38,7 @@ const ForgotPassword = () => {
   return (
     <div className={style.forgot__password}>
       <form className={style.forgot__password__form} onSubmit={submitHandler}>
-        <h1 className={style.forgot__password__form__header}>
-          Forgot Password
-        </h1>
+        <h1 className={style.forgot__password__form__header}>Forgot Password</h1>
         <div className={style.forgot__password__form__email}>
           <label htmlFor="email_field">Email</label>
           <input
@@ -52,7 +48,7 @@ const ForgotPassword = () => {
             className="form-control"
             placeholder="Please Enter Your Email.."
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
           />
         </div>
 

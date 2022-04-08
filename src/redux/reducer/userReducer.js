@@ -30,7 +30,7 @@ import {
   DELETE_USER_RESET,
   DELETE_USER_FAIL,
   CLEAR_ERRORS,
-} from "../types/userTypes";
+} from '../types/userTypes';
 
 // Auth reducer
 export const authReducer = (state = { user: null }, action) => {
@@ -64,10 +64,7 @@ export const authReducer = (state = { user: null }, action) => {
 };
 
 // Load user reducer
-export const loadedUserReducer = (
-  state = { loading: true, user: null },
-  action
-) => {
+export const loadedUserReducer = (state = { loading: true, user: null }, action) => {
   switch (action.type) {
     case LOAD_USER_REQUEST:
       return {

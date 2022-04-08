@@ -1,34 +1,30 @@
-import axios from "axios";
-import absoluteUrl from "next-absolute-url";
-
+import axios from 'axios';
+import absoluteUrl from 'next-absolute-url';
 import {
-  ALL_PRODUCTS_REQUEST,
-  ALL_PRODUCTS_SUCCESS,
-  ALL_PRODUCTS_FAIL,
-  PRODUCTS_DETAILS_SUCCESS,
-  PRODUCTS_DETAILS_FAIL,
+  ADMIN_PRODUCTS_FAIL,
   ADMIN_PRODUCTS_REQUEST,
   ADMIN_PRODUCTS_SUCCESS,
-  ADMIN_PRODUCTS_FAIL,
-  NEW_PRODUCT_REQUEST,
-  NEW_PRODUCT_SUCCESS,
-  NEW_PRODUCT_RESET,
-  NEW_PRODUCT_FAIL,
-  UPDATE_PRODUCT_REQUEST,
-  UPDATE_PRODUCT_SUCCESS,
-  UPDATE_PRODUCT_RESET,
-  UPDATE_PRODUCT_FAIL,
+  ALL_PRODUCTS_FAIL,
+  ALL_PRODUCTS_REQUEST,
+  ALL_PRODUCTS_SUCCESS,
+  CLEAR_ERROR,
+  DELETE_PRODUCT_FAIL,
   DELETE_PRODUCT_REQUEST,
   DELETE_PRODUCT_SUCCESS,
-  DELETE_PRODUCT_RESET,
-  DELETE_PRODUCT_FAIL,
-  CLEAR_ERROR,
-} from "../types/productsType";
+  NEW_PRODUCT_FAIL,
+  NEW_PRODUCT_REQUEST,
+  NEW_PRODUCT_SUCCESS,
+  PRODUCTS_DETAILS_FAIL,
+  PRODUCTS_DETAILS_SUCCESS,
+  UPDATE_PRODUCT_FAIL,
+  UPDATE_PRODUCT_REQUEST,
+  UPDATE_PRODUCT_SUCCESS,
+} from '../types/productsType';
 
 //! 👇 Get all products
 export const getAllProducts =
   (req, currentPage = 1) =>
-  async (dispatch) => {
+  async dispatch => {
     try {
       dispatch({ type: ALL_PRODUCTS_REQUEST });
 
@@ -52,7 +48,7 @@ export const getAllProducts =
 //! 👇 Get all Products - ADMIN
 export const getAdminProducts =
   (req, currentPage = 1) =>
-  async (dispatch) => {
+  async dispatch => {
     try {
       dispatch({ type: ADMIN_PRODUCTS_REQUEST });
 
@@ -74,7 +70,7 @@ export const getAdminProducts =
   };
 
 //!👇 get Product details
-export const getProductDetails = (req, id) => async (dispatch) => {
+export const getProductDetails = (req, id) => async dispatch => {
   try {
     const { origin } = absoluteUrl(req);
     const { data } = await axios.get(`${origin}/api/user/products/${id}`);
@@ -92,21 +88,17 @@ export const getProductDetails = (req, id) => async (dispatch) => {
 };
 
 //!👇 create new product
-export const createNewProduct = (ProductData) => async (dispatch) => {
+export const createNewProduct = ProductData => async dispatch => {
   try {
     dispatch({ type: NEW_PRODUCT_REQUEST });
 
     const config = {
       header: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
 
-    const { data } = await axios.post(
-      `/api/admin/products`,
-      ProductData,
-      config
-    );
+    const { data } = await axios.post(`/api/admin/products`, ProductData, config);
 
     dispatch({
       type: NEW_PRODUCT_SUCCESS,
@@ -120,21 +112,17 @@ export const createNewProduct = (ProductData) => async (dispatch) => {
   }
 };
 
-export const updateProduct = (id, productData) => async (dispatch) => {
+export const updateProduct = (id, productData) => async dispatch => {
   try {
     dispatch({ type: UPDATE_PRODUCT_REQUEST });
 
     const config = {
       header: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
 
-    const { data } = await axios.put(
-      `/api/user/products/${id}`,
-      productData,
-      config
-    );
+    const { data } = await axios.put(`/api/user/products/${id}`, productData, config);
 
     dispatch({
       type: UPDATE_PRODUCT_SUCCESS,
@@ -148,7 +136,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
   }
 };
 
-export const deleteProduct = (id) => async (dispatch) => {
+export const deleteProduct = id => async dispatch => {
   try {
     dispatch({ type: DELETE_PRODUCT_REQUEST });
 
@@ -167,11 +155,12 @@ export const deleteProduct = (id) => async (dispatch) => {
 };
 
 //*💣💣 Clear Errors
-export const clearErrors = () => async (dispatch) => {
+export const clearErrors = () => async dispatch => {
   dispatch({
     type: CLEAR_ERROR,
   });
 };
-function req(req) {
-  throw new Error("Function not implemented.");
-}
+
+// function req(req) {
+//   throw new Error('Function not implemented.');
+// }

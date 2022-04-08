@@ -1,12 +1,12 @@
-import React from "react";
-import Head from "next/head";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import React from 'react';
+import Head from 'next/head';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from './Header';
+import Footer from './Footer';
 
-const Layout = ({ children, title = "Tshirt desing and order" }) => {
+const Layout = ({ children, title = 'Tshirt desing and order' }) => {
   return (
     <div>
       <Head>

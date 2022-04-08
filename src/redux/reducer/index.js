@@ -1,4 +1,4 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
 import {
   authReducer,
@@ -7,7 +7,7 @@ import {
   forgotPasswordReducer,
   allUsersReducer,
   userDetailsReducer,
-} from "./userReducer";
+} from './userReducer';
 
 import {
   productReducer,
@@ -16,13 +16,9 @@ import {
   productDetailsReducer,
   createNewProductReducer,
   updateProductReducer,
-} from "./productReducer";
+} from './productReducer';
 
-import {
-  productOrderReducer,
-  getMyOrdersReducer,
-  removeSingleItemReducer,
-} from "./productOrderReducer";
+import { productOrderReducer, getMyOrdersReducer, removeSingleItemReducer } from './productOrderReducer';
 
 const reducer = combineReducers({
   //*-- user --//

@@ -1,8 +1,8 @@
-import { ProductOrder } from "../models/productOrder";
+import { ProductOrder } from '../models/productOrder';
 
-import ErrorHandler from "../utils/errorHandler";
-import catchError from "../middlewares/catchAsyncError";
-import mongoose from "mongoose";
+import ErrorHandler from '../utils/errorHandler';
+import catchError from '../middlewares/catchAsyncError';
+import mongoose from 'mongoose';
 
 //! 👇 ------- order new Product -----------//
 export const newProductOrder = catchError(async (req, res) => {
@@ -19,7 +19,7 @@ export const newProductOrder = catchError(async (req, res) => {
 
   res.status(200).json({
     success: true,
-    message: "Product update Successfully!",
+    message: 'Product update Successfully!',
   });
 });
 
@@ -28,14 +28,14 @@ export const removeItems = catchError(async (req, res, next) => {
   const product = await ProductOrder.findOne({ product: req.query.id });
 
   if (!product) {
-    return next(new ErrorHandler("Product not found with this ID", 404));
+    return next(new ErrorHandler('Product not found with this ID', 404));
   }
 
   await product.remove();
 
   res.status(200).json({
     success: true,
-    message: "item is removed!",
+    message: 'item is removed!',
   });
 });
 
@@ -53,41 +53,37 @@ export const myOrders = catchError(async (req, res) => {
     {
       $match: {
         user: { $eq: mongoose.Types.ObjectId(req.user._id) }, // this match is check user==id
-        "paymentInfo.status": { $ne: "paid" }, // this match is check paymentInfo.status!==paid
+        'paymentInfo.status': { $ne: 'paid' }, // this match is check paymentInfo.status!==paid
       },
     },
     {
       $lookup: {
-        from: "products",
-        localField: "product", // ai product er sob data nicci
-        foreignField: "_id",
-        as: "productInfo",
+        from: 'products',
+        localField: 'product', // ai product er sob data nicci
+        foreignField: '_id',
+        as: 'productInfo',
       },
     },
     {
       $lookup: {
-        from: "users",
-        localField: "user", // ai product j user korce tar info nicci
-        foreignField: "_id",
-        as: "userInfo",
+        from: 'users',
+        localField: 'user', // ai product j user korce tar info nicci
+        foreignField: '_id',
+        as: 'userInfo',
       },
     },
     {
       $group: {
-        _id: "$product",
-        totalPrice: { $sum: { $multiply: ["$price", "$quantity"] } }, // ai khane group by product korci r sob gula same type er product er price sum korci
-        doc: { $first: "$$ROOT" },
+        _id: '$product',
+        totalPrice: { $sum: { $multiply: ['$price', '$quantity'] } }, // ai khane group by product korci r sob gula same type er product er price sum korci
+        doc: { $first: '$$ROOT' },
       },
     },
     {
       // ai step a ese group r lookup er data er shate object er data merge kore dici
       $replaceRoot: {
         newRoot: {
-          $mergeObjects: [
-            { count: "$count" },
-            { totalPrice: "$totalPrice" },
-            "$doc",
-          ],
+          $mergeObjects: [{ count: '$count' }, { totalPrice: '$totalPrice' }, '$doc'],
         },
       },
     },

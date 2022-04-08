@@ -1,12 +1,12 @@
-import { ProductOrder } from "../models/productOrder";
+import { ProductOrder } from '../models/productOrder';
 
-import mongoose from "mongoose";
-import { buffer } from "micro";
+import mongoose from 'mongoose';
+import { buffer } from 'micro';
 
-import catchAsyncErrors from "../middlewares/catchAsyncError";
-import absoluteUrl from "next-absolute-url";
+import catchAsyncErrors from '../middlewares/catchAsyncError';
+import absoluteUrl from 'next-absolute-url';
 
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 //Todo: Generate stripe checkout session   =>   /api/payment
 export const stripCheckoutSession = catchAsyncErrors(async (req, res) => {
@@ -16,18 +16,18 @@ export const stripCheckoutSession = catchAsyncErrors(async (req, res) => {
 
   //* Create stripe checkout session
   const session = await stripe.checkout.sessions.create({
-    payment_method_types: ["card"],
+    payment_method_types: ['card'],
     success_url: `${origin}/customPages/shopping`,
     cancel_url: `${origin}/customPages/shopping`,
     customer_email: req.user.email,
     client_reference_id: req.user._id,
-    mode: "payment",
+    mode: 'payment',
     line_items: [
       {
-        name: "Tshirt",
+        name: 'Tshirt',
         images: [`${orderImg}`],
         amount: Number(priceTotal) * 100,
-        currency: "bdt",
+        currency: 'bdt',
         quantity: 1,
       },
     ],
@@ -39,13 +39,13 @@ export const stripCheckoutSession = catchAsyncErrors(async (req, res) => {
 //Todo: update product order after payment   =>   /api/payment/webhook
 export const webhookCheckout = catchAsyncErrors(async (req, res) => {
   const buf = await buffer(req);
-  const signature = req.headers["stripe-signature"];
+  const signature = req.headers['stripe-signature'];
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
   try {
     const event = stripe.webhooks.constructEvent(buf, signature, webhookSecret);
 
-    if (event.type === "checkout.session.completed") {
+    if (event.type === 'checkout.session.completed') {
       const session = event.data.object;
 
       const paymentInfo = {
@@ -56,7 +56,7 @@ export const webhookCheckout = catchAsyncErrors(async (req, res) => {
       await ProductOrder.updateMany(
         {
           user: { $eq: mongoose.Types.ObjectId(session.client_reference_id) },
-          "paymentInfo.status": { $ne: "paid" },
+          'paymentInfo.status': { $ne: 'paid' },
         },
         {
           $set: {
@@ -70,7 +70,7 @@ export const webhookCheckout = catchAsyncErrors(async (req, res) => {
       res.status(200).json({ success: true });
     }
   } catch (error) {
-    console.log("Error in Stripe Checkout Payment => ", error);
+    console.log('Error in Stripe Checkout Payment => ', error);
     res.status(401).json(error);
   }
 });

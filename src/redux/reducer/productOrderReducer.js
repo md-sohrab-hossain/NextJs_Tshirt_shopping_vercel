@@ -11,7 +11,7 @@ import {
   REMOVE_ITEM_RESET,
   REMOVE_ITEM_FAIL,
   CLEAR_ERRORS,
-} from "../types/productOrderType";
+} from '../types/productOrderType';
 
 export const productOrderReducer = (state = {}, action) => {
   const { type, payload } = action;

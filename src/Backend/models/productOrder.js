@@ -1,15 +1,15 @@
-import mongoose, { model, Schema } from "mongoose";
+import mongoose, { model, Schema } from 'mongoose';
 
 const productOrderSchema = new Schema({
   product: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: "Products",
+    ref: 'Products',
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: "User",
+    ref: 'User',
   },
   quantity: {
     type: Number,
@@ -45,5 +45,4 @@ const productOrderSchema = new Schema({
   ],
 });
 
-export const ProductOrder =
-  mongoose.models.ProductOrder || model("ProductOrder", productOrderSchema);
+export const ProductOrder = mongoose.models.ProductOrder || model('ProductOrder', productOrderSchema);

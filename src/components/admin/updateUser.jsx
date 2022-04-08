@@ -1,29 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-
-import { toast } from "react-toastify";
-
-import { useDispatch, useSelector } from "react-redux";
-import {
-  updateUser,
-  getUserDetails,
-  clearErrors,
-} from "../../redux/actions/userAction";
-import { UPDATE_USER_RESET } from "../../redux/types/userTypes";
-
-import Loading from "../atoms/Loading";
-import style from "./updateUser.module.scss";
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { clearErrors, getUserDetails, updateUser } from '../../redux/actions/userAction';
+import { UPDATE_USER_RESET } from '../../redux/types/userTypes';
+import Loading from '../atoms/Loading';
+import style from './updateUser.module.scss';
 
 const UpdateUser = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [role, setRole] = useState('');
 
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const { error, isUpdated } = useSelector((state) => state.user);
-  const { user, loading } = useSelector((state) => state.userDetails);
+  const { error, isUpdated } = useSelector(state => state.user);
+  const { user, loading } = useSelector(state => state.userDetails);
 
   const userId = router.query.id;
 
@@ -42,12 +35,12 @@ const UpdateUser = () => {
     }
 
     if (isUpdated) {
-      router.push("/customPages/admin/users");
+      router.push('/customPages/admin/users');
       dispatch({ type: UPDATE_USER_RESET });
     }
   }, [dispatch, isUpdated, userId, user, error]);
 
-  const submitHandler = (e) => {
+  const submitHandler = e => {
     e.preventDefault();
 
     const userData = {
@@ -76,8 +69,8 @@ const UpdateUser = () => {
                 id="name_field"
                 className="form-control"
                 name="name"
-                value={name || ""}
-                onChange={(e) => setName(e.target.value)}
+                value={name || ''}
+                onChange={e => setName(e.target.value)}
               />
             </div>
 
@@ -89,8 +82,8 @@ const UpdateUser = () => {
                 id="email_field"
                 className="form-control"
                 name="email"
-                value={email || ""}
-                onChange={(e) => setEmail(e.target.value)}
+                value={email || ''}
+                onChange={e => setEmail(e.target.value)}
               />
             </div>
 
@@ -101,7 +94,7 @@ const UpdateUser = () => {
                 className="form-control"
                 name="role"
                 value={role}
-                onChange={(e) => setRole(e.target.value)}
+                onChange={e => setRole(e.target.value)}
               >
                 <option value="user">user</option>
                 <option value="admin">admin</option>

@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import { getAdminProducts } from "../../../../redux/actions/productAction";
-import AllProducts from "../../../../components/admin/AllProducts";
+import { getAdminProducts } from '../../../../redux/actions/productAction';
+import AllProducts from '../../../../components/admin/AllProducts';
 
 const AdminProductsPage = ({ props }) => {
   return <AllProducts productsData={props.products} />;

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const dbConnect = () => {
   if (mongoose.connection.readyState > 1) return;
@@ -11,7 +11,7 @@ const dbConnect = () => {
       useCreateIndex: true,
     })
     .catch(function (reason) {
-      console.log("Unable to connect to the mongodb instance. Error: ", reason);
+      console.log('Unable to connect to the mongodb instance. Error: ', reason);
     });
 };
 

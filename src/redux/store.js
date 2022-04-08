@@ -1,11 +1,11 @@
-import { createStore, applyMiddleware } from "redux";
-import { HYDRATE, createWrapper } from "next-redux-wrapper";
-import thunkMiddleware from "redux-thunk";
-import rootReducer from "./reducer";
+import { createWrapper, HYDRATE } from 'next-redux-wrapper';
+import { applyMiddleware, createStore } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import rootReducer from './reducer';
 
-const bindMiddlware = (middlware) => {
-  if (process.env.NODE_ENV !== "production") {
-    const { composeWithDevTools } = require("redux-devtools-extension");
+const bindMiddlware = middlware => {
+  if (process.env.NODE_ENV !== 'production') {
+    const { composeWithDevTools } = require('redux-devtools-extension');
     return composeWithDevTools(applyMiddleware(...middlware));
   }
 

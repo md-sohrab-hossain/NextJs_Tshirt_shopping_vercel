@@ -1,7 +1,7 @@
-import React from "react";
-import { getSession } from "next-auth/client";
+import React from 'react';
+import { getSession } from 'next-auth/client';
 
-import UpdateUser from "../../../../components/admin/updateUser";
+import UpdateUser from '../../../../components/admin/updateUser';
 
 const UpdateUserPage = () => {
   return <UpdateUser />;
@@ -10,9 +10,9 @@ const UpdateUserPage = () => {
 export async function getServerSideProps({ req, res }) {
   const session = await getSession({ req: req });
 
-  if (!session || session?.user.role !== "admin") {
+  if (!session || session?.user.role !== 'admin') {
     res.writeHead(301, {
-      Location: "/",
+      Location: '/',
     });
     res.end();
   }

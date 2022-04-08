@@ -10,8 +10,8 @@ class ApiFeatures {
     const queryCopy = { ...this.queryStr };
 
     //* Remove fields from query
-    const removeFields = ["page"];
-    removeFields.forEach((el) => delete queryCopy[el]);
+    const removeFields = ['page'];
+    removeFields.forEach(el => delete queryCopy[el]);
 
     this.query = this.query.find(queryCopy);
     return this;

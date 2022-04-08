@@ -1,6 +1,6 @@
-import React from "react";
-import Link from "next/link";
-import style from "./cartitem.module.scss";
+import React from 'react';
+import Link from 'next/link';
+import style from './cartitem.module.scss';
 
 const CartItems = ({ item }) => {
   return (
@@ -12,9 +12,7 @@ const CartItems = ({ item }) => {
             <a>{item.productInfo[0].name}</a>
           </Link>
         </span>
-        <span className={style.cart_item__details__name__price}>
-          {item.price}/=
-        </span>
+        <span className={style.cart_item__details__name__price}>{item.price}/=</span>
       </div>
     </div>
   );

@@ -1,16 +1,16 @@
 /** Library */
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import Pagination from "react-js-pagination";
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import Pagination from 'react-js-pagination';
 /** Library */
 
 /** components */
-import Loading from "../components/atoms/Loading";
-import ProductItem from "../components/product/ProductItem";
+import Loading from '../components/atoms/Loading';
+import ProductItem from '../components/product/ProductItem';
 /** components */
 
 /** css */
-import style from "../styles/home.module.scss";
+import style from '../styles/home.module.scss';
 /** css */
 
 function Home({ productsData }) {
@@ -18,7 +18,7 @@ function Home({ productsData }) {
   const [allProduct, setAllproducts] = useState(() => productsData);
   const { loading, products, productsCount, resultPerPage } = allProduct;
 
-  const handlePagination = (pageNumber) => {
+  const handlePagination = pageNumber => {
     window.location.href = `/?page=${pageNumber}`;
     // let url = window.location.href + `/?page=${pageNumber}`;
 
@@ -32,13 +32,13 @@ function Home({ productsData }) {
   let count = productsCount;
   page = Number(page);
 
-  const filterItem = (e) => {
+  const filterItem = e => {
     const productList = products;
-    const filterProduct = productList.filter((item) =>
+    const filterProduct = productList.filter(item =>
       item.name.toLowerCase().includes(e.target.value.trim().toLowerCase())
     );
 
-    if (e.target.value.trim() == "") {
+    if (e.target.value.trim() == '') {
       count = productsCount;
       setAllproducts({
         ...allProduct,
@@ -75,10 +75,7 @@ function Home({ productsData }) {
               <b>No Products. &#128542;</b>
             </div>
           ) : (
-            products &&
-            products.map((product) => (
-              <ProductItem key={product._id} product={product} />
-            ))
+            products && products.map(product => <ProductItem key={product._id} product={product} />)
           )}
         </div>
       </div>
@@ -90,10 +87,10 @@ function Home({ productsData }) {
             itemsCountPerPage={resultPerPage}
             totalItemsCount={productsCount}
             onChange={handlePagination}
-            nextPageText={"Next"}
-            prevPageText={"Prev"}
-            firstPageText={"First"}
-            lastPageText={"Last"}
+            nextPageText={'Next'}
+            prevPageText={'Prev'}
+            firstPageText={'First'}
+            lastPageText={'Last'}
             itemClass="page-item"
             linkClass="page-link"
           />

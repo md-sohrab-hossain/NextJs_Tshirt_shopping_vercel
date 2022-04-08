@@ -1,6 +1,6 @@
-import React from "react";
-import { getProductDetails } from "../../../redux/actions/productAction";
-import ProductDetails from "../../../components/product/ProductDetails";
+import React from 'react';
+import { getProductDetails } from '../../../redux/actions/productAction';
+import ProductDetails from '../../../components/product/ProductDetails';
 function ProductDetailsPage({ props }) {
   return <ProductDetails title="Product Details" product={props?.product} />;
 }

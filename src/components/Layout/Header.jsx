@@ -1,29 +1,29 @@
-import Link from "next/link";
-import React, { useState, useEffect, useCallback, memo } from "react";
-import style from "../../styles/layout_header.module.scss";
+import Link from 'next/link';
+import React, { useState, useEffect, useCallback, memo } from 'react';
+import style from '../../styles/layout_header.module.scss';
 
 //?--- Redux --- //
-import { useDispatch, useSelector } from "react-redux";
-import { loadUser } from "../../redux/actions/userAction";
-import { getMyOrders } from "../../redux/actions/productOrderAction";
+import { useDispatch, useSelector } from 'react-redux';
+import { loadUser } from '../../redux/actions/userAction';
+import { getMyOrders } from '../../redux/actions/productOrderAction';
 //?--- Redux --- //
 
 //? --- Next-auth ---//
-import { signOut } from "next-auth/client";
+import { signOut } from 'next-auth/client';
 //? --- Next-auth ---//
 
-import CartIcon from "../shopping/cart";
-import CartDropdown from "../shopping/cartDropdown";
+import CartIcon from '../shopping/cart';
+import CartDropdown from '../shopping/cartDropdown';
 
 const Header = () => {
   const dispatch = useDispatch();
   const [openCart, setOpenCart] = useState(() => false);
 
-  const { user, loading } = useSelector((state) => state.loadedUser);
-  const { isUpdated } = useSelector((state) => state.user);
+  const { user, loading } = useSelector(state => state.loadedUser);
+  const { isUpdated } = useSelector(state => state.user);
 
-  const { order } = useSelector((state) => state.getMyOrderList);
-  const { success } = useSelector((state) => state.productOrder);
+  const { order } = useSelector(state => state.getMyOrderList);
+  const { success } = useSelector(state => state.productOrder);
 
   useEffect(() => {
     if (!isUpdated) {
@@ -40,7 +40,7 @@ const Header = () => {
   }, [success]);
 
   const handleOpenCart = useCallback(() => {
-    setOpenCart((open) => !open);
+    setOpenCart(open => !open);
   }, []);
 
   return (
@@ -48,9 +48,7 @@ const Header = () => {
       <div className={style.navbar__container}>
         <div className={style.navbar__container__brand}>
           <Link href="/">
-            <label onClick={() => (window.location.href = "/")}>
-              T-shirt Shopping
-            </label>
+            <label onClick={() => (window.location.href = '/')}>T-shirt Shopping</label>
           </Link>
         </div>
 
@@ -64,20 +62,13 @@ const Header = () => {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <img
-                  src={user.avatar && user.avatar.url}
-                  alt={user && user.name}
-                  className="rounded-circle"
-                />
+                <img src={user.avatar && user.avatar.url} alt={user && user.name} className="rounded-circle" />
 
                 <span>{user && user.name}</span>
               </a>
 
-              <div
-                className="dropdown-menu"
-                aria-labelledby="dropDownMenuButton"
-              >
-                {user.role === "admin" && (
+              <div className="dropdown-menu" aria-labelledby="dropDownMenuButton">
+                {user.role === 'admin' && (
                   <>
                     <Link href="/customPages/admin/users">
                       <a className="dropdown-item">Users</a>
@@ -102,9 +93,7 @@ const Header = () => {
                 <Link href="/">
                   <a
                     className="dropdown-item text-danger"
-                    onClick={() =>
-                      signOut({ redirect: true, callbackUrl: "/" })
-                    }
+                    onClick={() => signOut({ redirect: true, callbackUrl: '/' })}
                   >
                     Logout
                   </a>
@@ -119,11 +108,7 @@ const Header = () => {
             )
           )}
           <CartIcon openCart={handleOpenCart} orderList={order} />
-          <CartDropdown
-            open={openCart}
-            openCart={handleOpenCart}
-            orderList={order}
-          />
+          <CartDropdown open={openCart} openCart={handleOpenCart} orderList={order} />
         </div>
       </div>
     </nav>

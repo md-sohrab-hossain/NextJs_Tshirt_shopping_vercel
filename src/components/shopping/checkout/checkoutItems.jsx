@@ -1,12 +1,9 @@
-import React, { useState, useCallback } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 
-import {
-  NewProductOrder,
-  removeItems,
-} from "../../../redux/actions/productOrderAction";
-import DeleteModal from "../../atoms/DeleteModal";
-import style from "./index.module.scss";
+import { NewProductOrder, removeItems } from '../../../redux/actions/productOrderAction';
+import DeleteModal from '../../atoms/DeleteModal';
+import style from './index.module.scss';
 
 const CheckoutItem = ({ cartItem }) => {
   const [openModal, setOpenModal] = useState({
@@ -15,17 +12,9 @@ const CheckoutItem = ({ cartItem }) => {
   });
 
   const dispatch = useDispatch();
-  const {
-    images,
-    totalPrice,
-    productInfo,
-    paymentInfo,
-    product,
-    price,
-    quantity,
-  } = cartItem;
+  const { images, totalPrice, productInfo, paymentInfo, product, price, quantity } = cartItem;
 
-  const handleQuantity = useCallback((value) => {
+  const handleQuantity = useCallback(value => {
     const order = {
       product,
       quantity: value,
@@ -59,27 +48,17 @@ const CheckoutItem = ({ cartItem }) => {
             &#10094;
           </div>
           <span className={style.checkout__value}>{quantity}</span>
-          <div
-            className={style.checkout__arrow}
-            onClick={() => handleQuantity(1)}
-          >
+          <div className={style.checkout__arrow} onClick={() => handleQuantity(1)}>
             &#10095;
           </div>
         </span>
         <span className={style.checkout__price}>{totalPrice}/=</span>
-        <div
-          className={style.checkout__removeButton}
-          onClick={() => setOpenModal({ id: product, open: true })}
-        >
+        <div className={style.checkout__removeButton} onClick={() => setOpenModal({ id: product, open: true })}>
           &#10005;
         </div>
       </div>
 
-      <DeleteModal
-        message="Do you want to remove this item?"
-        handleOpen={openModal}
-        handleDelete={handleRemove}
-      />
+      <DeleteModal message="Do you want to remove this item?" handleOpen={openModal} handleDelete={handleRemove} />
     </>
   );
 };

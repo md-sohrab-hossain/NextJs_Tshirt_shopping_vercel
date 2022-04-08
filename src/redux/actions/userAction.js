@@ -1,48 +1,47 @@
-import axios from "axios";
-
+import axios from 'axios';
 import {
-  REGISTER_USER_REQUEST,
-  REGISTER_USER_SUCCESS,
-  REGISTER_USER_FAIL,
-  LOAD_USER_REQUEST,
-  LOAD_USER_SUCCESS,
-  LOAD_USER_FAIL,
-  UPDATE_PROFILE_REQUEST,
-  UPDATE_PROFILE_SUCCESS,
-  UPDATE_PROFILE_FAIL,
-  FORGOT_PASSWORD_REQUEST,
-  FORGOT_PASSWORD_SUCCESS,
-  FORGOT_PASSWORD_FAIL,
-  RESET_PASSWORD_REQUEST,
-  RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_FAIL,
+  ADMIN_USERS_FAIL,
   ADMIN_USERS_REQUEST,
   ADMIN_USERS_SUCCESS,
-  ADMIN_USERS_FAIL,
-  USER_DETAILS_REQUEST,
-  USER_DETAILS_SUCCESS,
-  USER_DETAILS_FAIL,
-  UPDATE_USER_REQUEST,
-  UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAIL,
+  CLEAR_ERRORS,
+  DELETE_USER_FAIL,
   DELETE_USER_REQUEST,
   DELETE_USER_SUCCESS,
-  DELETE_USER_FAIL,
-  CLEAR_ERRORS,
-} from "../types/userTypes";
+  FORGOT_PASSWORD_FAIL,
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_SUCCESS,
+  LOAD_USER_FAIL,
+  LOAD_USER_REQUEST,
+  LOAD_USER_SUCCESS,
+  REGISTER_USER_FAIL,
+  REGISTER_USER_REQUEST,
+  REGISTER_USER_SUCCESS,
+  RESET_PASSWORD_FAIL,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS,
+  UPDATE_PROFILE_FAIL,
+  UPDATE_PROFILE_REQUEST,
+  UPDATE_PROFILE_SUCCESS,
+  UPDATE_USER_FAIL,
+  UPDATE_USER_REQUEST,
+  UPDATE_USER_SUCCESS,
+  USER_DETAILS_FAIL,
+  USER_DETAILS_REQUEST,
+  USER_DETAILS_SUCCESS,
+} from '../types/userTypes';
 
 // Register user
-export const registerUser = (userData) => async (dispatch) => {
+export const registerUser = userData => async dispatch => {
   try {
     dispatch({ type: REGISTER_USER_REQUEST });
 
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
 
-    const { data } = await axios.post("/api/user/register", userData, config);
+    await axios.post('/api/user/register', userData, config);
 
     dispatch({
       type: REGISTER_USER_SUCCESS,
@@ -56,11 +55,11 @@ export const registerUser = (userData) => async (dispatch) => {
 };
 
 // Load user
-export const loadUser = () => async (dispatch) => {
+export const loadUser = () => async dispatch => {
   try {
     dispatch({ type: LOAD_USER_REQUEST });
 
-    const { data } = await axios.get("/api/user/userInfo");
+    const { data } = await axios.get('/api/user/userInfo');
 
     dispatch({
       type: LOAD_USER_SUCCESS,
@@ -75,21 +74,17 @@ export const loadUser = () => async (dispatch) => {
 };
 
 // Update Profile
-export const updateProfile = (userData) => async (dispatch) => {
+export const updateProfile = userData => async dispatch => {
   try {
     dispatch({ type: UPDATE_PROFILE_REQUEST });
 
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
 
-    const { data } = await axios.put(
-      "/api/user/userInfo/update",
-      userData,
-      config
-    );
+    const { data } = await axios.put('/api/user/userInfo/update', userData, config);
 
     dispatch({
       type: UPDATE_PROFILE_SUCCESS,
@@ -104,21 +99,17 @@ export const updateProfile = (userData) => async (dispatch) => {
 };
 
 // Forgot Password action
-export const forgotPassword = (email) => async (dispatch) => {
+export const forgotPassword = email => async dispatch => {
   try {
     dispatch({ type: FORGOT_PASSWORD_REQUEST });
 
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
 
-    const { data } = await axios.post(
-      "/api/user/password/forgot",
-      email,
-      config
-    );
+    const { data } = await axios.post('/api/user/password/forgot', email, config);
 
     dispatch({
       type: FORGOT_PASSWORD_SUCCESS,
@@ -133,21 +124,17 @@ export const forgotPassword = (email) => async (dispatch) => {
 };
 
 // Reset Password action
-export const resetPassword = (token, passwords) => async (dispatch) => {
+export const resetPassword = (token, passwords) => async dispatch => {
   try {
     dispatch({ type: RESET_PASSWORD_REQUEST });
 
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
 
-    const { data } = await axios.put(
-      `/api/user/password/reset/${token}`,
-      passwords,
-      config
-    );
+    const { data } = await axios.put(`/api/user/password/reset/${token}`, passwords, config);
 
     dispatch({
       type: RESET_PASSWORD_SUCCESS,
@@ -161,7 +148,7 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
   }
 };
 
-export const getAdminUsers = () => async (dispatch) => {
+export const getAdminUsers = () => async dispatch => {
   try {
     dispatch({ type: ADMIN_USERS_REQUEST });
 
@@ -179,7 +166,7 @@ export const getAdminUsers = () => async (dispatch) => {
   }
 };
 
-export const getUserDetails = (id) => async (dispatch) => {
+export const getUserDetails = id => async dispatch => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST });
 
@@ -197,21 +184,17 @@ export const getUserDetails = (id) => async (dispatch) => {
   }
 };
 
-export const updateUser = (id, userData) => async (dispatch) => {
+export const updateUser = (id, userData) => async dispatch => {
   try {
     dispatch({ type: UPDATE_USER_REQUEST });
 
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
 
-    const { data } = await axios.put(
-      `/api/admin/users/${id}`,
-      userData,
-      config
-    );
+    const { data } = await axios.put(`/api/admin/users/${id}`, userData, config);
 
     dispatch({
       type: UPDATE_USER_SUCCESS,
@@ -225,7 +208,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
   }
 };
 
-export const deleteUser = (id) => async (dispatch) => {
+export const deleteUser = id => async dispatch => {
   try {
     dispatch({ type: DELETE_USER_REQUEST });
 
@@ -244,7 +227,7 @@ export const deleteUser = (id) => async (dispatch) => {
 };
 
 // Clear Errors
-export const clearErrors = () => async (dispatch) => {
+export const clearErrors = () => async dispatch => {
   dispatch({
     type: CLEAR_ERRORS,
   });

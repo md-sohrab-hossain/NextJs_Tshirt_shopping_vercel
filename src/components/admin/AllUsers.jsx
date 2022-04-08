@@ -1,27 +1,23 @@
 //? -- library -- */
-import Link from "next/link";
-import { toast } from "react-toastify";
-import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import React, { useState, useEffect, useCallback } from "react";
+import Link from 'next/link';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect, useCallback } from 'react';
 //? -- library -- */
 
 //? -- components -- */
-import Loading from "../atoms/Loading";
-import DeleteModal from "../atoms/DeleteModal";
+import Loading from '../atoms/Loading';
+import DeleteModal from '../atoms/DeleteModal';
 //? -- components -- */
 
 //? -- redux -- */
-import {
-  getAdminUsers,
-  deleteUser,
-  clearErrors,
-} from "../../redux/actions/userAction";
-import { DELETE_USER_RESET } from "../../redux/types/userTypes";
+import { getAdminUsers, deleteUser, clearErrors } from '../../redux/actions/userAction';
+import { DELETE_USER_RESET } from '../../redux/types/userTypes';
 //? -- redux -- */
 
 //? -- css -- */
-import style from "./allUsers.module.scss";
+import style from './allUsers.module.scss';
 //? -- css -- */
 
 const AllUsers = () => {
@@ -33,8 +29,8 @@ const AllUsers = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const { loading, error, users } = useSelector((state) => state.allUsers);
-  const { error: deleteError, isDeleted } = useSelector((state) => state.user);
+  const { loading, error, users } = useSelector(state => state.allUsers);
+  const { error: deleteError, isDeleted } = useSelector(state => state.user);
 
   useEffect(() => {
     dispatch(getAdminUsers());
@@ -50,8 +46,8 @@ const AllUsers = () => {
     }
 
     if (isDeleted) {
-      toast.success("Delete User Successfully!");
-      router.push("/customPages/admin/users");
+      toast.success('Delete User Successfully!');
+      router.push('/customPages/admin/users');
       dispatch({ type: DELETE_USER_RESET });
     }
   }, [dispatch, error, deleteError, isDeleted]);
@@ -70,9 +66,7 @@ const AllUsers = () => {
     <>
       <div className={style.AllUsers}>
         <div className={style.AllUsers__info}>
-          <h2 className={style.AllUsers__info__count}>
-            {`${users && users.length} users`}
-          </h2>
+          <h2 className={style.AllUsers__info__count}>{`${users && users.length} users`}</h2>
 
           <table className={style.AllUsers__info__table}>
             <thead>
@@ -89,7 +83,7 @@ const AllUsers = () => {
 
             <tbody>
               {users &&
-                users.map((item) => (
+                users.map(item => (
                   <tr key={item._id}>
                     <td>
                       <img src={item.avatar.url} alt={item.name} />
@@ -100,9 +94,9 @@ const AllUsers = () => {
                     <td>{item.role}</td>
                     <td>
                       {new Date(item.createdAt).toLocaleDateString([], {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
                       })}
                     </td>
                     <td>
@@ -115,9 +109,7 @@ const AllUsers = () => {
 
                         <button
                           className="btn btn-danger mx-1"
-                          onClick={() =>
-                            setOpenModal({ id: item._id, open: true })
-                          }
+                          onClick={() => setOpenModal({ id: item._id, open: true })}
                         >
                           <i className="fa fa-trash"></i>
                         </button>
@@ -129,11 +121,7 @@ const AllUsers = () => {
           </table>
         </div>
       </div>
-      <DeleteModal
-        message="Do you want to delete?"
-        handleOpen={openModal}
-        handleDelete={deleteUserHandler}
-      />
+      <DeleteModal message="Do you want to delete?" handleOpen={openModal} handleDelete={deleteUserHandler} />
     </>
   );
 };

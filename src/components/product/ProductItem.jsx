@@ -1,11 +1,11 @@
 /** library */
-import React from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import React from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 /** library */
 
 /** css */
-import style from "./productitem.module.scss";
+import style from './productitem.module.scss';
 /** css */
 
 function ProductItem({ product }) {
@@ -14,11 +14,7 @@ function ProductItem({ product }) {
   return (
     <div className={style.product_item}>
       <div className={style.product_item__card}>
-        <img
-          className={style.product_item__card__img}
-          src={product.images[0].url}
-          alt={product.name}
-        />
+        <img className={style.product_item__card__img} src={product.images[0].url} alt={product.name} />
         <div className={style.product_item__card__body}>
           <h5 className={style.product_item__card__body__title}>
             <Link href={`/customPages/product/${product._id}`}>
@@ -32,10 +28,7 @@ function ProductItem({ product }) {
             </p>
 
             <div className={style.ratingOuter}>
-              <div
-                className={style.ratingInner}
-                style={{ width: `${(product.ratings / 5) * 100}%` }}
-              ></div>
+              <div className={style.ratingInner} style={{ width: `${(product.ratings / 5) * 100}%` }}></div>
             </div>
             <span id={style.review}>({product.numOfReviews} Reviews)</span>
           </div>

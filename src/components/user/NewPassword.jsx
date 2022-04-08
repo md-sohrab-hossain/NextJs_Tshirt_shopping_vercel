@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 
-import { useDispatch, useSelector } from "react-redux";
-import { resetPassword, clearErrors } from "../../redux/actions/userAction";
+import { useDispatch, useSelector } from 'react-redux';
+import { resetPassword, clearErrors } from '../../redux/actions/userAction';
 
-import style from "./new_password.module.scss";
+import style from './new_password.module.scss';
 
 const NewPassword = () => {
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const { error, loading, success } = useSelector(
-    (state) => state.forgotPassword
-  );
+  const { error, loading, success } = useSelector(state => state.forgotPassword);
 
   useEffect(() => {
     if (error) {
@@ -26,11 +24,11 @@ const NewPassword = () => {
     }
 
     if (success) {
-      router.push("/customPages/user/login");
+      router.push('/customPages/user/login');
     }
   }, [dispatch, success, error]);
 
-  const submitHandler = (e) => {
+  const submitHandler = e => {
     e.preventDefault();
 
     const passwords = {
@@ -53,7 +51,7 @@ const NewPassword = () => {
             id="password_field"
             className="form-control"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)}
           />
         </div>
 
@@ -64,7 +62,7 @@ const NewPassword = () => {
             id="confirm_password_field"
             className="form-control"
             value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            onChange={e => setConfirmPassword(e.target.value)}
           />
         </div>
 

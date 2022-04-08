@@ -1,39 +1,37 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from 'react';
 
-import Link from "next/link";
-import { toast } from "react-toastify";
-import { useRouter } from "next/router";
+import Link from 'next/link';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 //? ----- Redux ------
-import { useDispatch, useSelector } from "react-redux";
-import { registerUser, clearErrors } from "../../redux/actions/userAction";
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUser, clearErrors } from '../../redux/actions/userAction';
 //? ----- Redux ------
 
-import style from "./register.module.scss";
+import style from './register.module.scss';
 
 const Register = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
   const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password: "",
+    name: '',
+    email: '',
+    password: '',
   });
 
   const { name, email, password } = user;
 
-  const [avatar, setAvatar] = useState("");
-  const [avatarPreview, setAvatarPreview] = useState(
-    "/images/default_avatar.jpg"
-  );
+  const [avatar, setAvatar] = useState('');
+  const [avatarPreview, setAvatarPreview] = useState('/images/default_avatar.jpg');
 
-  const { success, error, loading } = useSelector((state) => state.auth);
+  const { success, error, loading } = useSelector(state => state.auth);
 
   useEffect(() => {
     if (success) {
-      toast.success("User register successfully!");
-      router.push("/customPages/user/login");
+      toast.success('User register successfully!');
+      router.push('/customPages/user/login');
     }
 
     if (error) {
@@ -43,7 +41,7 @@ const Register = () => {
   }, [dispatch, success, error]);
 
   const submitHandler = useCallback(
-    (e) => {
+    e => {
       e.preventDefault();
 
       const userData = {
@@ -59,8 +57,8 @@ const Register = () => {
   );
 
   const onChange = useCallback(
-    (e) => {
-      if (e.target.name === "avatar") {
+    e => {
+      if (e.target.name === 'avatar') {
         const reader = new FileReader();
 
         reader.onload = () => {
@@ -128,11 +126,7 @@ const Register = () => {
         <div className={style.register__form__avatar}>
           <label htmlFor="avatar_upload">Avatar</label>
           <div className={style.register__form__avatar__items}>
-            <img
-              src={avatarPreview}
-              className={style.register__form__avatar__items__img}
-              alt="image"
-            />
+            <img src={avatarPreview} className={style.register__form__avatar__items__img} alt="image" />
 
             <div className="custom-file">
               <input
@@ -160,9 +154,7 @@ const Register = () => {
         </button>
 
         <Link href="/customPages/user/login">
-          <a className={style.register__form__login}>
-            Already have an account?
-          </a>
+          <a className={style.register__form__login}>Already have an account?</a>
         </Link>
       </form>
     </div>

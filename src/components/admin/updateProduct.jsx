@@ -1,23 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-
-import {
-  updateProduct,
-  getProductDetails,
-  clearErrors,
-} from "../../redux/actions/productAction";
-
-import { UPDATE_PRODUCT_RESET } from "../../redux/types/productsType";
-
-import style from "./updateProduct.module.scss";
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { clearErrors, getProductDetails, updateProduct } from '../../redux/actions/productAction';
+import { UPDATE_PRODUCT_RESET } from '../../redux/types/productsType';
+import style from './updateProduct.module.scss';
 
 const EditProduct = () => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState('');
 
   const [images, setImages] = useState([]);
   const [oldImages, setOldImages] = useState([]);
@@ -27,15 +19,13 @@ const EditProduct = () => {
   const router = useRouter();
 
   const { id } = router.query;
-  const { loading, error, isUpdated } = useSelector((state) => state.product);
+  const { loading, error, isUpdated } = useSelector(state => state.product);
 
-  const { error: productDetailsError, product } = useSelector(
-    (state) => state.getProductDetails
-  );
+  const { error: productDetailsError, product } = useSelector(state => state.getProductDetails);
 
   useEffect(() => {
     if (!product || product?._id !== id) {
-      dispatch(getProductDetails("", id));
+      dispatch(getProductDetails('', id));
     } else {
       setName(product?.name);
       setPrice(product?.price);
@@ -52,13 +42,13 @@ const EditProduct = () => {
       dispatch(clearErrors());
     }
     if (isUpdated) {
-      dispatch(getProductDetails("", id));
-      router.push("/customPages/admin/products");
+      dispatch(getProductDetails('', id));
+      router.push('/customPages/admin/products');
       dispatch({ type: UPDATE_PRODUCT_RESET });
     }
   }, [dispatch, error, productDetailsError, isUpdated, product, id]);
 
-  const submitHandler = (e) => {
+  const submitHandler = e => {
     e.preventDefault();
 
     const productData = {
@@ -73,20 +63,20 @@ const EditProduct = () => {
     dispatch(updateProduct(product._id, productData));
   };
 
-  const onChange = (e) => {
+  const onChange = e => {
     const files = Array.from(e.target.files);
 
     setImages([]);
     setOldImages([]);
     setImagesPreview([]);
 
-    files.forEach((file) => {
+    files.forEach(file => {
       const reader = new FileReader();
 
       reader.onload = () => {
         if (reader.readyState === 2) {
-          setImages((oldArray) => [...oldArray, reader.result]);
-          setImagesPreview((oldArray) => [...oldArray, reader.result]);
+          setImages(oldArray => [...oldArray, reader.result]);
+          setImagesPreview(oldArray => [...oldArray, reader.result]);
         }
       };
 
@@ -96,50 +86,40 @@ const EditProduct = () => {
 
   return (
     <div className={style.updateNew}>
-      <form
-        className={style.updateNew__form}
-        onSubmit={submitHandler}
-        encType="multipart/form-data"
-      >
+      <form className={style.updateNew__form} onSubmit={submitHandler} encType="multipart/form-data">
         <h1 className={style.updateNew__form__header}>Update Product</h1>
 
         <div className={style.updateNew__form__name}>
           <label htmlFor="name_field">Name</label>
           <input
-            required
             type="text"
             id="name_field"
             className="form-control"
-            value={name || ""}
-            onChange={(e) => setName(e.target.value)}
-            required
+            value={name || ''}
+            onChange={e => setName(e.target.value)}
           />
         </div>
 
         <div className={style.updateNew__form__price}>
           <label htmlFor="price_field">Price</label>
           <input
-            required
             type="text"
             id="price_field"
             className="form-control"
-            value={price || ""}
-            placeholder={price ? "" : "0"}
-            onChange={(e) => setPrice(e.target.value)}
-            required
+            value={price || ''}
+            placeholder={price ? '' : '0'}
+            onChange={e => setPrice(e.target.value)}
           />
         </div>
 
         <div className={style.updateNew__form__description}>
           <label htmlFor="description_field">Description</label>
           <textarea
-            required
             className="form-control"
             id="description_field"
             rows="2"
-            value={description || ""}
-            onChange={(e) => setDescription(e.target.value)}
-            required
+            value={description || ''}
+            onChange={e => setDescription(e.target.value)}
           ></textarea>
         </div>
 
@@ -161,17 +141,12 @@ const EditProduct = () => {
 
           <div className={style.updateNew__form__image__preview}>
             {imagesPreview &&
-              imagesPreview.map((img) => (
-                <img
-                  src={img}
-                  key={img}
-                  alt="Images Preview"
-                  className={style.updateNew__form__image__preview__size}
-                />
+              imagesPreview.map(img => (
+                <img src={img} key={img} alt="Images Preview" className={style.updateNew__form__image__preview__size} />
               ))}
 
             {oldImages &&
-              oldImages.map((img) => (
+              oldImages.map(img => (
                 <img
                   src={img.url}
                   key={img.public_id}

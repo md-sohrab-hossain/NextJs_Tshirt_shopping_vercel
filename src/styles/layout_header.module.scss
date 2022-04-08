@@ -1,5 +1,5 @@
-$custom__font1: "Dancing Script", cursive;
-$custom__font2: "Kanit", sans-serif;
+$custom__font1: 'Dancing Script', cursive;
+$custom__font2: 'Kanit', sans-serif;
 
 .navbar {
   width: 100%;
@@ -64,7 +64,7 @@ $custom__font2: "Kanit", sans-serif;
       }
 
       &::after {
-        content: "";
+        content: '';
         cursor: pointer;
         border: solid #f55555;
         border-width: 0 3px 3px 0;

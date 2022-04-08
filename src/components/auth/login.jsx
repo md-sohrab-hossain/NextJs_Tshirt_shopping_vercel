@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import Link from "next/link";
+import React, { useState } from 'react';
+import Link from 'next/link';
 
-import { signIn } from "next-auth/client";
-import { toast } from "react-toastify";
+import { signIn } from 'next-auth/client';
+import { toast } from 'react-toastify';
 
-import style from "./login.module.scss";
+import style from './login.module.scss';
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const submitHandler = async (e) => {
+  const submitHandler = async e => {
     e.preventDefault();
 
     setLoading(true);
 
-    const result = await signIn("credentials", {
+    const result = await signIn('credentials', {
       redirect: false,
       email,
       password,
@@ -27,7 +27,7 @@ const Login = () => {
     if (result.error) {
       toast.error(result.error);
     } else {
-      window.location.href = "/";
+      window.location.href = '/';
     }
   };
 
@@ -44,7 +44,7 @@ const Login = () => {
             className="form-control"
             placeholder="Enter Email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
           />
         </div>
 
@@ -57,7 +57,7 @@ const Login = () => {
             className="form-control"
             placeholder="Enter Password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)}
           />
         </div>
 

@@ -1,41 +1,33 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { useRouter } from "next/router";
+import React, { useState, useEffect, useCallback } from 'react';
+import { useRouter } from 'next/router';
 
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 
-import { useDispatch, useSelector } from "react-redux";
-import { updateProfile, clearErrors } from "../../redux/actions/userAction";
-import { UPDATE_PROFILE_RESET } from "../../redux/types/userTypes";
+import { useDispatch, useSelector } from 'react-redux';
+import { updateProfile, clearErrors } from '../../redux/actions/userAction';
+import { UPDATE_PROFILE_RESET } from '../../redux/types/userTypes';
 
-import Loading from "../atoms/Loading";
-import style from "./profile.module.scss";
+import Loading from '../atoms/Loading';
+import style from './profile.module.scss';
 
 const Profile = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
   const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password: "",
+    name: '',
+    email: '',
+    password: '',
   });
 
   const { name, email, password } = user;
 
-  const [avatar, setAvatar] = useState("");
-  const [avatarPreview, setAvatarPreview] = useState(
-    "/images/default_avatar.jpg"
-  );
+  const [avatar, setAvatar] = useState('');
+  const [avatarPreview, setAvatarPreview] = useState('/images/default_avatar.jpg');
 
-  const { user: loadedUser, loading } = useSelector(
-    (state) => state.loadedUser
-  );
+  const { user: loadedUser, loading } = useSelector(state => state.loadedUser);
 
-  const {
-    error,
-    isUpdated,
-    loading: updateLoading,
-  } = useSelector((state) => state.user);
+  const { error, isUpdated, loading: updateLoading } = useSelector(state => state.user);
 
   useEffect(() => {
     if (loadedUser) {
@@ -52,13 +44,13 @@ const Profile = () => {
     }
 
     if (isUpdated) {
-      router.push("/");
+      router.push('/');
       dispatch({ type: UPDATE_PROFILE_RESET });
     }
   }, [isUpdated, error, loadedUser]);
 
   const submitHandler = useCallback(
-    (e) => {
+    e => {
       e.preventDefault();
 
       const userData = {
@@ -74,8 +66,8 @@ const Profile = () => {
   );
 
   const onChange = useCallback(
-    (e) => {
-      if (e.target.name === "avatar") {
+    e => {
+      if (e.target.name === 'avatar') {
         const reader = new FileReader();
 
         reader.onload = () => {
@@ -110,7 +102,7 @@ const Profile = () => {
                 id="name_field"
                 className="form-control"
                 name="name"
-                value={name || ""}
+                value={name || ''}
                 onChange={onChange}
               />
             </div>
@@ -123,7 +115,7 @@ const Profile = () => {
                 id="email_field"
                 className="form-control"
                 name="email"
-                value={email || ""}
+                value={email || ''}
                 onChange={onChange}
               />
             </div>
@@ -136,7 +128,7 @@ const Profile = () => {
                 id="password_field"
                 className="form-control"
                 name="password"
-                value={password || ""}
+                value={password || ''}
                 onChange={onChange}
               />
             </div>
@@ -144,11 +136,7 @@ const Profile = () => {
             <div className={style.profile__form__avatar}>
               <label htmlFor="avatar_upload">Avatar</label>
               <div className={style.profile__form__avatar__items}>
-                <img
-                  src={avatarPreview}
-                  className={style.profile__form__avatar__items__img}
-                  alt="image"
-                />
+                <img src={avatarPreview} className={style.profile__form__avatar__items__img} alt="image" />
 
                 <div className="custom-file">
                   <input
@@ -169,9 +157,7 @@ const Profile = () => {
 
             <button
               type="submit"
-              className={
-                updateLoading ? style.button__wait : style.button__profile
-              }
+              className={updateLoading ? style.button__wait : style.button__profile}
               disabled={updateLoading ? true : false}
             >
               <span>Update</span>

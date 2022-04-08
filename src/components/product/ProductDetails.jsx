@@ -1,14 +1,12 @@
-import Head from "next/head";
-import React, { useState, useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import { clearErrors } from "../../redux/actions/productAction";
-import { Carousel } from "react-bootstrap";
-
-import Loading from "../atoms/Loading";
-import style from "./productdetails.module.scss";
-
-import { NewProductOrder } from "../../redux/actions/productOrderAction";
+import Head from 'next/head';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Carousel } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { clearErrors } from '../../redux/actions/productAction';
+import { NewProductOrder } from '../../redux/actions/productOrderAction';
+import Loading from '../atoms/Loading';
+import style from './productdetails.module.scss';
 
 export default function ProductDetails({ product, title }) {
   const dispatch = useDispatch();
@@ -17,26 +15,13 @@ export default function ProductDetails({ product, title }) {
   let quantityOptions = [];
   for (let i = 1; i <= 10; i++) quantityOptions.push(i);
 
-  const {
-    price,
-    ratings,
-    numOfReviews,
-    name,
-    error,
-    description,
-    reviews,
-    images,
-  } = product;
+  const { price, ratings, numOfReviews, name, error, description, images } = product;
 
-  const {
-    error: orderError,
-    loading,
-    success,
-  } = useSelector((state) => state.productOrder);
+  const { error: orderError, loading, success } = useSelector(state => state.productOrder);
 
   useEffect(() => {
     if (success) {
-      toast.success("Product Added Successfully!");
+      toast.success('Product Added Successfully!');
     }
   }, [success]);
 
@@ -57,8 +42,8 @@ export default function ProductDetails({ product, title }) {
       price,
       images,
       paymentInfo: {
-        id: "STRIPE_PAYMENT_ID",
-        status: "STRIPE_PAYMENT_STATUS",
+        id: 'STRIPE_PAYMENT_ID',
+        status: 'STRIPE_PAYMENT_STATUS',
       },
     };
 
@@ -80,11 +65,7 @@ export default function ProductDetails({ product, title }) {
               images.map((img, indx) => (
                 <Carousel.Item key={img.public_id}>
                   <div key={indx} className={style.slider}>
-                    <img
-                      src={img.url}
-                      alt={product?.name}
-                      className={style.slider__img}
-                    />
+                    <img src={img.url} alt={product?.name} className={style.slider__img} />
                   </div>
                 </Carousel.Item>
               ))}
@@ -97,16 +78,11 @@ export default function ProductDetails({ product, title }) {
 
             <b> BDT {price}/=</b>
 
-            <div className={style.productDetails__info__card__description}>
-              {description}
-            </div>
+            <div className={style.productDetails__info__card__description}>{description}</div>
             <div className={style.productDetails__info__card__quantity}>
               <span>Quantity:</span>
-              <select
-                className="form-control"
-                onChange={(e) => setQuantity(e.target.value)}
-              >
-                {quantityOptions.map((item) => (
+              <select className="form-control" onChange={e => setQuantity(e.target.value)}>
+                {quantityOptions.map(item => (
                   <option key={item} value={item}>
                     {item}
                   </option>
@@ -115,10 +91,7 @@ export default function ProductDetails({ product, title }) {
             </div>
             <div className={style.productDetails__info__card__ratings}>
               <div className={style.ratingOuter}>
-                <div
-                  className={style.ratingInner}
-                  style={{ width: `${(ratings / 5) * 100}%` }}
-                ></div>
+                <div className={style.ratingInner} style={{ width: `${(ratings / 5) * 100}%` }}></div>
               </div>
               <span id={style.review}>({numOfReviews} Reviews)</span>
             </div>
@@ -127,9 +100,7 @@ export default function ProductDetails({ product, title }) {
 
             <button
               className={
-                loading
-                  ? style.productDetails__info__card__buttonWait
-                  : style.productDetails__info__card__button
+                loading ? style.productDetails__info__card__buttonWait : style.productDetails__info__card__button
               }
               onClick={handleOrder}
             >

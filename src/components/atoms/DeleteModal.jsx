@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo } from 'react';
 
 function DeleteModal({ message, handleOpen, handleDelete }) {
   return handleOpen?.open ? (
@@ -6,16 +6,10 @@ function DeleteModal({ message, handleOpen, handleDelete }) {
       <div className="deleteModal__body">
         <p>{message}</p>
         <div className="deleteModal__button">
-          <button
-            className="deleteModal__button__cancle"
-            onClick={() => handleDelete(handleOpen?.id, false)}
-          >
+          <button className="deleteModal__button__cancle" onClick={() => handleDelete(handleOpen?.id, false)}>
             Cancel
           </button>
-          <button
-            className="deleteModal__button__ok"
-            onClick={() => handleDelete(handleOpen?.id, true)}
-          >
+          <button className="deleteModal__button__ok" onClick={() => handleDelete(handleOpen?.id, true)}>
             Ok
           </button>
         </div>

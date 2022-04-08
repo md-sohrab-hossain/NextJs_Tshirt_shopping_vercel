@@ -1,25 +1,25 @@
 //? -- library -- */
-import Link from "next/link";
-import { toast } from "react-toastify";
-import { useRouter } from "next/router";
-import Pagination from "react-js-pagination";
-import { useDispatch, useSelector } from "react-redux";
-import React, { useState, useEffect, useCallback } from "react";
-import { useSession } from "next-auth/client";
+import Link from 'next/link';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
+import Pagination from 'react-js-pagination';
+import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useSession } from 'next-auth/client';
 //? -- library -- */
 
 //? -- components -- */
-import Loading from "../atoms/Loading";
-import DeleteModal from "../atoms/DeleteModal";
+import Loading from '../atoms/Loading';
+import DeleteModal from '../atoms/DeleteModal';
 //? -- components -- */
 
 //? -- redux -- */
-import { deleteProduct, clearErrors } from "../../redux/actions/productAction";
-import { DELETE_PRODUCT_RESET } from "../../redux/types/productsType";
+import { deleteProduct, clearErrors } from '../../redux/actions/productAction';
+import { DELETE_PRODUCT_RESET } from '../../redux/types/productsType';
 //? -- redux -- */
 
 //? -- css -- */
-import style from "./allProducts.module.scss";
+import style from './allProducts.module.scss';
 //? -- css -- */
 
 const AllProducts = ({ productsData }) => {
@@ -34,12 +34,9 @@ const AllProducts = ({ productsData }) => {
   let { page = 1 } = router.query;
   page = Number(page);
 
-  const { loading, products, productsCount, error, resultPerPage } =
-    productsData;
+  const { loading, products, productsCount, error, resultPerPage } = productsData;
 
-  const { error: deleteError, isDeleted } = useSelector(
-    (state) => state.product
-  );
+  const { error: deleteError, isDeleted } = useSelector(state => state.product);
 
   useEffect(() => {
     if (error) {
@@ -52,16 +49,16 @@ const AllProducts = ({ productsData }) => {
     }
 
     if (isDeleted) {
-      toast.warning("🚀 Product Deleted!");
+      toast.warning('🚀 Product Deleted!');
       router.push(window.location.href);
       dispatch({ type: DELETE_PRODUCT_RESET });
     }
   }, [dispatch, deleteError, error, isDeleted]);
 
-  const handlePagination = (pageNumber) => {
+  const handlePagination = pageNumber => {
     let url = window.location.href + `/?page=${pageNumber}`;
 
-    url = url.replace(/\b\?page=([1-9])(\/)?/g, "");
+    url = url.replace(/\b\?page=([1-9])(\/)?/g, '');
 
     router.push(url);
   };
@@ -76,7 +73,7 @@ const AllProducts = ({ productsData }) => {
   }, []);
 
   if (!session) {
-    router.push("/");
+    router.push('/');
   }
   if (loading) {
     return <Loading />;
@@ -89,9 +86,7 @@ const AllProducts = ({ productsData }) => {
             <a className={style.AllProducts__info__create}> Create New</a>
           </Link>
 
-          <h2 className={style.AllProducts__info__count}>
-            {`${count} Products`}
-          </h2>
+          <h2 className={style.AllProducts__info__count}>{`${count} Products`}</h2>
 
           <table className={style.AllProducts__info__table}>
             <thead>
@@ -108,7 +103,7 @@ const AllProducts = ({ productsData }) => {
 
             <tbody>
               {products &&
-                products.map((item) => (
+                products.map(item => (
                   <tr key={item._id}>
                     <td>{item._id}</td>
                     <td>{item.name}</td>
@@ -117,9 +112,9 @@ const AllProducts = ({ productsData }) => {
                     <td>{item.ratings}</td>
                     <td>
                       {new Date(item.createdAt).toLocaleDateString([], {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
                       })}
                     </td>
                     <td>
@@ -132,9 +127,7 @@ const AllProducts = ({ productsData }) => {
 
                         <button
                           className="btn btn-danger mx-1"
-                          onClick={() =>
-                            setOpenModal({ id: item._id, open: true })
-                          }
+                          onClick={() => setOpenModal({ id: item._id, open: true })}
                         >
                           <i className="fa fa-trash"></i>
                         </button>
@@ -153,21 +146,17 @@ const AllProducts = ({ productsData }) => {
               itemsCountPerPage={resultPerPage}
               totalItemsCount={productsCount}
               onChange={handlePagination}
-              nextPageText={"Next"}
-              prevPageText={"Prev"}
-              firstPageText={"First"}
-              lastPageText={"Last"}
+              nextPageText={'Next'}
+              prevPageText={'Prev'}
+              firstPageText={'First'}
+              lastPageText={'Last'}
               itemClass="page-item"
               linkClass="page-link"
             />
           </div>
         )}
       </div>
-      <DeleteModal
-        message="Do you want to delete?"
-        handleOpen={openModal}
-        handleDelete={deleteProductHandler}
-      />
+      <DeleteModal message="Do you want to delete?" handleOpen={openModal} handleDelete={deleteProductHandler} />
     </>
   );
 };

@@ -1,7 +1,7 @@
-import React from "react";
-import { getSession } from "next-auth/client";
+import React from 'react';
+import { getSession } from 'next-auth/client';
 
-import CreateNewProduct from "../../../../components/admin/CreateNewProduct";
+import CreateNewProduct from '../../../../components/admin/CreateNewProduct';
 
 const CreateNewProductPage = () => {
   return <CreateNewProduct />;
@@ -10,10 +10,10 @@ const CreateNewProductPage = () => {
 export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });
 
-  if (!session || session.user.role !== "admin") {
+  if (!session || session.user.role !== 'admin') {
     return {
       redirect: {
-        destination: "/customPages/user/login",
+        destination: '/customPages/user/login',
         permanent: false,
       },
     };

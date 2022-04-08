@@ -1,25 +1,25 @@
-import mongoose, { model, Schema } from "mongoose";
-import validator from "validator";
-import bcrypt from "bcryptjs";
-import crypto from "crypto";
+import mongoose, { model, Schema } from 'mongoose';
+import validator from 'validator';
+import bcrypt from 'bcryptjs';
+import crypto from 'crypto';
 
 const userSchema = new Schema({
   name: {
     type: String,
-    required: [true, "Please enter user name"],
+    required: [true, 'Please enter user name'],
     trim: true,
     maxLength: [50, "Your name can't exceed 50 characters"],
   },
   email: {
     type: String,
-    required: [true, "Please enter your email"],
+    required: [true, 'Please enter your email'],
     unique: true,
-    validate: [validator.isEmail, "Please enter valid email address"],
+    validate: [validator.isEmail, 'Please enter valid email address'],
   },
   password: {
     type: String,
-    required: [true, "Please enter your password"],
-    minLength: [6, "Your password must be longer than 6 characters"],
+    required: [true, 'Please enter your password'],
+    minLength: [6, 'Your password must be longer than 6 characters'],
     select: false,
   },
   avatar: {
@@ -34,7 +34,7 @@ const userSchema = new Schema({
   },
   role: {
     type: String,
-    default: "user",
+    default: 'user',
   },
   createdAt: {
     type: Date,
@@ -45,9 +45,9 @@ const userSchema = new Schema({
 });
 
 //*---- Encrypting password before saving user ---------//
-userSchema.pre("save", async function (next) {
+userSchema.pre('save', async function (next) {
   const user = this;
-  if (!user.isModified("password")) {
+  if (!user.isModified('password')) {
     next();
   }
 
@@ -65,13 +65,10 @@ userSchema.methods.comparePassword = async function (enteredPassword) {
 //* Generate password reset token
 userSchema.methods.getResetPasswordToken = function () {
   //! Generate token
-  const resetToken = crypto.randomBytes(20).toString("hex");
+  const resetToken = crypto.randomBytes(20).toString('hex');
 
   //! Hash and set to resetPasswordToken field
-  this.resetPasswordToken = crypto
-    .createHash("sha256")
-    .update(resetToken)
-    .digest("hex");
+  this.resetPasswordToken = crypto.createHash('sha256').update(resetToken).digest('hex');
 
   //! Set token expire time
   this.resetPasswordExpire = Date.now() + 30 * 60 * 1000; //30 minutes
@@ -79,4 +76,4 @@ userSchema.methods.getResetPasswordToken = function () {
   return resetToken;
 };
 
-export const User = mongoose.models.User || model("User", userSchema);
+export const User = mongoose.models.User || model('User', userSchema);

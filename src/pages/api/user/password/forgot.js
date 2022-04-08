@@ -1,9 +1,9 @@
-import nc from "next-connect";
-import dbConnect from "../../../../Backend/config/dbConfig";
+import nc from 'next-connect';
+import dbConnect from '../../../../Backend/config/dbConfig';
 
-import { forgotPassword } from "../../../../Backend/controllers/authController";
+import { forgotPassword } from '../../../../Backend/controllers/authController';
 
-import onError from "../../../../Backend/middlewares/errors";
+import onError from '../../../../Backend/middlewares/errors';
 
 const handler = nc({ onError });
 

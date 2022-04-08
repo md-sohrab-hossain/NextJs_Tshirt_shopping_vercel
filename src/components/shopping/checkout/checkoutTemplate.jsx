@@ -1,21 +1,21 @@
-import React, { useEffect, useCallback, memo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import getStripe from "../../../Backend/utils/getStripe";
-import { toast } from "react-toastify";
-import axios from "axios";
+import React, { useEffect, useCallback, memo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import getStripe from '../../../Backend/utils/getStripe';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 //?-- components--//
-import CheckoutItems from "./checkoutItems";
-import { getMyOrders } from "../../../redux/actions/productOrderAction";
-import style from "./index.module.scss";
+import CheckoutItems from './checkoutItems';
+import { getMyOrders } from '../../../redux/actions/productOrderAction';
+import style from './index.module.scss';
 //?-- components--//
 
 const CheckoutTemplate = () => {
   const dispatch = useDispatch();
 
-  const { order } = useSelector((state) => state.getMyOrderList);
-  const { success } = useSelector((state) => state.productOrder);
-  const { success: remove } = useSelector((state) => state.removeItem);
+  const { order } = useSelector(state => state.getMyOrderList);
+  const { success } = useSelector(state => state.productOrder);
+  const { success: remove } = useSelector(state => state.removeItem);
 
   const getRecentOrder = useCallback(() => {
     dispatch(getMyOrders());
@@ -75,7 +75,7 @@ const CheckoutTemplate = () => {
         </div>
       </div>
 
-      {order?.orders.map((item) => (
+      {order?.orders.map(item => (
         <CheckoutItems key={item._id} cartItem={item} />
       ))}
 

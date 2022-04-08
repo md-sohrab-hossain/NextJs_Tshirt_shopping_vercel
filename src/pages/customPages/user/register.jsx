@@ -1,7 +1,7 @@
-import React from "react";
-import Register from "../../../components/auth/Register";
+import React from 'react';
+import Register from '../../../components/auth/Register';
 
-import { getSession } from "next-auth/client";
+import { getSession } from 'next-auth/client';
 
 export default function RegisterPage() {
   return <Register />;
@@ -13,7 +13,7 @@ export async function getServerSideProps(context) {
   if (session) {
     return {
       redirect: {
-        destination: "/",
+        destination: '/',
         permanent: false,
       },
     };

@@ -1,8 +1,8 @@
-import NextAuth from "next-auth";
-import Providers from "next-auth/providers";
+import NextAuth from 'next-auth';
+import Providers from 'next-auth/providers';
 
-import { User } from "../../../Backend/models/user";
-import dbConnect from "../../../Backend/config/dbConfig";
+import { User } from '../../../Backend/models/user';
+import dbConnect from '../../../Backend/config/dbConfig';
 
 export default NextAuth({
   providers: [
@@ -17,20 +17,20 @@ export default NextAuth({
 
         // Check if email and password is entered
         if (!email || !password) {
-          throw new Error("Please enter email or password");
+          throw new Error('Please enter email or password');
         }
 
         //Find user in the databae
-        const user = await User.findOne({ email }).select("+password");
+        const user = await User.findOne({ email }).select('+password');
 
         if (!user) {
-          throw new Error("Invalid email or Password");
+          throw new Error('Invalid email or Password');
         }
 
         // Check if password is correct or not
         const isPasswordMatched = await user.comparePassword(password);
         if (!isPasswordMatched) {
-          throw new Error("Invalid Email or Password");
+          throw new Error('Invalid Email or Password');
         }
 
         return Promise.resolve(user);

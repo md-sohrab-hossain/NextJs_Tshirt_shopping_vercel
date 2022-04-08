@@ -1,5 +1,5 @@
-import React from "react";
-import Checkout from "../../../components/shopping/checkout/checkoutTemplate";
+import React from 'react';
+import Checkout from '../../../components/shopping/checkout/checkoutTemplate';
 
 const CheckoutPage = () => {
   return <Checkout />;

@@ -26,7 +26,7 @@
     color: #f1c40f;
 
     &::before {
-      content: "\f006 \f006 \f006 \f006 \f006";
+      content: '\f006 \f006 \f006 \f006 \f006';
     }
   }
 
@@ -39,7 +39,7 @@
     width: 0;
 
     &::before {
-      content: "\f005 \f005 \f005 \f005 \f005";
+      content: '\f005 \f005 \f005 \f005 \f005';
       color: #f1c40f;
     }
   }
@@ -82,7 +82,7 @@
   z-index: 1;
 
   &::before {
-    content: "";
+    content: '';
     top: 0;
     left: 0;
     position: absolute;
@@ -111,7 +111,7 @@
   @content;
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     width: 20px;
     height: 20px;

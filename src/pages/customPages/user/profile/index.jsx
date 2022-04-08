@@ -1,6 +1,6 @@
-import React from "react";
-import { getSession } from "next-auth/client";
-import Profile from "../../../../components/user/Profile";
+import React from 'react';
+import { getSession } from 'next-auth/client';
+import Profile from '../../../../components/user/Profile';
 const userProfilePage = () => {
   return <Profile />;
 };
@@ -11,7 +11,7 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       redirect: {
-        destination: "/customPages/user/login",
+        destination: '/customPages/user/login',
         permanent: false,
       },
     };

@@ -1,28 +1,27 @@
 //?-- library --//
-import React, { useRef, useState, useEffect, useCallback, memo } from "react";
-import { useRouter } from "next/router";
-import { toast } from "react-toastify";
+import { useRouter } from 'next/router';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
 //?-- library --//
-
 //?-- components---//
-import CartItems from "../cart/CartItems";
-import style from "./index.module.scss";
+import CartItems from '../cart/CartItems';
+import style from './index.module.scss';
 //?-- components---//
 
-let useClickOutside = (handler) => {
+let useClickOutside = handler => {
   let domNode = useRef();
 
   useEffect(() => {
-    let maybeHandler = (event) => {
+    let maybeHandler = event => {
       if (domNode.current && !domNode.current.contains(event.target)) {
         handler();
       }
     };
 
-    document.addEventListener("mousedown", maybeHandler);
+    document.addEventListener('mousedown', maybeHandler);
 
     return () => {
-      document.removeEventListener("mousedown", maybeHandler);
+      document.removeEventListener('mousedown', maybeHandler);
     };
   }, [handler]);
 
@@ -40,11 +39,11 @@ const CartDropdown = ({ open, openCart, orderList }) => {
     };
   }, [open]);
 
-  const handleRoute = useCallback((orderList) => {
+  const handleRoute = useCallback(orderList => {
     if (!orderList?.orders.length) {
-      return toast.warning("Your cart is empty!");
+      return toast.warning('Your cart is empty!');
     }
-    router.push("/customPages/shopping");
+    router.push('/customPages/shopping');
   }, []);
 
   let domNode = useClickOutside(() => {
@@ -57,17 +56,12 @@ const CartDropdown = ({ open, openCart, orderList }) => {
       <div ref={domNode} className={style.cart}>
         <div className={style.cart__items}>
           {orderList?.orders.length ? (
-            orderList?.orders.map((item) => (
-              <CartItems key={item._id} item={item} />
-            ))
+            orderList?.orders.map(item => <CartItems key={item._id} item={item} />)
           ) : (
             <span className={style.cart__items__msg}> Your Cart Is Empty!</span>
           )}
         </div>
-        <div
-          className={style.cart__button}
-          onClick={() => handleRoute(orderList)}
-        >
+        <div className={style.cart__button} onClick={() => handleRoute(orderList)}>
           checkout
         </div>
       </div>

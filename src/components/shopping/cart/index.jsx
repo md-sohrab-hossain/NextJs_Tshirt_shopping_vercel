@@ -1,5 +1,5 @@
-import React from "react";
-import style from "./index.module.scss";
+import React from 'react';
+import style from './index.module.scss';
 
 const CartIcon = ({ openCart, orderList }) => (
   <div className={style.cart} onClick={openCart}>

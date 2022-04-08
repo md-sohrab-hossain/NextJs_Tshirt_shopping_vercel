@@ -1,10 +1,10 @@
-import "../styles/globals.scss";
-import React from "react";
+import '../styles/globals.scss';
+import React from 'react';
 
 //!👇 here we customize our page default behaviour
-import Layout from "../components/Layout/Layout";
-import { initStore, wrapper } from "../redux/store";
-import { Provider } from "react-redux";
+import Layout from '../components/Layout/Layout';
+import { initStore, wrapper } from '../redux/store';
+import { Provider } from 'react-redux';
 
 const store = initStore();
 function MyApp({ Component, pageProps }) {

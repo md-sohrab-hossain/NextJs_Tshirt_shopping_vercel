@@ -1,6 +1,6 @@
-import React from "react";
-import Login from "../../../components/auth/login";
-import { getSession } from "next-auth/client";
+import React from 'react';
+import Login from '../../../components/auth/login';
+import { getSession } from 'next-auth/client';
 
 function LoginPage() {
   return <Login />;
@@ -12,7 +12,7 @@ export async function getServerSideProps(context) {
   if (session) {
     return {
       redirect: {
-        destination: "/",
+        destination: '/',
         permanent: false,
       },
     };

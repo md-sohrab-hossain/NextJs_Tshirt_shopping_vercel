@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import NewPassword from "../../../../../components/user/NewPassword";
+import NewPassword from '../../../../../components/user/NewPassword';
 
 const NewPasswordPage = () => {
   return <NewPassword />;

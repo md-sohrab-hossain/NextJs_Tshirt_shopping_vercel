@@ -1,22 +1,22 @@
-import mongoose, { model, Schema } from "mongoose";
+import mongoose, { model, Schema } from 'mongoose';
 
 const productSchema = new Schema({
   name: {
     type: String,
-    required: [true, "Please enter product name"],
+    required: [true, 'Please enter product name'],
     unique: true,
     trim: true,
     maxLength: [100, "Product name can't exceed 100 characters"],
   },
   price: {
     type: Number,
-    required: [true, "Please enter tshirt price"],
+    required: [true, 'Please enter tshirt price'],
     maxLength: [4, "Tshirt price can't exceed 4 characters!"],
     default: 0.0,
   },
   description: {
     type: String,
-    required: [true, "Please enter tshirt description"],
+    required: [true, 'Please enter tshirt description'],
   },
   ratings: {
     type: Number,
@@ -37,7 +37,7 @@ const productSchema = new Schema({
       user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: "User",
+        ref: 'User',
       },
       name: {
         type: String,
@@ -56,7 +56,7 @@ const productSchema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     required: false,
-    ref: "User",
+    ref: 'User',
   },
   createdAt: {
     type: Date,
@@ -64,5 +64,4 @@ const productSchema = new Schema({
   },
 });
 
-export const Products =
-  mongoose.models.Products || model("Products", productSchema);
+export const Products = mongoose.models.Products || model('Products', productSchema);

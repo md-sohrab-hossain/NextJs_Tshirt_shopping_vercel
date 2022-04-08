@@ -20,7 +20,7 @@ import {
   DELETE_PRODUCT_RESET,
   DELETE_PRODUCT_FAIL,
   CLEAR_ERROR,
-} from "../types/productsType";
+} from '../types/productsType';
 
 const initialState = {
   productsCount: 0,
