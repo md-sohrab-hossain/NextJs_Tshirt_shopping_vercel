@@ -1,9 +1,7 @@
-@import '../../styles/mixins.module';
-
 $custom__font1: 'Dancing Script', cursive;
 $custom__font2: 'Kanit', sans-serif;
 
-.user {
+.register {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,9 +13,8 @@ $custom__font2: 'Kanit', sans-serif;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 350px;
+    width: minmax(50%, 50%);
     height: auto;
-    padding: 10px;
     margin-top: 50px;
     border-radius: 10px;
     box-shadow: rgb(50 50 93 / 25%) 0 50px 100px -20px, rgb(0 0 0 / 30%) 0 30px 60px -30px,
@@ -29,12 +26,27 @@ $custom__font2: 'Kanit', sans-serif;
 
     &__name,
     &__email,
-    &__role {
+    &__password,
+    &__avatar {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
       width: 90%;
+
+      &__items {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &__img {
+          width: 3rem;
+          height: 3rem;
+          margin-right: 5px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
     }
 
     &__login {
@@ -48,7 +60,7 @@ $custom__font2: 'Kanit', sans-serif;
   }
 }
 
-.button__user {
+.button__register {
   margin: 15px;
   @include custom-button;
 

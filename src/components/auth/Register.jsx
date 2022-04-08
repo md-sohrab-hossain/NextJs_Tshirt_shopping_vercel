@@ -1,15 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
-
 import Link from 'next/link';
-import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
-
+import React, { useCallback, useEffect, useState } from 'react';
 //? ----- Redux ------
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUser, clearErrors } from '../../redux/actions/userAction';
-//? ----- Redux ------
+import { toast } from 'react-toastify';
+import { clearErrors, registerUser } from '../../redux/actions/userAction';
 
-import style from './register.module.scss';
+//? ----- Redux ------
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -77,11 +74,11 @@ const Register = () => {
   );
 
   return (
-    <div className={style.register}>
-      <form className={style.register__form} onSubmit={submitHandler}>
-        <h1 className={style.register__form__header}>Join Us</h1>
+    <div className="register">
+      <form className="register__form" onSubmit={submitHandler}>
+        <h1 className="register__form__header">Join Us</h1>
 
-        <div className={style.register__form__name}>
+        <div className="register__form__name">
           <label htmlFor="name_field">Full Name</label>
           <input
             required
@@ -95,7 +92,7 @@ const Register = () => {
           />
         </div>
 
-        <div className={style.register__form__email}>
+        <div className="register__form__email">
           <label htmlFor="email_field">Email</label>
           <input
             required
@@ -109,7 +106,7 @@ const Register = () => {
           />
         </div>
 
-        <div className={style.register__form__password}>
+        <div className="register__form__password">
           <label htmlFor="password_field">Password</label>
           <input
             required
@@ -123,10 +120,10 @@ const Register = () => {
           />
         </div>
 
-        <div className={style.register__form__avatar}>
+        <div className="register__form__avatar">
           <label htmlFor="avatar_upload">Avatar</label>
-          <div className={style.register__form__avatar__items}>
-            <img src={avatarPreview} className={style.register__form__avatar__items__img} alt="image" />
+          <div className="register__form__avatar__items">
+            <img src={avatarPreview} className="register__form__avatar__items__img" alt="image" />
 
             <div className="custom-file">
               <input
@@ -147,14 +144,14 @@ const Register = () => {
 
         <button
           type="submit"
-          className={loading ? style.button__wait : style.button__register}
+          className={loading ? 'button__wait' : 'button__register'}
           disabled={loading ? true : false}
         >
           <span>register</span>
         </button>
 
         <Link href="/customPages/user/login">
-          <a className={style.register__form__login}>Already have an account?</a>
+          <a className="register__form__login">Already have an account?</a>
         </Link>
       </form>
     </div>

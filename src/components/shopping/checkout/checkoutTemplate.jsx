@@ -1,13 +1,11 @@
-import React, { useEffect, useCallback, memo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import getStripe from '../../../Backend/utils/getStripe';
-import { toast } from 'react-toastify';
 import axios from 'axios';
-
+import React, { memo, useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import getStripe from '../../../Backend/utils/getStripe';
+import { getMyOrders } from '../../../redux/actions/productOrderAction';
 //?-- components--//
 import CheckoutItems from './checkoutItems';
-import { getMyOrders } from '../../../redux/actions/productOrderAction';
-import style from './index.module.scss';
 //?-- components--//
 
 const CheckoutTemplate = () => {
@@ -52,25 +50,25 @@ const CheckoutTemplate = () => {
   };
 
   return (
-    <div className={style.checkoutPage}>
-      <div className={style.checkoutPage__header}>
-        <div className={style.checkoutPage__header__block}>
+    <div className="checkoutPage">
+      <div className="checkoutPage__header">
+        <div className="checkoutPage__header__block">
           <b>Product</b>
         </div>
 
-        <div className={style.checkoutPage__header__block}>
+        <div className="checkoutPage__header__block">
           <b>Description</b>
         </div>
 
-        <div className={style.checkoutPage__header__block}>
+        <div className="checkoutPage__header__block">
           <b>Quantity</b>
         </div>
 
-        <div className={style.checkoutPage__header__block}>
+        <div className="checkoutPage__header__block">
           <b>Price</b>
         </div>
 
-        <div className={style.checkoutPage__header__block}>
+        <div className="checkoutPage__header__block">
           <b>Remove</b>
         </div>
       </div>
@@ -79,13 +77,13 @@ const CheckoutTemplate = () => {
         <CheckoutItems key={item._id} cartItem={item} />
       ))}
 
-      <div className={style.checkoutPage__total}>
+      <div className="checkoutPage__total">
         <b>TOTAL: {totalPrice}/= </b>
       </div>
 
       {totalPrice > 0 && (
         <button
-          className={style.checkoutPage__button}
+          className="checkoutPage__button"
           onClick={() => {
             handleCheckout(order?.orders[0].images[0].url, totalPrice);
           }}

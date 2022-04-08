@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 //?-- library --//
 //?-- components---//
 import CartItems from '../cart/CartItems';
-import style from './index.module.scss';
 //?-- components---//
 
 let useClickOutside = handler => {
@@ -53,15 +52,15 @@ const CartDropdown = ({ open, openCart, orderList }) => {
 
   return (
     IsOpen && (
-      <div ref={domNode} className={style.cart}>
-        <div className={style.cart__items}>
+      <div ref={domNode} className="cart">
+        <div className="cart__items">
           {orderList?.orders.length ? (
             orderList?.orders.map(item => <CartItems key={item._id} item={item} />)
           ) : (
-            <span className={style.cart__items__msg}> Your Cart Is Empty!</span>
+            <span className="cart__items__msg"> Your Cart Is Empty!</span>
           )}
         </div>
-        <div className={style.cart__button} onClick={() => handleRoute(orderList)}>
+        <div className="cart__button" onClick={() => handleRoute(orderList)}>
           checkout
         </div>
       </div>

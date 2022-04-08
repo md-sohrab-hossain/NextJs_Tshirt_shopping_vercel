@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-
-import { toast } from 'react-toastify';
-
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetPassword, clearErrors } from '../../redux/actions/userAction';
-
-import style from './new_password.module.scss';
+import { toast } from 'react-toastify';
+import { clearErrors, resetPassword } from '../../redux/actions/userAction';
 
 const NewPassword = () => {
   const [password, setPassword] = useState('');
@@ -40,11 +36,11 @@ const NewPassword = () => {
   };
 
   return (
-    <div className={style.new__password}>
-      <form className={style.new__password__form} onSubmit={submitHandler}>
-        <h1 className={style.new__password__form__header}>New Password</h1>
+    <div className="new__password">
+      <form className="new__password__form" onSubmit={submitHandler}>
+        <h1 className="new__password__form__header">New Password</h1>
 
-        <div className={style.new__password__form__pass}>
+        <div className="new__password__form__pass">
           <label htmlFor="password_field">Password</label>
           <input
             type="password"
@@ -55,7 +51,7 @@ const NewPassword = () => {
           />
         </div>
 
-        <div className={style.new__password__form__confirmPass}>
+        <div className="new__password__form__confirmPass">
           <label htmlFor="confirm_password_field">Confirm Password</label>
           <input
             type="password"
@@ -68,7 +64,7 @@ const NewPassword = () => {
 
         <button
           type="submit"
-          className={loading ? style.button__wait : style.button__setPass}
+          className={loading ? 'button__wait' : 'button__setPass'}
           disabled={loading ? true : false}
         >
           <span>Set Password</span>

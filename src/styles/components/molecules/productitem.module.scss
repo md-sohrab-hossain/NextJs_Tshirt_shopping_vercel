@@ -1,30 +1,29 @@
-@import '../../styles/mixins.module';
-
 #review {
   padding-left: 5px;
 }
 
 .product_item {
-  margin: 5px;
-  box-sizing: border-box;
-  @include display_column;
   position: relative;
+  box-sizing: border-box;
+  margin: 5px;
+  @include display-column;
 
   &__card {
     width: 300px !important;
+    padding: 15px;
     margin: 10px;
-    @include display_column;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-      rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-    border-radius: 19px 19px 19px 19px;
+    border-radius: 19px;
+    box-shadow: rgb(50 50 93 / 25%) 0 50px 100px -20px, rgb(0 0 0 / 30%) 0 30px 60px -30px,
+      rgb(10 37 64 / 35%) 0 -2px 6px 0 inset;
+
     // border-radius: 0% 100% 0% 100% / 83% 18% 82% 17%;
     transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
-    padding: 15px;
+    @include display-column;
 
     &:hover {
-      opacity: 1;
       z-index: 999;
       background: linear-gradient(to right, #77a1d3, #79cbca, #e684ae);
+      opacity: 1;
       transform: scale(1.1, 1.1);
     }
 
@@ -39,9 +38,9 @@
       margin-top: 15px;
 
       &__title a {
-        margin-bottom: 20px;
         display: flex;
         justify-content: center;
+        margin-bottom: 20px;
         text-decoration: none;
         text-transform: capitalize;
       }
@@ -61,10 +60,10 @@
   }
 
   &__button {
+    margin-bottom: 10px;
     color: white;
     text-decoration: none;
-    @include custom_animated_button1;
-    margin-bottom: 10px;
+    @include custom-animated-button;
   }
 }
 

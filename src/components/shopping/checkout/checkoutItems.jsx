@@ -1,9 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-
 import { NewProductOrder, removeItems } from '../../../redux/actions/productOrderAction';
 import DeleteModal from '../../atoms/DeleteModal';
-import style from './index.module.scss';
 
 const CheckoutItem = ({ cartItem }) => {
   const [openModal, setOpenModal] = useState({
@@ -32,28 +30,28 @@ const CheckoutItem = ({ cartItem }) => {
 
   return (
     <>
-      <div className={style.checkout}>
-        <div className={style.checkout__image}>
+      <div className="checkout">
+        <div className="checkout__image">
           <img src={images[0].url} alt="item" />
         </div>
 
-        <span className={style.checkout__name}>{productInfo[0].name}</span>
-        <span className={style.checkout__quantity}>
+        <span className="checkout__name">{productInfo[0].name}</span>
+        <span className="checkout__quantity">
           <div
-            className={style.checkout__arrow}
+            className="checkout__arrow"
             onClick={() => {
               quantity === 1 ? handleRemove(product, true) : handleQuantity(-1);
             }}
           >
             &#10094;
           </div>
-          <span className={style.checkout__value}>{quantity}</span>
-          <div className={style.checkout__arrow} onClick={() => handleQuantity(1)}>
+          <span className="checkout__value">{quantity}</span>
+          <div className="checkout__arrow" onClick={() => handleQuantity(1)}>
             &#10095;
           </div>
         </span>
-        <span className={style.checkout__price}>{totalPrice}/=</span>
-        <div className={style.checkout__removeButton} onClick={() => setOpenModal({ id: product, open: true })}>
+        <span className="checkout__price">{totalPrice}/=</span>
+        <div className="checkout__removeButton" onClick={() => setOpenModal({ id: product, open: true })}>
           &#10005;
         </div>
       </div>

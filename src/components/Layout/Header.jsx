@@ -1,17 +1,13 @@
-import Link from 'next/link';
-import React, { useState, useEffect, useCallback, memo } from 'react';
-import style from '../../styles/layout_header.module.scss';
-
 //?--- Redux --- //
-import { useDispatch, useSelector } from 'react-redux';
-import { loadUser } from '../../redux/actions/userAction';
-import { getMyOrders } from '../../redux/actions/productOrderAction';
-//?--- Redux --- //
-
 //? --- Next-auth ---//
 import { signOut } from 'next-auth/client';
+import Link from 'next/link';
+import React, { memo, useCallback, useEffect, useState } from 'react';
+//?--- Redux --- //
+import { useDispatch, useSelector } from 'react-redux';
+import { getMyOrders } from '../../redux/actions/productOrderAction';
+import { loadUser } from '../../redux/actions/userAction';
 //? --- Next-auth ---//
-
 import CartIcon from '../shopping/cart';
 import CartDropdown from '../shopping/cartDropdown';
 
@@ -44,19 +40,19 @@ const Header = () => {
   }, []);
 
   return (
-    <nav className={style.navbar}>
-      <div className={style.navbar__container}>
-        <div className={style.navbar__container__brand}>
+    <nav className="navbar">
+      <div className="navbar__container">
+        <div className="navbar__container__brand">
           <Link href="/">
             <label onClick={() => (window.location.href = '/')}>T-shirt Shopping</label>
           </Link>
         </div>
 
-        <div className={style.navbar__container__auth}>
+        <div className="navbar__container__auth">
           {user ? (
-            <div className={style.navbar__dropdown}>
+            <div className="navbar__dropdown">
               <a
-                className={style.navbar__dropdown__options}
+                className="navbar__dropdown__options"
                 id="dropDownMenuButton"
                 data-toggle="dropdown"
                 aria-haspopup="true"
@@ -103,7 +99,7 @@ const Header = () => {
           ) : (
             !loading && (
               <Link href="/customPages/user/login">
-                <a className={style.login__header__button}>Login</a>
+                <a className="login__header__button">Login</a>
               </Link>
             )
           )}

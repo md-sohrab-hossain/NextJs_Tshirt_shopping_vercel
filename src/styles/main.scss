@@ -1,0 +1,144 @@
+/**
+ * ITCSS Structure
+ * https://speakerdeck.com/dafed/managing-css-projects-with-itcss?slide=49
+ *
+ * Settings............ Global variables, config swtiches
+ * Tools............... Default mixin and functions
+ * Generic............. Ground-zero styles (reset, normalize, sanitize)
+ * Base................ Unclassed HTML elements (type selectors)
+ * Objects............. Cosmetic-free design patterns
+ * Components.......... Design components, chunks of UI
+ * Trumps.............. Helpers and overrides (!important)
+ * Animation........... Use for animation
+ */
+@import '01-settings';
+@import '02-tools';
+@import '03-generic';
+@import '04-base';
+@import '05-objects';
+@import '07-trumps';
+@import '08-animation';
+
+// component/atom
+@import './components/atoms/checkout.module.scss';
+@import './components/atoms/layout_header.module.scss';
+
+// component/molecules
+@import './components/molecules/cart-dropdown.module.scss';
+@import './components/molecules/productitem.module.scss';
+@import './components/molecules/productdetails.module.scss';
+
+// component/organism
+@import './components/organism/home.module.scss';
+@import './components/organism/login.module.scss';
+@import './components/organism/register.module.scss';
+@import './components/organism/forgot_password.module.scss';
+@import './components/organism/new_password.module.scss';
+@import './components/organism/profile.module.scss';
+
+.footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60vh;
+
+  &__modal {
+    width: 100px;
+    height: 100px;
+    background: #7367f0;
+    border-radius: 12px;
+    perspective: 6000px;
+    animation: loading 2s linear infinite;
+  }
+
+  @keyframes loading {
+    0% {
+      transform: rotateX(0deg) rotateY(0deg);
+    }
+
+    50% {
+      transform: rotateX(0deg) rotateY(180deg);
+    }
+
+    100% {
+      transform: rotateX(180deg) rotateY(180deg);
+    }
+  }
+}
+
+.deleteModal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10000;
+  width: 100%;
+  background: rgb(0 0 0 / 60%);
+
+  &__body {
+    position: absolute;
+    top: 40%;
+    left: 35%;
+    z-index: 10001;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: calc(100% - 75%);
+    padding: 15px;
+    margin-left: 1%;
+    background: linear-gradient(to right, #c2e59c, #64b3f4);
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #000000;
+  }
+
+  p {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  &__button {
+    position: relative;
+    top: 50%;
+    display: flex;
+    justify-content: flex-end;
+
+    &__cancle,
+    &__cancle:focus,
+    &__ok,
+    &__ok:focus {
+      width: calc(100% - 70%);
+      height: 30px;
+      margin: 5px;
+      font-size: calc(100% - 10%);
+      color: #ffffff;
+      border: 0;
+      outline: 0;
+      transition: background 0.3s ease-in;
+    }
+
+    &__cancle {
+      background: #27ae60;
+
+      &:hover {
+        background: #2ecc71;
+      }
+    }
+
+    &__ok {
+      background: #c0392b;
+
+      &:hover {
+        background: #e74c3c;
+      }
+    }
+  }
+}

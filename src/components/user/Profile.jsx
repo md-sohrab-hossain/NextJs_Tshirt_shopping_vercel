@@ -1,14 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
-
-import { toast } from 'react-toastify';
-
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateProfile, clearErrors } from '../../redux/actions/userAction';
+import { toast } from 'react-toastify';
+import { clearErrors, updateProfile } from '../../redux/actions/userAction';
 import { UPDATE_PROFILE_RESET } from '../../redux/types/userTypes';
-
 import Loading from '../atoms/Loading';
-import style from './profile.module.scss';
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -88,13 +84,13 @@ const Profile = () => {
   if (loading) return <Loading />;
 
   return (
-    <div className={style.profile}>
+    <div className="profile">
       <div className="row wrapper">
         <div className="col-10 col-lg-5">
-          <form className={style.profile__form} onSubmit={submitHandler}>
-            <h1 className={style.profile__form__header}>Update Profile</h1>
+          <form className="profile__form" onSubmit={submitHandler}>
+            <h1 className="profile__form__header">Update Profile</h1>
 
-            <div className={style.profile__form__name}>
+            <div className="profile__form__name">
               <label htmlFor="name_field">Name</label>
               <input
                 required
@@ -107,7 +103,7 @@ const Profile = () => {
               />
             </div>
 
-            <div className={style.profile__form__email}>
+            <div className="profile__form__email">
               <label htmlFor="email_field">Email</label>
               <input
                 required
@@ -120,7 +116,7 @@ const Profile = () => {
               />
             </div>
 
-            <div className={style.profile__form__password}>
+            <div className="profile__form__password">
               <label htmlFor="password_field">Password</label>
               <input
                 required
@@ -133,10 +129,10 @@ const Profile = () => {
               />
             </div>
 
-            <div className={style.profile__form__avatar}>
+            <div className="profile__form__avatar">
               <label htmlFor="avatar_upload">Avatar</label>
-              <div className={style.profile__form__avatar__items}>
-                <img src={avatarPreview} className={style.profile__form__avatar__items__img} alt="image" />
+              <div className="profile__form__avatar__items">
+                <img src={avatarPreview} className="profile__form__avatar__items__img" alt="image" />
 
                 <div className="custom-file">
                   <input
@@ -157,7 +153,7 @@ const Profile = () => {
 
             <button
               type="submit"
-              className={updateLoading ? style.button__wait : style.button__profile}
+              className={updateLoading ? 'button__wait' : 'button__profile'}
               disabled={updateLoading ? true : false}
             >
               <span>Update</span>

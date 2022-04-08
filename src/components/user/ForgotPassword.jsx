@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from 'react';
-
-import { toast } from 'react-toastify';
-
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { forgotPassword, clearErrors } from '../../redux/actions/userAction';
-
-import style from './forgot_password.module.scss';
+import { toast } from 'react-toastify';
+import { clearErrors, forgotPassword } from '../../redux/actions/userAction';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -36,10 +32,10 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className={style.forgot__password}>
-      <form className={style.forgot__password__form} onSubmit={submitHandler}>
-        <h1 className={style.forgot__password__form__header}>Forgot Password</h1>
-        <div className={style.forgot__password__form__email}>
+    <div className="forgot__password">
+      <form className="forgot__password__form" onSubmit={submitHandler}>
+        <h1 className="forgot__password__form__header">Forgot Password</h1>
+        <div className="forgot__password__form__email">
           <label htmlFor="email_field">Email</label>
           <input
             required
@@ -52,11 +48,7 @@ const ForgotPassword = () => {
           />
         </div>
 
-        <button
-          type="submit"
-          className={loading ? style.button__wait : style.button__send}
-          disabled={loading ? true : false}
-        >
+        <button type="submit" className={loading ? 'button__wait' : 'button__send'} disabled={loading ? true : false}>
           <span>Send Email</span>
         </button>
       </form>

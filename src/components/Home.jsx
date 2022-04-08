@@ -1,16 +1,15 @@
 /** Library */
-import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import Pagination from 'react-js-pagination';
 /** Library */
-
 /** components */
 import Loading from '../components/atoms/Loading';
 import ProductItem from '../components/product/ProductItem';
 /** components */
 
 /** css */
-import style from '../styles/home.module.scss';
+// import style from '../styles/home.module.scss';
 /** css */
 
 function Home({ productsData }) {
@@ -58,8 +57,8 @@ function Home({ productsData }) {
   }
   return (
     <>
-      <div className={style.container}>
-        <div className={style.container__search}>
+      <div className="container">
+        <div className="container__search">
           <p>Our Products</p>
           <input
             type="text"
@@ -69,7 +68,7 @@ function Home({ productsData }) {
           />
         </div>
 
-        <div className={style.container__row}>
+        <div className="container__row">
           {products && products.length == 0 ? (
             <div>
               <b>No Products. &#128542;</b>
@@ -81,7 +80,7 @@ function Home({ productsData }) {
       </div>
 
       {resultPerPage < count && (
-        <div className={style.pagination}>
+        <div className="pagination">
           <Pagination
             activePage={page}
             itemsCountPerPage={resultPerPage}

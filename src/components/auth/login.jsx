@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
-import Link from 'next/link';
-
 import { signIn } from 'next-auth/client';
+import Link from 'next/link';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-
-import style from './login.module.scss';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -32,10 +29,10 @@ const Login = () => {
   };
 
   return (
-    <div className={style.login}>
-      <form className={style.login__form} onSubmit={submitHandler}>
-        <h1 className={style.login__form__header}>Login</h1>
-        <div className={style.login__form__email}>
+    <div className="login">
+      <form className="login__form" onSubmit={submitHandler}>
+        <h1 className="login__form__header">Login</h1>
+        <div className="login__form__email">
           <label htmlFor="email_field">Email</label>
           <input
             required
@@ -48,7 +45,7 @@ const Login = () => {
           />
         </div>
 
-        <div className={style.login__form__password}>
+        <div className="login__form__password">
           <label htmlFor="password_field">Password</label>
           <input
             required
@@ -62,20 +59,20 @@ const Login = () => {
         </div>
 
         <Link href="/customPages/user/password/forgot">
-          <a className={style.login__form__forgotPassword}>Forgot Password?</a>
+          <a className="login__form__forgotPassword">Forgot Password?</a>
         </Link>
 
         <button
           id="login_button"
           type="submit"
-          className={loading ? style.button__wait : style.button__login}
+          className={loading ? 'button__wait' : 'button__login'}
           disabled={loading ? true : false}
         >
           <span>Login</span>
         </button>
 
         <Link href="/customPages/user/register">
-          <a className={style.login__form__new__user}>New User?</a>
+          <a className="login__form__new__user">New User?</a>
         </Link>
       </form>
     </div>

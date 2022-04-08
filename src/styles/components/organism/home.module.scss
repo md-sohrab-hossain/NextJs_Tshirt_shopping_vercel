@@ -1,57 +1,56 @@
-@import './mixins.module';
-
 $custom__font1: 'Dancing Script', cursive;
 $custom__font2: 'Kanit', sans-serif;
 
 .container {
   padding: 0 0.5rem;
-  @include display_column;
+  @include display-column;
 
   &__heading {
-    margin-top: 5%;
     width: 100%;
-    color: #009432;
+    margin-top: 5%;
     font-family: $custom__font1;
+    color: #009432;
   }
 
   &__search {
-    width: 100%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
 
     p {
-      font-family: $custom__font1;
-      font-weight: bolder;
-      font-size: 3rem;
       padding: 10px;
       margin-left: 20px;
+      font-family: $custom__font1;
+      font-size: 3rem;
+      font-weight: bolder;
     }
   }
 
   &__row {
+    flex-wrap: wrap;
     width: 100%;
     margin-top: 20px;
-    flex-wrap: wrap;
-    @include display_row;
+    @include display-row;
 
-    @include sp() {
+    @include sp {
       flex-direction: column;
     }
   }
 }
 
 .pagination {
-  @include display_row;
+  @include display-row;
+
   margin-top: 30px;
 }
 
 .alert {
-  color: #fff;
-  height: 40px;
   width: 50%;
-  background: #ea2027;
+  height: 40px;
   margin-top: 20px;
+  color: #ffffff;
+  background: #ea2027;
   transform: translate(0%, 10%);
-  @include display_row;
+  @include display-row;
 }
