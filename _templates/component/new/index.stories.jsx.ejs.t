@@ -2,7 +2,7 @@
 to: src/components/<%= component %>/<%= h.toLowercase(name) %>/index.stories.jsx
 ---
 import React from 'react';
-import { <%= h.toPascalCase(name) %> } from './';
+import <%= h.toPascalCase(name) %> from './';
 
 export default {
   title: 'components/<%= component %>/<%= h.toPascalCase(name) %>',
@@ -21,5 +21,5 @@ const Template = args => <<%= h.toPascalCase(name) %> {...args} />;
 
 export const Normal = Template.bind({});
 Normal.args = {
-  children: 'ボタン',
+  children: 'new component',
 };

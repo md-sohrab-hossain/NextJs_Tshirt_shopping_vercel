@@ -1,0 +1,48 @@
+.a-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  @mixin icon-shape($name, $sprite: false) {
+    &--#{$name} {
+      background-image: url('~/public/static/icons/#{$name}.svg');
+      @if $sprite {
+        @include sprite-icon;
+
+        &:hover {
+          @include pc {
+            @include sprite-icon-active;
+          }
+        }
+      }
+    }
+  }
+
+  @mixin icon-size($name, $pc, $sp) {
+    &--#{$name} {
+      width: $pc;
+      height: $pc;
+
+      @include sp {
+        width: $sp;
+        height: $sp;
+      }
+    }
+  }
+
+  @mixin icon($name, $pc, $sp, $sprite: false) {
+    @include icon-shape($name, $sprite);
+    @include icon-size($name, $pc, $sp);
+  }
+
+  @include icon('logout', 24px, 24px);
+  @include icon('expand-more', 24px, 24px);
+  @include icon('expand-less', 24px, 24px);
+  @include icon('arrow-left', 24px, 24px);
+  @include icon('arrow-right', 24px, 24px);
+  @include icon('close', 24px, 24px, true);
+}
