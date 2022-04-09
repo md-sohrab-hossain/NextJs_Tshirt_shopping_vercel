@@ -21,6 +21,7 @@
 @import '08-animation';
 
 // component/atom
+@import '../components/atoms/icon/index.module.scss';
 @import '../components/atoms/text/index.module.scss';
 @import '../components/atoms/input-text/index.module.scss';
 @import '../components/atoms/heading/index.module.scss';
