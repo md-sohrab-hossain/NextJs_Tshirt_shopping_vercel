@@ -1,3 +1,5 @@
+import Button from 'components/atoms/button';
+import Section from 'components/molecules/section';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -27,9 +29,14 @@ function ProductItem({ product }) {
             <span id="#review">({product.numOfReviews} Reviews)</span>
           </div>
 
-          <button className="product_item__button" onClick={() => router.push(`/customPages/product/${product._id}`)}>
-            View Details
-          </button>
+          <Section padding="vertical-medium">
+            <Button
+              modifiers={['violet', 'animated']}
+              onClick={() => router.push(`/customPages/product/${product._id}`)}
+            >
+              View Details
+            </Button>
+          </Section>
         </div>
       </div>
     </div>
