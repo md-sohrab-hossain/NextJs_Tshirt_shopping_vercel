@@ -1,0 +1,14 @@
+.a-input-text {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.2rem;
+  color: $color-grey-6;
+  border: 1.5px solid $color-base-lightgray;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: box-shadow 0.1s ease;
+
+  &:focus {
+    box-shadow: 0 0 0 1.6px $color-secondary-blue;
+  }
+}

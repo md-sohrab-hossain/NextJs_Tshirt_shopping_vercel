@@ -23,9 +23,4 @@
   },
   "include": ["src"],
   "exclude": ["node_modules", "build", "scripts"],
-  "ts-node": {
-    "compilerOptions": {
-      "module": "CommonJS"
-    }
-  }
 }

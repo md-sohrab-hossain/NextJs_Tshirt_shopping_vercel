@@ -1,9 +1,7 @@
 import { paramCase } from 'change-case';
 
-type MapModifiersModifier = string | false | null | undefined | (string | false | null | undefined)[];
-
-function generateModifierClassNameArray(baseClassName: string, ...modifiers: MapModifiersModifier[]): string[] {
-  let classNameArray: string[] = [];
+function generateModifierClassNameArray(baseClassName, ...modifiers) {
+  let classNameArray = [];
 
   for (const modifier of modifiers) {
     if (Array.isArray(modifier)) {
@@ -19,7 +17,7 @@ function generateModifierClassNameArray(baseClassName: string, ...modifiers: Map
 /**
  * Generate `className` from base class name and modifiers, based on MindBEMing.
  */
-export function mapModifiers(baseClassName: string, ...modifiers: MapModifiersModifier[]): string {
+export function mapModifiers(baseClassName, ...modifiers) {
   return (
     baseClassName +
     ' ' +
@@ -29,12 +27,7 @@ export function mapModifiers(baseClassName: string, ...modifiers: MapModifiersMo
   ).trim();
 }
 
-export type ModifierProp<M extends string> = M | M[];
-
-export function injectModifiers<M extends string>(
-  baseModifiers: ModifierProp<M> | undefined,
-  ...additionalModifiers: M[]
-): ModifierProp<M> {
+export function injectModifiers(baseModifiers, ...additionalModifiers) {
   const modifiers = (() => {
     if (typeof baseModifiers === 'undefined') {
       return [];
@@ -49,8 +42,8 @@ export function injectModifiers<M extends string>(
   return modifiers.concat(additionalModifiers);
 }
 
-export function mapDataAttrs(dataSet: Record<string, string>): Record<string, string> {
-  const result: Record<string, string> = {};
+export function mapDataAttrs(dataSet) {
+  const result = {};
 
   for (const key in dataSet) {
     result[`data-${paramCase(key)}`] = dataSet[key];
@@ -59,8 +52,8 @@ export function mapDataAttrs(dataSet: Record<string, string>): Record<string, st
   return result;
 }
 
-export function mapModifiersPrefix(prefix: string, modifiers: MapModifiersModifier): string[] {
-  let classNameArray: string[] = [];
+export function mapModifiersPrefix(prefix, modifiers) {
+  let classNameArray = [];
 
   if (Array.isArray(modifiers)) {
     classNameArray = classNameArray.concat(modifiers.map(modifier => prefix + '-' + modifier));

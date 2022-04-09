@@ -2,7 +2,6 @@
 to: src/components/<%= component %>/<%= h.toLowercase(name) %>/index.stories.jsx
 ---
 import React from 'react';
-import { ComponentMeta, ComponentStory  } from '@storybook/react';
 import { <%= h.toPascalCase(name) %> } from './';
 
 export default {

@@ -5,7 +5,6 @@ module.exports = {
   ignorePatterns: ['docs'],
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
     'plugin:react/recommended',
     'plugin:storybook/recommended',
@@ -13,8 +12,11 @@ module.exports = {
   env: {
     browser: true,
     node: true,
+    es6: true,
   },
   parserOptions: {
+    sourceType: 'module',
+    ecmaVersion: 2020,
     project: resolve(__dirname, './jsconfig.json'),
   },
   settings: {

@@ -1,9 +1,9 @@
 import React from 'react';
-import { Button } from './';
+import { InputText } from './';
 
 export default {
-  title: 'components/atoms/Button',
-  component: Button,
+  title: 'components/atoms/InputText',
+  component: InputText,
   parameters: {
     paddings: {
       default: 'small',
@@ -14,9 +14,10 @@ export default {
   },
 };
 
-const Template = args => <Button {...args} />;
+const Template = args => <InputText {...args} />;
 
 export const Normal = Template.bind({});
 Normal.args = {
-  children: 'ボタン',
+  placeholder: 'Search..',
+  type: 'email',
 };

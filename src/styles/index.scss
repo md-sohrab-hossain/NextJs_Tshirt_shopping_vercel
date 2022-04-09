@@ -20,6 +20,7 @@
 @import '08-animation';
 
 // component/atom
+@import '../components/atoms/input-text/index.module.scss';
 @import './components/atoms/checkout.module.scss';
 @import './components/atoms/layout_header.module.scss';
 

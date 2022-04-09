@@ -6,6 +6,7 @@ import Pagination from 'react-js-pagination';
 /** components */
 import Loading from '../components/atoms/Loading';
 import ProductItem from '../components/product/ProductItem';
+import { InputText } from './atoms/input-text';
 /** components */
 
 /** css */
@@ -60,12 +61,7 @@ function Home({ productsData }) {
       <div className="container">
         <div className="container__search">
           <p>Our Products</p>
-          <input
-            type="text"
-            className="form-control w-25 m-5 float-right"
-            placeholder="Search.."
-            onChange={filterItem}
-          />
+          <InputText placeholder="Search.." onChange={filterItem} />
         </div>
 
         <div className="container__row">
