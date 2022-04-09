@@ -1,0 +1,55 @@
+.a-text {
+  font-size: 16px;
+  font-weight: xd-font-weight('regular');
+  line-height: 26px;
+
+  &--size {
+    &-small {
+      font-size: 14px;
+      line-height: 24px;
+    }
+
+    &-extra-small {
+      font-size: 12px;
+      line-height: 18px;
+    }
+  }
+
+  &--weight {
+    &-medium {
+      font-weight: xd-font-weight('medium');
+    }
+
+    &-bold {
+      font-weight: xd-font-weight('bold');
+    }
+  }
+
+  &--color {
+    &-gray {
+      color: $color-primary-grey;
+    }
+
+    &-white {
+      color: $color-white;
+    }
+
+    &-red {
+      color: $color-primary-red;
+    }
+  }
+
+  &--align {
+    &-left {
+      text-align: left;
+    }
+
+    &-center {
+      text-align: center;
+    }
+
+    &-right {
+      text-align: right;
+    }
+  }
+}

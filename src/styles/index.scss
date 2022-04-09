@@ -1,3 +1,4 @@
+/* stylelint-disable scss/at-import-partial-extension */
 /**
  * ITCSS Structure
  * https://speakerdeck.com/dafed/managing-css-projects-with-itcss?slide=49
@@ -20,11 +21,14 @@
 @import '08-animation';
 
 // component/atom
+@import '../components/atoms/text/index.module.scss';
 @import '../components/atoms/input-text/index.module.scss';
+@import '../components/atoms/heading/index.module.scss';
 @import './components/atoms/checkout.module.scss';
 @import './components/atoms/layout_header.module.scss';
 
 // component/molecules
+@import '../components/molecules/section/index.module.scss';
 @import './components/molecules/cart-dropdown.module.scss';
 @import './components/molecules/productitem.module.scss';
 @import './components/molecules/productdetails.module.scss';

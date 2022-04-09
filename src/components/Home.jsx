@@ -1,17 +1,11 @@
-/** Library */
+import Heading from 'components/atoms/heading';
+import InputText from 'components/atoms/input-text';
+import Section from 'components/molecules/section';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import Pagination from 'react-js-pagination';
-/** Library */
-/** components */
 import Loading from '../components/atoms/Loading';
 import ProductItem from '../components/product/ProductItem';
-import { InputText } from './atoms/input-text';
-/** components */
-
-/** css */
-// import style from '../styles/home.module.scss';
-/** css */
 
 function Home({ productsData }) {
   const router = useRouter();
@@ -59,10 +53,10 @@ function Home({ productsData }) {
   return (
     <>
       <div className="container">
-        <div className="container__search">
-          <p>Our Products</p>
+        <Section modifiers="side-by-side">
+          <Heading large>Our Products</Heading>
           <InputText placeholder="Search.." onChange={filterItem} />
-        </div>
+        </Section>
 
         <div className="container__row">
           {products && products.length == 0 ? (

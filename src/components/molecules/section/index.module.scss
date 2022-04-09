@@ -1,0 +1,97 @@
+.m-section {
+  $root: &;
+
+  width: 100%;
+  padding: 28px 20px;
+  border-radius: 6px;
+
+  &--side-by-side {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    > :nth-child(2) {
+      width: 25%;
+    }
+  }
+
+  &--round {
+    &-large {
+      border-radius: 24px;
+    }
+  }
+
+  &--border {
+    border-bottom: 1px solid $color-grey-3;
+  }
+
+  &--card {
+    background: $color-base-white;
+    box-shadow: 0 4px 16px 0 rgba($color-base-black, 5%);
+  }
+
+  &--card-border {
+    border: 3px solid $color-grey-3;
+  }
+
+  &--fill {
+    background: $color-base-whitesmoke;
+  }
+
+  &--fill-white {
+    background: $color-base-white;
+  }
+
+  &--fullpage {
+    min-height: calc(100% - 32px);
+    background: $color-base-whitesmoke;
+    background: rgba($color-base-white, 80%);
+    backdrop-filter: blur(3px) brightness(1);
+
+    @include sp {
+      min-height: calc(100% - 20px);
+      box-shadow: 0 16px 24px rgba($color-black, 5%);
+    }
+  }
+
+  &--padding {
+    &-medium {
+      padding: 20px;
+    }
+
+    &-horizontal {
+      padding: 0 24px;
+    }
+
+    &-vertical {
+      padding: 24px 0 0;
+    }
+
+    &-vertical-medium {
+      padding: 16px 0 0;
+    }
+
+    &-vertical-large {
+      padding: 40px 0 0;
+      @include sp {
+        padding: 24px 0 0;
+      }
+    }
+
+    &-none {
+      padding: 0;
+    }
+
+    &-pc-none {
+      @include pc {
+        padding: 0;
+      }
+    }
+
+    &-sp-none {
+      @include sp {
+        padding: 0;
+      }
+    }
+  }
+}

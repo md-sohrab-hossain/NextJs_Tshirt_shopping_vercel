@@ -1,20 +1,83 @@
 .a-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: bold;
+
   $root: &;
-  color: $color-base-black;
-  @include pc {
-    // only pc
-  }
 
-  @include sp {
-    // only sp
-  }
+  &__text {
+    width: 100%;
+    font-family: $fontset-dancing;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 39px;
+    color: $color-base-black;
 
-  &_element {
-  }
+    @include sp {
+      font-size: 22px;
+      line-height: 33px;
+    }
 
-  &.-modifires {
-  }
+    #{$root}--left & {
+      text-align: left;
+    }
 
-  &.is-state {
+    #{$root}--right & {
+      text-align: right;
+    }
+
+    #{$root}--center & {
+      text-align: center;
+    }
+
+    #{$root}--tag-h1 & {
+      font-size: 3rem;
+      font-weight: bolder;
+      line-height: 39px;
+
+      @include sp {
+        font-size: 22px;
+        line-height: 33px;
+      }
+    }
+
+    #{$root}--tag-h2 & {
+      position: relative;
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 29px;
+      border: 0;
+    }
+
+    #{$root}--tag-h3 & {
+      position: relative;
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 27px;
+    }
+
+    #{$root}--tag-h4 & {
+      position: relative;
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 24px;
+    }
+
+    #{$root}--tag-h5 & {
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 24px;
+    }
+
+    #{$root}--tag-h6 & {
+      font-size: 10px;
+      font-weight: bold;
+      line-height: 20px;
+    }
+
+    #{$root}--large & {
+      font-size: 31px;
+    }
   }
 }
