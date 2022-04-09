@@ -39,10 +39,6 @@ module.exports = {
           },
         ],
         exclude: /\.module\.scss$/,
-      },
-      {
-        test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
-        use: ['file-loader'],
       }
     );
 
