@@ -63,6 +63,12 @@ Red.args = {
   modifiers: 'red',
 };
 
+export const Violet = Template.bind({});
+Violet.args = {
+  children: 'click me',
+  modifiers: ['violet', 'animated'],
+};
+
 export const Text = Template.bind({});
 Text.args = {
   children: 'click me',

@@ -1,12 +1,6 @@
-/** library */
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-/** library */
-
-/** css */
-// import style from './productitem.module.scss';
-/** css */
 
 function ProductItem({ product }) {
   const router = useRouter();
