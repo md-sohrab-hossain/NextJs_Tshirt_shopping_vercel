@@ -39,7 +39,8 @@
     @include icon-size($name, $pc, $sp);
   }
 
-  @include icon('logout', 24px, 24px);
+  @include icon('login', 20px, 20px);
+  @include icon('logout', 18px, 18px);
   @include icon('expand-more', 24px, 24px);
   @include icon('expand-less', 24px, 24px);
   @include icon('arrow-left', 24px, 24px);
