@@ -13,7 +13,7 @@
     font-size: 24px;
     font-weight: bold;
     line-height: 39px;
-    color: $color-base-black;
+    color: $color-base-pitch-black;
 
     @include sp {
       font-size: 22px;
@@ -78,7 +78,7 @@
     }
 
     #{$root}--large & {
-      font-size: 31px;
+      font-size: 4.5rem;
     }
   }
 }
