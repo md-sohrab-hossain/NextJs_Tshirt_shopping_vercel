@@ -23,14 +23,19 @@
   box-shadow: 0 4px 16px 0 rgba($color-base-black, 5%);
   transition: box-shadow 0.25s;
 
-  &--icon {
-    display: flex;
-    justify-content: space-between;
-  }
-
   &:active {
     background: $color-base-lavender;
     box-shadow: none;
+  }
+
+  &:focus {
+    border: 0;
+    outline: 0;
+  }
+
+  &--icon {
+    display: flex;
+    justify-content: space-between;
   }
 
   &--primary {
