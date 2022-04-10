@@ -1,14 +1,14 @@
 import Heading from 'components/atoms/heading';
 import InputText from 'components/atoms/input-text';
+import Loading from 'components/atoms/Loading';
+import Pagination from 'components/atoms/pagination';
 import Card from 'components/molecules/card';
 import Section from 'components/molecules/section';
 import Grid from 'components/organisms/grid';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import Pagination from 'react-js-pagination';
-import Loading from '../components/atoms/Loading';
 
-const Home = ({ productsData }) => {
+const DashBoard = ({ productsData }) => {
   const router = useRouter();
   const [allProduct, setAllproducts] = useState(() => productsData);
   const { loading, products, productsCount, resultPerPage } = allProduct;
@@ -69,23 +69,15 @@ const Home = ({ productsData }) => {
       </Grid>
 
       {resultPerPage < count && (
-        <div className="pagination">
-          <Pagination
-            activePage={page}
-            itemsCountPerPage={resultPerPage}
-            totalItemsCount={productsCount}
-            onChange={handlePagination}
-            nextPageText={'Next'}
-            prevPageText={'Prev'}
-            firstPageText={'First'}
-            lastPageText={'Last'}
-            itemClass="page-item"
-            linkClass="page-link"
-          />
-        </div>
+        <Pagination
+          activePage={page}
+          resultPerPage={resultPerPage}
+          itemsCount={productsCount}
+          onChange={handlePagination}
+        />
       )}
     </div>
   );
 };
 
-export default Home;
+export default DashBoard;

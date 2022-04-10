@@ -27,6 +27,7 @@
 @import '../components/atoms/button/index.module.scss';
 @import '../components/atoms/heading/index.module.scss';
 @import '../components/atoms/rating/index.module.scss';
+@import '../components/atoms/pagination/index.module.scss';
 @import './components/atoms/checkout.module.scss';
 @import './components/atoms/layout_header.module.scss';
 
@@ -34,12 +35,10 @@
 @import '../components/molecules/section/index.module.scss';
 @import '../components/molecules/card/index.module.scss';
 @import './components/molecules/cart-dropdown.module.scss';
-@import './components/molecules/productitem.module.scss';
 @import './components/molecules/productdetails.module.scss';
 
 // component/organism
 @import '../components/organisms/grid/index.module.scss';
-@import './components/organism/home.module.scss';
 @import './components/organism/login.module.scss';
 @import './components/organism/register.module.scss';
 @import './components/organism/forgot_password.module.scss';

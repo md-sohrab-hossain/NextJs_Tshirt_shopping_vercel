@@ -1,9 +1,9 @@
+import DashBoard from 'components/templates/dashboard';
 import React from 'react';
-import Home from '../components/Home';
-import { getAllProducts } from '../redux/actions/productAction';
+import { getAllProducts } from 'redux/actions/productAction';
 
 const App = ({ props }) => {
-  return <Home productsData={props.products} />;
+  return <DashBoard productsData={props.products} />;
 };
 
 App.getInitialProps = async ({ req, query, store }) => {
