@@ -8,6 +8,8 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:react/recommended',
     'plugin:storybook/recommended',
+    'next',
+    'next/core-web-vitals',
   ],
   env: {
     browser: true,
