@@ -22,28 +22,48 @@
       transform: scale(1.1, 1.1);
     }
 
-    .a-text {
-      font-weight: xd-font-weight('medium');
-      text-transform: capitalize;
+    &--image {
+      position: relative;
+      width: 20rem;
+      height: 20rem;
     }
 
-    &__details {
+    &--details {
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       width: 100%;
       margin-top: 2rem;
 
-      &--price {
+      &-price {
         font-size: 1.5rem;
         font-weight: xd-font-weight('bold');
+        cursor: default;
+      }
+
+      &-rating {
+        display: flex;
+        align-items: center;
+
+        > span {
+          font-size: 1.2rem;
+          font-weight: xd-font-weight('medium');
+          cursor: default;
+        }
       }
     }
 
-    &--image {
-      position: relative;
-      width: 20rem;
-      height: 20rem;
+    .a-text {
+      font-weight: xd-font-weight('medium');
+      text-transform: capitalize;
+
+      &:hover {
+        color: $color-base-royalblue;
+      }
+    }
+
+    .a-button {
+      margin-top: 1.6rem;
     }
   }
 }

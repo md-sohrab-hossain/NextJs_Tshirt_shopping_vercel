@@ -1,11 +1,11 @@
 import Heading from 'components/atoms/heading';
 import InputText from 'components/atoms/input-text';
+import Card from 'components/molecules/card';
 import Section from 'components/molecules/section';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import Pagination from 'react-js-pagination';
 import Loading from '../components/atoms/Loading';
-import ProductItem from '../components/product/ProductItem';
 
 function Home({ productsData }) {
   const router = useRouter();
@@ -64,7 +64,7 @@ function Home({ productsData }) {
               <b>No Products. &#128542;</b>
             </div>
           ) : (
-            products && products.map(product => <ProductItem key={product._id} product={product} />)
+            products && products.map(product => <Card key={product._id} product={product} />)
           )}
         </div>
       </div>

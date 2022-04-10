@@ -22,7 +22,7 @@ Normal.args = {
     _id: 1,
     name: 'green T-shirt',
     price: 300,
-    ratings: 0,
+    ratings: 3,
     numOfReviews: 0,
     images: [
       {
