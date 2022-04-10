@@ -38,6 +38,7 @@
 @import './components/molecules/productdetails.module.scss';
 
 // component/organism
+@import '../components/organisms/grid/index.module.scss';
 @import './components/organism/home.module.scss';
 @import './components/organism/login.module.scss';
 @import './components/organism/register.module.scss';

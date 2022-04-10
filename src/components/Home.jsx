@@ -2,12 +2,13 @@ import Heading from 'components/atoms/heading';
 import InputText from 'components/atoms/input-text';
 import Card from 'components/molecules/card';
 import Section from 'components/molecules/section';
+import Grid from 'components/organisms/grid';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import Pagination from 'react-js-pagination';
 import Loading from '../components/atoms/Loading';
 
-function Home({ productsData }) {
+const Home = ({ productsData }) => {
   const router = useRouter();
   const [allProduct, setAllproducts] = useState(() => productsData);
   const { loading, products, productsCount, resultPerPage } = allProduct;
@@ -51,23 +52,21 @@ function Home({ productsData }) {
     return <Loading />;
   }
   return (
-    <>
-      <div className="container">
-        <Section modifiers="side-by-side">
-          <Heading large>Our Products</Heading>
-          <InputText placeholder="Search.." onChange={filterItem} />
-        </Section>
+    <div>
+      <Section modifiers="side-by-side">
+        <Heading large>Our Products</Heading>
+        <InputText placeholder="Search.." onChange={filterItem} />
+      </Section>
 
-        <div className="container__row">
-          {products && products.length == 0 ? (
-            <div>
-              <b>No Products. &#128542;</b>
-            </div>
-          ) : (
-            products && products.map(product => <Card key={product._id} product={product} />)
-          )}
-        </div>
-      </div>
+      <Grid>
+        {!products?.length ? (
+          <div>
+            <b>No Products. &#128542;</b>
+          </div>
+        ) : (
+          products?.map(product => <Card key={product._id} product={product} />)
+        )}
+      </Grid>
 
       {resultPerPage < count && (
         <div className="pagination">
@@ -85,8 +84,8 @@ function Home({ productsData }) {
           />
         </div>
       )}
-    </>
+    </div>
   );
-}
+};
 
 export default Home;
