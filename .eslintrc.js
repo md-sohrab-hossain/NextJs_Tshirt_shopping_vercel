@@ -35,6 +35,8 @@ module.exports = {
     'consistent-return': 0,
     'default-case': 2,
     'eol-last': 2,
+    'react/no-unescaped-entities': 0,
+    '@next/next/no-page-custom-font': 0,
     // `indent` conflicts with `prettier`
     // `key-spacing` conflicts with `prettier`
     // `linebreak-style` conflicts with `prettier`
@@ -47,7 +49,13 @@ module.exports = {
     'no-dupe-class-members': 2,
     'no-eq-null': 2,
     'no-eval': 2,
+    '@next/next/no-sync-scripts': 0,
+    'react-hooks/rules-of-hooks': 0,
+    'react-hooks/exhaustive-deps': 0,
+    '@next/next/link-passhref': 0,
+    '@next/next/no-img-element': 0,
     '@typescript-eslint/no-var-requires': 0,
+    'import/no-anonymous-default-export': 0,
     // `no-floating-decimal` conflicts with `prettier`
     'no-irregular-whitespace': 0,
     'no-magic-numbers': 0,
