@@ -1,14 +1,13 @@
-import React from 'react';
 import Head from 'next/head';
+import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-import Header from './Header';
 import Footer from './Footer';
+import Header from './Header';
 
-const Layout = ({ children, title = 'Tshirt desing and order' }) => {
+const Layout = ({ children, title = 'Tshirt shopping' }) => {
   return (
-    <div>
+    <div style={{ height: '100%' }}>
       <Head>
         <title>{title}</title>
         <meta charSet="utf-8" />

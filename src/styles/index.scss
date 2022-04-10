@@ -45,10 +45,13 @@
 @import './components/organism/new_password.module.scss';
 @import './components/organism/profile.module.scss';
 
+// component/template
+@import '../components/templates/dashboard/index.module.scss';
+
 .footer {
   display: flex;
   justify-content: center;
-  margin-top: 50px;
+  margin: 2rem 0;
 }
 
 .loading {
