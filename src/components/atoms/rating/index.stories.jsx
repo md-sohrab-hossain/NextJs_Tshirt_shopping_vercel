@@ -19,4 +19,5 @@ const Template = args => <Rating {...args} />;
 export const Normal = Template.bind({});
 Normal.args = {
   ratings: 2,
+  id: 1123,
 };

@@ -35,7 +35,7 @@ const Card = ({ product }) => {
           <div className="m-card__item--details">
             <div className="m-card__item--details-price">BDT {product.price}/=</div>
             <div className="m-card__item--details-rating">
-              <Rating ratings={product.ratings} />
+              <Rating ratings={product.ratings} id={product._id} />
               <span>({product.numOfReviews} Reviews)</span>
             </div>
           </div>
