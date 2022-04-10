@@ -1,4 +1,13 @@
+import * as NextImage from 'next/image';
 import '../src/styles/index.scss';
+
+// Storybook can't load static path issue: https://dev.to/jonasmerlin/how-to-use-the-next-js-image-component-in-storybook-1415
+const OriginalNextImage = NextImage.default;
+
+Object.defineProperty(NextImage, 'default', {
+  configurable: true,
+  value: props => <OriginalNextImage {...props} unoptimized />,
+});
 
 const MINIMAL_VIEWPORTS = {
   mobile1: {
