@@ -1,0 +1,13 @@
+.m-menu-list {
+  position: absolute;
+  z-index: $zindex-modal;
+  display: flex;
+  flex-direction: column;
+  width: 18rem;
+  min-height: 3rem;
+  max-height: auto;
+  overflow: hidden;
+  background-color: $color-base-white;
+  border: 2px solid rgba($color-primary-violet, 0.8);
+  border-radius: 1rem;
+}

@@ -23,6 +23,28 @@
   box-shadow: 0 4px 16px 0 rgba($color-base-black, 5%);
   transition: box-shadow 0.25s;
 
+  &--size {
+    &-large {
+      min-width: 20rem;
+      max-width: 30rem;
+    }
+
+    &-extra-large {
+      min-width: 25rem;
+      max-width: 40rem;
+    }
+
+    &-small {
+      min-width: 8rem;
+      max-width: 12rem;
+    }
+
+    &-extra-small {
+      min-width: 5rem;
+      max-width: 10rem;
+    }
+  }
+
   &:active {
     background: $color-base-lavender;
     box-shadow: none;
@@ -189,7 +211,7 @@
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
-    height: auto;
+    height: 3.5rem;
     padding: 5px;
     font-size: 15px;
     font-weight: medium;

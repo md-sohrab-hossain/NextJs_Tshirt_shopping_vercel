@@ -6,7 +6,7 @@ module.exports = {
     '../src/components/molecules/**/*.stories.@(js|jsx|ts|tsx)',
     '../src/components/organisms/**/*.stories.@(js|jsx|ts|tsx)',
   ],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@whitespace/storybook-addon-html'],
 
   webpack: function (config) {
     // ...add your webpack config

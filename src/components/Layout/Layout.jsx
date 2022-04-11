@@ -1,3 +1,4 @@
+import Navbar from 'components/molecules/navbar';
 import Head from 'next/head';
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
@@ -14,6 +15,7 @@ const Layout = ({ children, title = 'Tshirt shopping' }) => {
       </Head>
 
       <Header />
+      <Navbar />
       <ToastContainer position="bottom-right" />
       {children}
       <Footer />

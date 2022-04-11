@@ -9,7 +9,7 @@
 
   @mixin icon-shape($name, $sprite: false) {
     &--#{$name} {
-      background-image: url('/public/static/icons/#{$name}.svg');
+      background-image: url('~/public/static/icons/#{$name}.svg');
       @if $sprite {
         @include sprite-icon;
 
@@ -40,6 +40,7 @@
   }
 
   @include icon('login', 20px, 20px);
+  @include icon('shopping-bag', 32px, 32px);
   @include icon('logout', 18px, 18px);
   @include icon('expand-more', 24px, 24px);
   @include icon('expand-less', 24px, 24px);

@@ -1,23 +1,22 @@
 .cart {
-  width: 45px;
-  height: 45px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 45px;
+  height: 45px;
   cursor: pointer;
 
   &__icon {
-    height: 32px;
     width: 45px;
-    filter: invert(100%) sepia(0%) saturate(7443%) hue-rotate(198deg) brightness(126%) contrast(50%);
+    height: 32px;
   }
 
   &__count {
-    color: #e84118;
     position: absolute;
+    bottom: 8px;
     font-size: 13px;
     font-weight: bold;
-    bottom: 8px;
+    color: #e84118;
   }
 }

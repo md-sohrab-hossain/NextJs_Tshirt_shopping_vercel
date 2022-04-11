@@ -1,0 +1,60 @@
+.m-navbar {
+  $root: &;
+
+  position: sticky;
+  top: 0;
+  z-index: $zindex-navbar;
+  width: 100%;
+  height: 5rem;
+  background: $color-base-space-cadet;
+  border: 1px solid rgb(255 255 255 / 18%);
+  box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
+  backdrop-filter: blur(6px);
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+
+    &--logo {
+      position: relative;
+      width: 70%;
+
+      &-text {
+        position: absolute;
+        top: -2.3rem;
+        left: 2.7rem;
+        font-family: $fontset-dancing;
+        font-size: 30px;
+        cursor: pointer;
+        background-image: linear-gradient(135deg, #ff6fd8 10%, #3813c2 100%);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+
+        &:hover {
+          background-image: linear-gradient(135deg, #ee9ae5 10%, #5961f9 100%);
+          transform: scale(1.2, 1.2);
+        }
+      }
+    }
+
+    &--auth {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: 20%;
+
+      @include sp {
+        width: 25%;
+      }
+    }
+  }
+
+  .m-menu-list {
+    top: 5rem;
+    right: 4rem;
+  }
+}

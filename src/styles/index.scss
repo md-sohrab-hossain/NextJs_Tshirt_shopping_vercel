@@ -28,12 +28,16 @@
 @import '../components/atoms/heading/index.module.scss';
 @import '../components/atoms/rating/index.module.scss';
 @import '../components/atoms/pagination/index.module.scss';
+@import '../components/atoms/user-info/index.module.scss';
+@import '../components/atoms/list-item/index.module.scss';
 @import './components/atoms/checkout.module.scss';
 @import './components/atoms/layout_header.module.scss';
 
 // component/molecules
 @import '../components/molecules/section/index.module.scss';
 @import '../components/molecules/card/index.module.scss';
+@import '../components/molecules/navbar/index.module.scss';
+@import '../components/molecules/menu-list/index.module.scss';
 @import './components/molecules/cart-dropdown.module.scss';
 @import './components/molecules/productdetails.module.scss';
 

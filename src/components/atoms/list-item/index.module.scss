@@ -1,0 +1,17 @@
+.a-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 4rem;
+  font-size: 1.4rem;
+  font-weight: xd-font-weight('regular');
+  cursor: pointer;
+  background: $color-base-white-overlay;
+  border-bottom: 1px solid $color-grey-1;
+
+  &:hover {
+    color: $color-base-darkmagenta;
+    background: $color-base-whitesmoke;
+  }
+}

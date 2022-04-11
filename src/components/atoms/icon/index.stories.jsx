@@ -45,3 +45,8 @@ export const LogeOut = Template.bind({});
 LogeOut.args = {
   name: 'logout',
 };
+
+export const ShoppingBag = Template.bind({});
+ShoppingBag.args = {
+  name: 'shopping-bag',
+};
