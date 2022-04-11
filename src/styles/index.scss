@@ -30,19 +30,21 @@
 @import '../components/atoms/pagination/index.module.scss';
 @import '../components/atoms/user-info/index.module.scss';
 @import '../components/atoms/list-item/index.module.scss';
+@import '../components/atoms/shopping-cart/index.module.scss';
+@import '../components/atoms/shopping-cart-item/index.module.scss';
 @import './components/atoms/checkout.module.scss';
-@import './components/atoms/layout_header.module.scss';
 
 // component/molecules
 @import '../components/molecules/section/index.module.scss';
 @import '../components/molecules/card/index.module.scss';
-@import '../components/molecules/navbar/index.module.scss';
 @import '../components/molecules/menu-list/index.module.scss';
+@import '../components/molecules/shopping-cart-items-list/index.module.scss';
 @import './components/molecules/cart-dropdown.module.scss';
 @import './components/molecules/productdetails.module.scss';
 
 // component/organism
 @import '../components/organisms/grid/index.module.scss';
+@import '../components/organisms/navbar/index.module.scss';
 @import './components/organism/login.module.scss';
 @import './components/organism/register.module.scss';
 @import './components/organism/forgot_password.module.scss';

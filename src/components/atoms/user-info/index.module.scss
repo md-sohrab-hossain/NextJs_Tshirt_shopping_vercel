@@ -1,7 +1,11 @@
 .a-user-info {
   display: flex;
   align-items: center;
-  cursor: pointer;
+  cursor: default;
+
+  .a-icon {
+    cursor: pointer;
+  }
 
   &__img {
     position: relative;
@@ -20,8 +24,8 @@
     padding: 1rem;
 
     > span {
-      min-width: 90px;
-      max-width: 150px;
+      min-width: auto;
+      max-width: 12rem;
       overflow: hidden;
       font-size: 1.2rem;
       font-weight: xd-font-weight('medium');

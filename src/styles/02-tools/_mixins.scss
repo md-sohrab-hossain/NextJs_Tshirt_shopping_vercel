@@ -51,6 +51,12 @@
   }
 }
 
+@mixin center-element {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @mixin display-column {
   display: flex;
   flex-direction: column;

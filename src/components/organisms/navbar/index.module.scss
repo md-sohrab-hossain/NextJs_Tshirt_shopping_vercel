@@ -1,4 +1,4 @@
-.m-navbar {
+.o-navbar {
   $root: &;
 
   position: sticky;
@@ -46,6 +46,7 @@
       align-items: center;
       justify-content: flex-end;
       width: 20%;
+      margin-right: 1.2rem;
 
       @include sp {
         width: 25%;
@@ -53,8 +54,21 @@
     }
   }
 
+  .a-button {
+    margin-right: 1.5rem;
+  }
+
+  .a-shopping-cart {
+    top: -3px;
+  }
+
   .m-menu-list {
     top: 5rem;
     right: 4rem;
+  }
+
+  .m-shopping-cart-items-list {
+    top: 5rem;
+    right: 0;
   }
 }

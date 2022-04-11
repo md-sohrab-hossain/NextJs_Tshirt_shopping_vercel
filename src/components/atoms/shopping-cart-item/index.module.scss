@@ -1,0 +1,33 @@
+.a-shopping-cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 8rem;
+  padding: 0 1rem;
+  cursor: default;
+  background-color: $color-azureish-white;
+  border-bottom: 1px solid $color-grey-1;
+
+  &:hover {
+    background-color: rgba($color-primary-violet, 0.5);
+  }
+
+  &__name,
+  &__price {
+    min-width: auto;
+    max-width: 12rem;
+    overflow: hidden;
+    font-size: 1.2rem;
+    font-weight: xd-font-weight('medium');
+    color: $color-base-black;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__image {
+    position: relative;
+    width: 8rem;
+    height: 80%;
+  }
+}

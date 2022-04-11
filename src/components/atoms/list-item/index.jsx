@@ -5,11 +5,7 @@ const ListItem = ({ children }) => {
   const componentClassName = mapModifiers('a-list-item');
   const className = `${componentClassName}`.trim();
 
-  return (
-    <div className={className}>
-      <span>{children}</span>
-    </div>
-  );
+  return <div className={className}>{children}</div>;
 };
 
 export default ListItem;

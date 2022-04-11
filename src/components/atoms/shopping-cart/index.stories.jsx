@@ -1,9 +1,9 @@
 import React from 'react';
-import Navbar from '.';
+import ShoppingCart from '.';
 
 export default {
-  title: 'components/organisms/Navbar',
-  component: Navbar,
+  title: 'components/atoms/ShoppingCart',
+  component: ShoppingCart,
   parameters: {
     paddings: {
       default: 'small',
@@ -14,7 +14,7 @@ export default {
   },
 };
 
-const Template = args => <Navbar {...args} />;
+const Template = args => <ShoppingCart {...args} />;
 
 export const Normal = Template.bind({});
 Normal.args = {};

@@ -35,8 +35,8 @@
     }
 
     &-small {
-      min-width: 8rem;
-      max-width: 12rem;
+      min-width: 7rem;
+      max-width: 10rem;
     }
 
     &-extra-small {
@@ -218,6 +218,7 @@
     line-height: 24px;
     color: $color-text-white;
     background-color: $color-primary-purple;
+    border-radius: 5px;
     box-shadow: none;
 
     .a-icon--login {
@@ -236,8 +237,6 @@
   }
 
   @include sp {
-    height: 40px;
-
     &--square {
       height: 56px;
     }
