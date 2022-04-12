@@ -295,7 +295,7 @@
       margin: auto;
       content: '';
       border: 4px solid transparent;
-      border-top-color: $color-base-white;
+      border-top-color: #ffffffff;
       border-radius: 50%;
       animation: button-loading-spinner 1s ease infinite;
     }
