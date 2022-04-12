@@ -5,7 +5,6 @@ module.exports = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
-  transformIgnorePatterns: ['<rootDir>/node_modules/'],
   transformIgnorePatterns: ['<rootDir>/build/', '<rootDir>/node_modules/'],
   testRegex: '\\.e2e-test\\.[js]sx?$',
   globals: {
