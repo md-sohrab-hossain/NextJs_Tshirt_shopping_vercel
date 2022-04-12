@@ -1,6 +1,6 @@
+import ListItem from 'components/atoms/list-item';
 import React from 'react';
-import ListItem from '../../atoms/list-item';
-import MenuList from './';
+import MenuList from '.';
 
 export default {
   title: 'components/molecules/MenuList',

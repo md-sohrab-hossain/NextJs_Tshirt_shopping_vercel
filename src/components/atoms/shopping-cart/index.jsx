@@ -1,6 +1,6 @@
+import Icon from 'components/atoms/icon';
+import { mapModifiers } from 'libs/component';
 import React from 'react';
-import { mapModifiers } from '../../../libs/component';
-import Icon from '../icon';
 
 const ShoppingCart = ({ onClick, products }) => {
   const componentClassName = mapModifiers('a-shopping-cart');

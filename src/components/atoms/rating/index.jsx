@@ -1,5 +1,5 @@
+import { mapModifiers } from 'libs/component';
 import React, { Fragment } from 'react';
-import { mapModifiers } from '../../../libs/component';
 
 const Rating = ({ ratings = 0, id = 123 }) => {
   const componentClassName = mapModifiers('a-rating');

@@ -1,5 +1,5 @@
+import { mapModifiers } from 'libs/component';
 import React, { forwardRef } from 'react';
-import { mapModifiers } from '../../../libs/component';
 
 const MenuList = forwardRef(({ children }, ref) => {
   const componentClassName = mapModifiers('m-menu-list');

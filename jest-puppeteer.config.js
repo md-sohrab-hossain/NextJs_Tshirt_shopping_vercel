@@ -1,7 +1,7 @@
 module.exports = {
   launch: {
-    headless: "false",
+    headless: 'false',
     devtools: true,
   },
-  browserContext: "default",
+  browserContext: 'default',
 };

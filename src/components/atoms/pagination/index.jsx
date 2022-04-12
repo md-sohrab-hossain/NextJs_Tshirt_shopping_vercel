@@ -1,6 +1,6 @@
+import { mapModifiers } from 'libs/component';
 import React from 'react';
 import Pagination from 'react-js-pagination';
-import { mapModifiers } from '../../../libs/component';
 
 const Paginations = ({ activePage, resultPerPage, itemsCount, onChange }) => {
   const componentClassName = mapModifiers('a-pagination');

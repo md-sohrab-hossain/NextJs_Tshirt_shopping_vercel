@@ -1,5 +1,5 @@
 import React from 'react';
-import ShoppingCartItemsList from './';
+import ShoppingCartItemsList from '.';
 
 export default {
   title: 'components/molecules/ShoppingCartItemsList',

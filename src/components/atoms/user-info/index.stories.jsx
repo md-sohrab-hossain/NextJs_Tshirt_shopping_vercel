@@ -1,5 +1,5 @@
 import React from 'react';
-import UserInfo from './';
+import UserInfo from '.';
 
 export default {
   title: 'components/atoms/UserInfo',

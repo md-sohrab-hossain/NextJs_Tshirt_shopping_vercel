@@ -1,5 +1,5 @@
 import React from 'react';
-import ShoppingCartItem from './';
+import ShoppingCartItem from '.';
 
 export default {
   title: 'components/atoms/ShoppingCartItem',

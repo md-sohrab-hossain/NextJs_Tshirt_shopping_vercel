@@ -1,11 +1,11 @@
+import Button from 'components/atoms/button';
+import Rating from 'components/atoms/rating';
+import Text from 'components/atoms/text';
+import { mapModifiers } from 'libs/component';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useCallback, useState } from 'react';
-import { mapModifiers } from '../../../libs/component';
-import Button from '../../atoms/button';
-import Rating from '../../atoms/rating';
-import Text from '../../atoms/text';
 import NotFoundImage from '/public/static/images/not-found.png';
 
 const Card = ({ product }) => {

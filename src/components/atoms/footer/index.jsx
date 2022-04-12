@@ -1,6 +1,6 @@
+import Text from 'components/atoms/text';
+import { mapModifiers } from 'libs/component';
 import React from 'react';
-import { mapModifiers } from '../../../libs/component';
-import Text from '../text';
 
 const Footer = () => {
   const data = new Date();

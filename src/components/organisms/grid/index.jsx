@@ -1,5 +1,5 @@
+import { mapModifiers } from 'libs/component';
 import React from 'react';
-import { mapModifiers } from '../../../libs/component';
 
 const Grid = ({ children }) => {
   const componentClassName = mapModifiers('o-grid');

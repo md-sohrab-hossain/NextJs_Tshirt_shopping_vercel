@@ -1,6 +1,6 @@
+import { mapModifiers } from 'libs/component';
 import Image from 'next/image';
 import React, { useCallback, useState } from 'react';
-import { mapModifiers } from '../../../libs/component';
 import NotFoundImage from '/public/static/images/not-found.png';
 
 const ShoppingCartItem = ({ imgUrl, productName, price }) => {

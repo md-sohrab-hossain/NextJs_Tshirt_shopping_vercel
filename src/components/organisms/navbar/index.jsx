@@ -1,14 +1,14 @@
+import Button from 'components/atoms/button';
+import ListItem from 'components/atoms/list-item';
+import ShoppingCart from 'components/atoms/shopping-cart';
+import UserInfo from 'components/atoms/user-info';
+import MenuList from 'components/molecules/menu-list';
+import ShoppingCartItemsList from 'components/molecules/shopping-cart-items-list';
+import { ROUTES } from 'constants/routes';
+import { mapModifiers } from 'libs/component';
+import { useOnClickOutside } from 'libs/Hooks/useOnClickOutside';
 import Link from 'next/link';
 import React, { useRef, useState } from 'react';
-import { ROUTES } from '../../../constants/routes';
-import { mapModifiers } from '../../../libs/component';
-import { useOnClickOutside } from '../../../libs/Hooks/useOnClickOutside';
-import Button from '../../atoms/button';
-import ListItem from '../../atoms/list-item';
-import ShoppingCart from '../../atoms/shopping-cart';
-import UserInfo from '../../atoms/user-info';
-import MenuList from '../../molecules/menu-list';
-import ShoppingCartItemsList from '../../molecules/shopping-cart-items-list';
 
 const Navbar = ({ products, user, loading, handleLogin, handleLogout, handleCheckout }) => {
   const menuListRef = useRef();

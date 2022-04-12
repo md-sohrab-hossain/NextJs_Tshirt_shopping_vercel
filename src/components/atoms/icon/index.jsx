@@ -1,5 +1,5 @@
+import { mapModifiers } from 'libs/component';
 import React from 'react';
-import { mapModifiers } from '../../../libs/component';
 
 const Icon = ({ name, className: additionalClassName = '', onClick }) => {
   const componentClassName = mapModifiers('a-icon', name);

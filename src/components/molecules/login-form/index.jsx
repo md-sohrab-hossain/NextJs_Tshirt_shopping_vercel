@@ -1,13 +1,14 @@
+import Button from 'components/atoms/button';
+import Heading from 'components/atoms/heading';
+import InputText from 'components/atoms/input-text';
+import { ROUTES } from 'constants/routes';
+import { mapModifiers } from 'libs/component';
 import Link from 'next/link';
 import React from 'react';
-import { ROUTES } from '../../../constants/routes';
-import { mapModifiers } from '../../../libs/component';
-import Button from '../../atoms/button';
-import Heading from '../../atoms/heading';
-import InputText from '../../atoms/input-text';
 
 const LoginForm = ({ email, setEmail, password, setPassword, loading, onSubmit }) => {
   const { FORGOT_PASSWORD, REGISTER_NEW_USERS } = ROUTES;
+
   const componentClassName = mapModifiers('m-login-form');
   const className = `${componentClassName}`.trim();
 

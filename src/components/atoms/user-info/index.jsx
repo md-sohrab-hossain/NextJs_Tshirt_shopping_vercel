@@ -1,7 +1,7 @@
+import Icon from 'components/atoms/icon';
+import { mapModifiers } from 'libs/component';
 import Image from 'next/image';
 import React, { useCallback, useState } from 'react';
-import { mapModifiers } from '../../../libs/component';
-import Icon from '../icon';
 import NotFoundImage from '/public/static/images/not-found.png';
 
 const UserInfo = ({ name, imgUrl, onClick, isExpand = false }) => {

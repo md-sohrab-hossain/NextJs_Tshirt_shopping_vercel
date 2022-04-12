@@ -1,3 +1,6 @@
+const globImporter = require('node-sass-glob-importer');
+const path = require('path');
+
 module.exports = {
   env: {
     DB_LOCAL_URI:
@@ -22,6 +25,22 @@ module.exports = {
     STMP_FROM_EMAIL: 'noreply@tshirtShopping.com',
 
     NEXTAUTH_URL: 'https://next-js-tshirt-shopping.vercel.app/',
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'src/styles')],
+  },
+  webpack: function (config) {
+    // ...add your webpack config
+    config.resolve.extensions.push('*', '.js', '.jsx', '.ts', '.tsx', '.json', '.gif', '.png', '.jpg');
+    config.resolve.modules.push('./node_modules', '../src');
+
+    return {
+      ...config,
+      plugins: [...config.plugins],
+    };
   },
   images: {
     domains: ['res.cloudinary.com'],

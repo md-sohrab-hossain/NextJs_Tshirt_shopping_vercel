@@ -16,10 +16,14 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src",
     "downlevelIteration": true,
     "sourceMap": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "baseUrl": "src",
+    "paths": {
+      "*": ["src/*"],
+      "story/*": [".storybook/*"]
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules", "build", "scripts"],

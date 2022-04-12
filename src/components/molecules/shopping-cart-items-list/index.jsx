@@ -1,7 +1,7 @@
+import Button from 'components/atoms/button';
+import ShoppingCartItem from 'components/atoms/shopping-cart-item';
+import { mapModifiers } from 'libs/component';
 import React, { forwardRef } from 'react';
-import { mapModifiers } from '../../../libs/component';
-import Button from '../../atoms/button';
-import ShoppingCartItem from '../../atoms/shopping-cart-item';
 
 const ShoppingCartItemsList = forwardRef(({ products, onClick }, ref) => {
   const componentClassName = mapModifiers('m-shopping-cart-items-list');

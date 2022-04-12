@@ -1,5 +1,5 @@
+import { mapModifiers } from 'libs/component';
 import React from 'react';
-import { mapModifiers } from '../../../libs/component';
 
 const Heading = ({ className: additionalClassName = '', children, tag = 'h1', useDiv, align, large }) => {
   const componentClassName = mapModifiers('a-heading', `tag-${tag}`, large && 'large', align);

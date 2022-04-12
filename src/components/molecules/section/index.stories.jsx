@@ -1,7 +1,7 @@
+import Heading from 'components/atoms/heading';
+import Text from 'components/atoms/text';
 import React from 'react';
-import Heading from '../../atoms/heading';
-import Text from '../../atoms/text';
-import Section from './';
+import Section from '.';
 
 export default {
   title: 'components/molecules/Section',

@@ -1,5 +1,5 @@
+import { mapModifiers } from 'libs/component';
 import React from 'react';
-import { mapModifiers } from '../../../libs/component';
 
 const Text = ({ children, size, weight, colors, align = 'left', className: additionalClassName = '' }) => {
   const componentClassName = mapModifiers(

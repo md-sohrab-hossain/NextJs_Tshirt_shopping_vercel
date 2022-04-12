@@ -1,6 +1,6 @@
+import Card from 'components/molecules/card';
 import React from 'react';
-import Card from '../../molecules/card';
-import Grid from './';
+import Grid from '.';
 
 export default {
   title: 'components/organisms/Grid',

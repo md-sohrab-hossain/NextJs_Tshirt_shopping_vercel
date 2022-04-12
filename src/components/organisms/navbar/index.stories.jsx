@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from './';
+import Navbar from '.';
 
 export default {
   title: 'components/organisms/Navbar',
