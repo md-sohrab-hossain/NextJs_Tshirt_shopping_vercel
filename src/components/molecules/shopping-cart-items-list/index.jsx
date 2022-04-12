@@ -1,8 +1,9 @@
 import React, { forwardRef } from 'react';
 import { mapModifiers } from '../../../libs/component';
+import Button from '../../atoms/button';
 import ShoppingCartItem from '../../atoms/shopping-cart-item';
 
-const ShoppingCartItemsList = forwardRef(({ products }, ref) => {
+const ShoppingCartItemsList = forwardRef(({ products, onClick }, ref) => {
   const componentClassName = mapModifiers('m-shopping-cart-items-list');
   const className = `${componentClassName}`.trim();
 
@@ -21,6 +22,10 @@ const ShoppingCartItemsList = forwardRef(({ products }, ref) => {
         ) : (
           <span className="m-shopping-cart-items-list__details--empty"> Your Cart Is Empty!</span>
         )}
+
+        <Button modifiers="indigo" onClick={() => onClick && onClick()}>
+          Checkout
+        </Button>
       </div>
     </div>
   );

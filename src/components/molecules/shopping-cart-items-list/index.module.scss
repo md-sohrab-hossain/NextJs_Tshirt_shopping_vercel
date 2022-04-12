@@ -1,27 +1,39 @@
 .m-shopping-cart-items-list {
   position: absolute;
   z-index: $zindex-modal;
-  display: flex;
-  flex-direction: column;
   width: 25rem;
-  min-height: 25rem;
+  min-height: 30rem;
   max-height: 30rem;
+  overflow-x: hidden;
   overflow-y: auto;
   background-color: $color-azureish-white;
-  border: 2px solid rgba($color-base-space-cadet, 0.7);
   border-radius: 10px;
+  box-shadow: rgb(3 102 214 / 30%) 0 0 0 3px;
 
   &__details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 30rem;
+    max-height: auto;
+
     &--empty {
-      position: absolute;
-      top: 50%;
-      left: 50%;
+      padding: 4rem;
+      margin-top: 45px;
       font-family: $fontset-dancing;
       font-size: 2rem;
       font-weight: xd-font-weight('bold');
+      text-align: center;
       text-transform: uppercase;
-      transform: translate(-40%, -50%);
     }
+  }
+
+  .a-button--indigo {
+    position: sticky;
+    bottom: 1.5rem;
+    left: 2.5rem;
+    z-index: $zindex-float-button;
+    width: 200px;
   }
 
   .a-shopping-cart-item:last-child {

@@ -2,6 +2,7 @@ import { signOut } from 'next-auth/client';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useRef, useState } from 'react';
+import { toast } from 'react-toastify';
 import { mapModifiers } from '../../../libs/component';
 import { useOnClickOutside } from '../../../libs/Hooks/useOnClickOutside';
 import Button from '../../atoms/button';
@@ -22,6 +23,13 @@ const Navbar = ({ products, user, loading }) => {
 
   useOnClickOutside(menuListRef, () => setIsMenuOpen(false));
   useOnClickOutside(cartItemsListRef, () => setIsOpenCart(false));
+
+  const handleCheckout = () => {
+    if (!products?.orders.length) {
+      return toast.warning('Your cart is empty!');
+    }
+    router.push('/customPages/shopping');
+  };
 
   return (
     <nav className={className}>
@@ -52,7 +60,7 @@ const Navbar = ({ products, user, loading }) => {
             )
           )}
           <ShoppingCart onClick={() => setIsOpenCart(!isOpenCart)} products={products} />
-          {isOpenCart && <ShoppingCartItemsList products={products} ref={cartItemsListRef} />}
+          {isOpenCart && <ShoppingCartItemsList onClick={handleCheckout} products={products} ref={cartItemsListRef} />}
         </div>
       </div>
 
