@@ -69,10 +69,10 @@ Violet.args = {
   modifiers: ['violet', 'animated'],
 };
 
-export const Green = Template.bind({});
-Green.args = {
+export const Success = Template.bind({});
+Success.args = {
   children: 'click me',
-  modifiers: 'green',
+  modifiers: 'success',
 };
 
 export const Indigo = Template.bind({});

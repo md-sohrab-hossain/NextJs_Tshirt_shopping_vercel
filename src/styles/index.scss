@@ -40,13 +40,13 @@
 @import '../components/molecules/card/index.module.scss';
 @import '../components/molecules/menu-list/index.module.scss';
 @import '../components/molecules/shopping-cart-items-list/index.module.scss';
+@import '../components/molecules/login-form/index.module.scss';
 @import './components/molecules/cart-dropdown.module.scss';
 @import './components/molecules/productdetails.module.scss';
 
 // component/organism
 @import '../components/organisms/grid/index.module.scss';
 @import '../components/organisms/navbar/index.module.scss';
-@import './components/organism/login.module.scss';
 @import './components/organism/register.module.scss';
 @import './components/organism/forgot_password.module.scss';
 @import './components/organism/new_password.module.scss';
@@ -55,6 +55,9 @@
 // component/template
 @import '../components/templates/dashboard/index.module.scss';
 @import '../components/templates/layout/index.module.scss';
+
+// pages
+@import '../pages/customPages/user/login/index.module.scss';
 
 .footer {
   display: flex;
