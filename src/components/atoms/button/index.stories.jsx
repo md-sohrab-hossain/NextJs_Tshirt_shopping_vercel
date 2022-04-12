@@ -69,6 +69,18 @@ Violet.args = {
   modifiers: ['violet', 'animated'],
 };
 
+export const Green = Template.bind({});
+Green.args = {
+  children: 'click me',
+  modifiers: 'green',
+};
+
+export const Indigo = Template.bind({});
+Indigo.args = {
+  children: 'click me',
+  modifiers: 'indigo',
+};
+
 export const Text = Template.bind({});
 Text.args = {
   children: 'click me',
