@@ -1,4 +1,4 @@
-import Footer from 'components/Layout/Footer';
+import Footer from 'components/atoms/footer';
 import Navbar from 'components/organisms/navbar';
 import Head from 'next/head';
 import React, { useCallback, useEffect } from 'react';

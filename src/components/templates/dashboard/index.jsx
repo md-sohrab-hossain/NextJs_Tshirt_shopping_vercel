@@ -52,7 +52,7 @@ const DashBoard = ({ productsData }) => {
     return <Loading />;
   }
   return (
-    <div className="t-template">
+    <div className="t-dashboard">
       <Section modifiers="side-by-side">
         <Heading large>Our Products</Heading>
         <InputText placeholder="Search.." onChange={filterItem} />
