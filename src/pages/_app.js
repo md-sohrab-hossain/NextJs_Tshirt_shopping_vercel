@@ -1,5 +1,5 @@
 //!👇 here we customize our page default behaviour
-import Layout from 'components/Layout/Layout';
+import Layout from 'components/templates/layout';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { initStore, wrapper } from 'redux/store';

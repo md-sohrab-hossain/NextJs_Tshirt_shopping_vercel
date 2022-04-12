@@ -1,12 +1,9 @@
 import { signOut } from 'next-auth/client';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useRef, useState } from 'react';
 import { mapModifiers } from '../../../libs/component';
 import { useOnClickOutside } from '../../../libs/Hooks/useOnClickOutside';
-import { getMyOrders } from '../../../redux/actions/productOrderAction';
-import { loadUser } from '../../../redux/actions/userAction';
 import Button from '../../atoms/button';
 import ListItem from '../../atoms/list-item';
 import ShoppingCart from '../../atoms/shopping-cart';
@@ -14,11 +11,10 @@ import UserInfo from '../../atoms/user-info';
 import MenuList from '../../molecules/menu-list';
 import ShoppingCartItemsList from '../../molecules/shopping-cart-items-list';
 
-const Navbar = () => {
+const Navbar = ({ products, user, loading }) => {
   const router = useRouter();
   const menuListRef = useRef();
   const cartItemsListRef = useRef();
-  const dispatch = useDispatch();
   const [isOpenCart, setIsOpenCart] = useState(() => false);
   const [isMenuOpen, setIsMenuOpen] = useState(() => false);
   const componentClassName = mapModifiers('o-navbar');
@@ -26,26 +22,6 @@ const Navbar = () => {
 
   useOnClickOutside(menuListRef, () => setIsMenuOpen(false));
   useOnClickOutside(cartItemsListRef, () => setIsOpenCart(false));
-
-  const { user, loading } = useSelector(state => state.loadedUser);
-  const { isUpdated } = useSelector(state => state.user);
-
-  const { order } = useSelector(state => state.getMyOrderList);
-  const { success } = useSelector(state => state.productOrder);
-
-  useEffect(() => {
-    if (!isUpdated) {
-      dispatch(loadUser());
-    }
-  }, [dispatch, isUpdated]);
-
-  const getRecentOrder = useCallback(() => {
-    dispatch(getMyOrders());
-  }, [success]);
-
-  useEffect(async () => {
-    getRecentOrder();
-  }, [success]);
 
   return (
     <nav className={className}>
@@ -75,8 +51,8 @@ const Navbar = () => {
               </Button>
             )
           )}
-          <ShoppingCart onClick={() => setIsOpenCart(!isOpenCart)} products={order} />
-          {isOpenCart && <ShoppingCartItemsList products={order} ref={cartItemsListRef} />}
+          <ShoppingCart onClick={() => setIsOpenCart(!isOpenCart)} products={products} />
+          {isOpenCart && <ShoppingCartItemsList products={products} ref={cartItemsListRef} />}
         </div>
       </div>
 
