@@ -1,7 +1,7 @@
 //* www.thedreaming.org/2020/11/09/jest-for-web-projects/
 const { resolve } = require('path');
 
-http: module.exports = {
+module.exports = {
   rootDir: resolve(__dirname, '.'),
   modulePaths: ['<rootDir>/src'],
   roots: ['<rootDir>/src', '<rootDir>/src/components'],
@@ -9,7 +9,6 @@ http: module.exports = {
     '^components/(.*)$': '<rootDir>/src/components/$1',
   },
   testRegex: '\\.test\\.[jt]sx?$',
-  transformIgnorePatterns: ['<rootDir>/node_modules/'],
   transformIgnorePatterns: ['<rootDir>/build/', '<rootDir>/node_modules/'],
   setupFilesAfterEnv: ['<rootDir>/setupEnzyme.js', '<rootDir>/node_modules/jest-enzyme/lib/index.js'],
   collectCoverage: true,
