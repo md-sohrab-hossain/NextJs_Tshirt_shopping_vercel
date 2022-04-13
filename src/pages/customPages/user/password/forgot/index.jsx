@@ -21,9 +21,7 @@ const ForgotPasswordPage = () => {
 
   const submitHandler = e => {
     e.preventDefault();
-    const userData = {
-      email,
-    };
+    const userData = { email };
 
     if (!userData.email) {
       toast.error('Please provide an Email address!');
@@ -34,7 +32,12 @@ const ForgotPasswordPage = () => {
 
   return (
     <div className="p-forgot-password">
-      <ForgotPassword onSubmit={submitHandler} loading={loading} email={email} setEmail={setEmail} />;
+      <ForgotPassword
+        onSubmit={submitHandler}
+        loading={loading}
+        email={email}
+        onChange={e => setEmail(e.target.value)}
+      />
     </div>
   );
 };

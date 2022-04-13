@@ -4,7 +4,7 @@ import InputText from 'components/atoms/input-text';
 import { mapModifiers } from 'libs/component';
 import React from 'react';
 
-const ForgotPassword = ({ onSubmit, loading, email, setEmail }) => {
+const ForgotPassword = ({ loading, email, setEmail, onSubmit, onChange }) => {
   const componentClassName = mapModifiers('m-forgot-password');
   const className = `${componentClassName}`.trim();
 
@@ -13,14 +13,7 @@ const ForgotPassword = ({ onSubmit, loading, email, setEmail }) => {
       <Heading>Forgot Password</Heading>
       <div className="m-forgot-password__email">
         <label htmlFor="email">Email</label>
-        <InputText
-          required
-          type="email"
-          id="email"
-          placeholder="Enter Email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-        />
+        <InputText required type="email" id="email" placeholder="Enter Email" value={email} onChange={onChange} />
       </div>
 
       <div className="m-forgot-password__send">
