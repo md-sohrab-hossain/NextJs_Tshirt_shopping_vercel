@@ -4,7 +4,7 @@ import InputText from 'components/atoms/input-text';
 import { mapModifiers } from 'libs/component';
 import React from 'react';
 
-const ForgotPassword = ({ loading, email, setEmail, onSubmit, onChange }) => {
+const ForgotPassword = ({ loading, email, onSubmit, onChange }) => {
   const componentClassName = mapModifiers('m-forgot-password');
   const className = `${componentClassName}`.trim();
 
