@@ -25,6 +25,10 @@ const ForgotPasswordPage = () => {
       email,
     };
 
+    if (!userData.email) {
+      toast.error('Please provide an Email address!');
+      return;
+    }
     dispatch(forgotPassword(userData));
   };
 
