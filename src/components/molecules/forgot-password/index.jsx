@@ -14,6 +14,7 @@ const ForgotPassword = ({ onSubmit, loading, email, setEmail }) => {
       <div className="m-forgot-password__email">
         <label htmlFor="email">Email</label>
         <InputText
+          required
           type="email"
           id="email"
           placeholder="Enter Email"
