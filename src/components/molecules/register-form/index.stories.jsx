@@ -18,5 +18,5 @@ const Template = args => <RegisterForm {...args} />;
 
 export const Normal = Template.bind({});
 Normal.args = {
-  children: 'new component',
+  imgSrc: 'https://next-js-tshirt-shopping-7dltd6ofj-sajalkhan.vercel.app/images/default_avatar.jpg',
 };

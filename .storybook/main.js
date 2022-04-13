@@ -1,4 +1,4 @@
-const globImporter = require('node-sass-glob-importer');
+const sassGlobImporter = require('node-sass-glob-importer');
 const path = require('path');
 
 module.exports = {
@@ -7,38 +7,20 @@ module.exports = {
 
   webpack: function (config) {
     // ...add your webpack config
-    config.module.rules.push(
-      {
-        test: /\.scss$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              modules: true,
-            },
+    config.module.rules.push({
+      test: /\.scss$/,
+      include: path.resolve(__dirname, '../src'),
+      use: [
+        'style-loader',
+        'css-loader',
+        {
+          loader: 'sass-loader',
+          options: {
+            sassOptions: { importer: sassGlobImporter() },
           },
-        ],
-        include: /\.module\.scss$/,
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              sassOptions: {
-                importer: globImporter(),
-              },
-            },
-          },
-        ],
-        exclude: /\.module\.scss$/,
-      }
-    );
+        },
+      ],
+    });
 
     config.resolve.extensions.push('*', '.js', '.jsx', '.ts', '.tsx', '.json', '.gif', '.png', '.jpg');
     config.resolve.modules.push('./node_modules', '../src');

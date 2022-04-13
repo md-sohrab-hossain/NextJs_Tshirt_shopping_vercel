@@ -28,7 +28,7 @@ const LoginForm = ({ email, setEmail, password, setPassword, loading, onSubmit }
       </div>
 
       <div className="m-login-form__password">
-        <label htmlFor="email">Password</label>
+        <label htmlFor="password">Password</label>
         <InputText
           type="password"
           id="password"

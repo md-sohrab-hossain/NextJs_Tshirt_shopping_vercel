@@ -21,3 +21,9 @@ Normal.args = {
   name: 'Md.Sohrab Hossain',
   imgUrl: 'https://res.cloudinary.com/sajal-cnq/image/upload/v1624201629/tshirt/avatar/fks16fk1s8wbatrxvl6p.jpg',
 };
+
+export const WrongImgUrl = Template.bind({});
+WrongImgUrl.args = {
+  name: 'Md.Sohrab Hossain',
+  imgUrl: '2https://res.cloudinary.com/sajal-cnq/image/upload/v1624201629/tshirt/avatar/fks16fk1s8wbatrxvl6p.jpg',
+};
