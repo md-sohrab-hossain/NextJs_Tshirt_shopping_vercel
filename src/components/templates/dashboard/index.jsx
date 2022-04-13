@@ -5,57 +5,25 @@ import Pagination from 'components/atoms/pagination';
 import Card from 'components/molecules/card';
 import Section from 'components/molecules/section';
 import Grid from 'components/organisms/grid';
-import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React from 'react';
 
-const DashBoard = ({ productsData }) => {
-  const router = useRouter();
-  const [allProduct, setAllproducts] = useState(() => productsData);
-  const { loading, products, productsCount, resultPerPage } = allProduct;
+const DashBoard = ({
+  isLoading,
+  products,
+  productsCount,
+  totalProducts,
+  resultPerPage,
+  activePage,
+  onChange,
+  searchItems,
+}) => {
+  if (isLoading) return <Loading />;
 
-  const handlePagination = pageNumber => {
-    window.location.href = `/?page=${pageNumber}`;
-    // let url = window.location.href + `/?page=${pageNumber}`;
-
-    // url = url.replace(/\b\/\?page=([1-9])(\/)?/g, "");
-
-    // router.push(url);
-    // router.push({ pathname: "/", query: { page: pageNumber } });
-  };
-
-  let { page = 1 } = router.query;
-  let count = productsCount;
-  page = Number(page);
-
-  const filterItem = e => {
-    const productList = products;
-    const filterProduct = productList.filter(item =>
-      item.name.toLowerCase().includes(e.target.value.trim().toLowerCase())
-    );
-
-    if (e.target.value.trim() == '') {
-      count = productsCount;
-      setAllproducts({
-        ...allProduct,
-        products: productsData.products,
-      });
-    } else {
-      count = filterProduct.length;
-      setAllproducts({
-        ...allProduct,
-        products: filterProduct.length ? filterProduct : productsData.products,
-      });
-    }
-  };
-
-  if (loading) {
-    return <Loading />;
-  }
   return (
     <div className="t-dashboard">
       <Section modifiers="side-by-side">
         <Heading large>Our Products</Heading>
-        <InputText placeholder="Search.." onChange={filterItem} />
+        <InputText placeholder="Search.." onChange={searchItems} />
       </Section>
 
       <Grid>
@@ -68,12 +36,12 @@ const DashBoard = ({ productsData }) => {
         )}
       </Grid>
 
-      {resultPerPage < count && (
+      {resultPerPage < productsCount && (
         <Pagination
-          activePage={page}
+          activePage={activePage}
           resultPerPage={resultPerPage}
-          itemsCount={productsCount}
-          onChange={handlePagination}
+          itemsCount={totalProducts}
+          onChange={onChange}
         />
       )}
     </div>
