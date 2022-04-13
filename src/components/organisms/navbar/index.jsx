@@ -8,14 +8,16 @@ import { ROUTES } from 'constants/routes';
 import { mapModifiers } from 'libs/component';
 import { useOnClickOutside } from 'libs/Hooks/useOnClickOutside';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useRef, useState } from 'react';
 
 const Navbar = ({ products, user, loading, handleLogin, handleLogout, handleCheckout }) => {
+  const router = useRouter();
   const menuListRef = useRef();
   const cartItemsListRef = useRef();
   const [isOpenCart, setIsOpenCart] = useState(() => false);
   const [isMenuOpen, setIsMenuOpen] = useState(() => false);
-  const { ADMIN_USERS, ALL_PRODUCTS, MY_ORDERS, USER_PROFILE } = ROUTES;
+  const { HOME, ADMIN_USERS, ALL_PRODUCTS, MY_ORDERS, USER_PROFILE } = ROUTES;
 
   const componentClassName = mapModifiers('o-navbar');
   const className = `${componentClassName}`.trim();
@@ -27,8 +29,13 @@ const Navbar = ({ products, user, loading, handleLogin, handleLogout, handleChec
     <nav className={className}>
       <div className="o-navbar__container">
         <div className="o-navbar__container--logo">
-          <Link href="/">
-            <label className="o-navbar__container--logo-text">T-shirt Shopping</label>
+          <Link href={`${HOME}`}>
+            <label
+              className="o-navbar__container--logo-text"
+              onClick={() => router.asPath.match(/page/g)?.length && (window.location.href = `${HOME}`)}
+            >
+              T-shirt Shopping
+            </label>
           </Link>
         </div>
         <div className="o-navbar__container--auth">

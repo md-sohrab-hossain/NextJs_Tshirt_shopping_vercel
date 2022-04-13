@@ -43,6 +43,7 @@
 @import '../components/molecules/shopping-cart-items-list/index.module.scss';
 @import '../components/molecules/login-form/index.module.scss';
 @import '../components/molecules/register-form/index.module.scss';
+@import '../components/molecules/forgot-password/index.module.scss';
 @import './components/molecules/cart-dropdown.module.scss';
 @import './components/molecules/productdetails.module.scss';
 
@@ -60,6 +61,7 @@
 // pages
 @import '../pages/customPages/user/login/index.module.scss';
 @import '../pages/customPages/user/register/index.module.scss';
+@import '../pages/customPages/user/password/forgot/index.module.scss';
 
 .footer {
   display: flex;

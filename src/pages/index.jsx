@@ -12,15 +12,8 @@ const App = ({ props }) => {
   let count = productsCount;
   page = Number(page);
 
-  console.log({ allProduct });
   const handlePagination = pageNumber => {
     window.location.href = `/?page=${pageNumber}`;
-    // let url = window.location.href + `/?page=${pageNumber}`;
-
-    // url = url.replace(/\b\/\?page=([1-9])(\/)?/g, "");
-
-    // router.push(url);
-    // router.push({ pathname: "/", query: { page: pageNumber } });
   };
 
   const searchItems = e => {
