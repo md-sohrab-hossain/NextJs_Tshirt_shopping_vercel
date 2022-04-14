@@ -1,7 +1,168 @@
 .a-pagination {
+  $root: &;
+  $sm: 400px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 4rem;
-  font-size: 1.2rem;
+  margin: 0 auto;
+
+  &__action {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 5px;
+
+    @media (max-width: $sm) {
+      padding: 6px;
+    }
+
+    &:active {
+      background-color: $color-base-linen;
+      border: 0;
+      outline: 0;
+      box-shadow: none;
+    }
+
+    &:focus {
+      border: 0;
+      outline: 0;
+    }
+
+    &--prev {
+      .a-icon--arrow-left-gray-inactive {
+        display: none;
+      }
+    }
+
+    &--next {
+      .a-icon--arrow-right-gray-inactive {
+        display: none;
+      }
+    }
+
+    &--disabled {
+      pointer-events: none;
+      box-shadow: none;
+
+      .a-icon {
+        &--arrow-left-gray-active,
+        &--arrow-right-gray-active {
+          display: none;
+        }
+
+        &--arrow-left-gray-inactive,
+        &--arrow-right-gray-inactive {
+          display: inline-block;
+        }
+      }
+    }
+
+    @media (max-width: $sm) {
+      padding: 6px;
+    }
+
+    &:hover {
+      box-shadow: none;
+
+      .a-icon {
+        @include sprite-icon-active;
+      }
+    }
+  }
+
+  &__pages {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    margin: 0 16px;
+    list-style: none;
+
+    @include pc {
+      margin: 0 16px;
+    }
+
+    #{$root}__page-item--ellipsis {
+      pointer-events: none;
+      box-shadow: none;
+    }
+  }
+
+  &__page-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 4px;
+    cursor: pointer;
+    border-radius: 8px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    @media (max-width: $sm) {
+      border-radius: 8px;
+    }
+
+    &:hover {
+      background-color: $color-base-whitesmoke;
+      box-shadow: none;
+
+      #{$root}__page-index {
+        color: $color-primary-purple;
+      }
+    }
+
+    &:active {
+      background-color: $color-base-linen;
+      box-shadow: none;
+    }
+
+    &--active {
+      color: $color-text-white;
+      pointer-events: none;
+      background: $color-primary-purple;
+      box-shadow: none;
+
+      #{$root}__page-index {
+        color: $color-text-white;
+      }
+    }
+
+    &--optional {
+      @include sp {
+        display: none;
+      }
+    }
+  }
+
+  &__page-index {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    font-weight: xd-font-weight('medium');
+    line-height: 22px;
+    color: $color-text-black;
+
+    #{$root}__page-item--ellipsis & {
+      top: 0;
+      color: $color-text-black;
+    }
+
+    @media (max-width: $sm) {
+      width: 24px;
+      height: 24px;
+    }
+  }
 }

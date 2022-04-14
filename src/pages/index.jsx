@@ -6,10 +6,9 @@ import { getAllProducts } from 'redux/actions/productAction';
 const App = ({ props }) => {
   const router = useRouter();
   const [allProduct, setAllproducts] = useState(() => props.products);
-  const { loading, products, productsCount, resultPerPage } = allProduct;
+  const { loading, products, productsCount } = allProduct;
 
   let { page = 1 } = router.query;
-  let count = productsCount;
   page = Number(page);
 
   const handlePagination = pageNumber => {
@@ -28,7 +27,6 @@ const App = ({ props }) => {
         item.name.toLowerCase().includes(e.target.value.trim().toLowerCase())
       );
 
-      count = filterProduct.length;
       setAllproducts({
         ...allProduct,
         products: filterProduct.length ? filterProduct : props.products.products,
@@ -40,11 +38,9 @@ const App = ({ props }) => {
     <DashBoard
       products={products}
       onChange={handlePagination}
-      resultPerPage={resultPerPage}
       totalProducts={productsCount}
       activePage={page}
       isLoading={loading}
-      productsCount={count}
       searchItems={searchItems}
     />
   );

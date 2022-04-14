@@ -7,17 +7,10 @@ import Section from 'components/molecules/section';
 import Grid from 'components/organisms/grid';
 import React from 'react';
 
-const DashBoard = ({
-  isLoading,
-  products,
-  productsCount,
-  totalProducts,
-  resultPerPage,
-  activePage,
-  onChange,
-  searchItems,
-}) => {
+const DashBoard = ({ isLoading, products, totalProducts, activePage, searchItems, onChange }) => {
   if (isLoading) return <Loading />;
+
+  const pages = parseInt(totalProducts / 8) + (totalProducts % 8 > 0 ? 1 : 0);
 
   return (
     <div className="t-dashboard">
@@ -36,14 +29,7 @@ const DashBoard = ({
         )}
       </Grid>
 
-      {resultPerPage < productsCount && (
-        <Pagination
-          activePage={activePage}
-          resultPerPage={resultPerPage}
-          itemsCount={totalProducts}
-          onChange={onChange}
-        />
-      )}
+      <Pagination length={pages} currentIndex={activePage} onChange={onChange} />
     </div>
   );
 };

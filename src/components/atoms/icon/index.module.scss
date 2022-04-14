@@ -46,5 +46,9 @@
   @include icon('expand-less', 24px, 24px);
   @include icon('arrow-left', 24px, 24px);
   @include icon('arrow-right', 24px, 24px);
+  @include icon('arrow-left-gray-active', 30px, 24px, true);
+  @include icon('arrow-left-gray-inactive', 30px, 24px);
+  @include icon('arrow-right-gray-active', 30px, 24px, true);
+  @include icon('arrow-right-gray-inactive', 30px, 24px);
   @include icon('close', 24px, 24px, true);
 }
