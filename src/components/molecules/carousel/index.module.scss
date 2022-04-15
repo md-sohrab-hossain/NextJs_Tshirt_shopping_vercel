@@ -3,7 +3,7 @@
   $root: &;
 
   width: 100%;
-  height: 200px;
+  height: 250px;
 
   .swiper {
     width: 100%;
@@ -13,6 +13,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
+
+      img {
+        min-width: 300px !important;
+        max-width: 300px !important;
+        height: 100% !important;
+      }
     }
 
     &-scrollbar {

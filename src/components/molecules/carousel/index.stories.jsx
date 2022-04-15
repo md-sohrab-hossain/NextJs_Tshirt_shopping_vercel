@@ -26,8 +26,7 @@ Normal.args = {
         draggable="false"
         src="https://res.cloudinary.com/sajal-cnq/image/upload/v1632479979/tshirt/products/p4puuezmzup7wqtljavx.png"
         alt="card img"
-        height="200"
-        width="250"
+        layout="fill"
       />
     </SwiperSlide>,
     <SwiperSlide key="1">
@@ -35,8 +34,7 @@ Normal.args = {
         draggable="false"
         src="https://res.cloudinary.com/sajal-cnq/image/upload/v1624538021/tshirt/products/ezafikjm5prqocue1fgl.png"
         alt="card img"
-        height="200"
-        width="250"
+        layout="fill"
       />
     </SwiperSlide>,
   ],
