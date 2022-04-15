@@ -10,7 +10,8 @@ export const useOnClickOutside = (ref, handler) => {
       if (
         (event.target.classList.contains(expandIcon) && !shoppingCart) ||
         (event.target.classList.contains('a-shopping-cart__count') && !menuList) ||
-        (event.target.classList.contains('a-icon--shopping-bag') && !menuList)
+        (event.target.classList.contains('a-icon--shopping-bag') && !menuList) ||
+        event.target.classList.contains('a-dropdown__select')
       ) {
         return;
       }

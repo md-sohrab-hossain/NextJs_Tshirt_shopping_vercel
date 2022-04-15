@@ -1,4 +1,5 @@
 import Button from 'components/atoms/button';
+import Dropdown from 'components/atoms/dropdown';
 import Heading from 'components/atoms/heading';
 import Rating from 'components/atoms/rating';
 import Text from 'components/atoms/text';
@@ -9,7 +10,19 @@ import Image from 'next/image';
 import React from 'react';
 import { SwiperSlide } from 'swiper/react';
 
-const ProductDetails = ({ loading, title, images, brandName, price, rating, reviews = 0, description, onClick }) => {
+const ProductDetails = ({
+  loading,
+  quantity,
+  title,
+  images,
+  brandName,
+  price,
+  rating,
+  reviews = 0,
+  description,
+  onClick,
+  handleQuantity,
+}) => {
   const componentClassName = mapModifiers('o-product-details');
   const className = `${componentClassName}`.trim();
 
@@ -38,6 +51,7 @@ const ProductDetails = ({ loading, title, images, brandName, price, rating, revi
 
           <div className="o-product-details__info--quantity">
             <span>Quantity:</span>
+            <Dropdown quantity={quantity} handleQuantity={handleQuantity} />
           </div>
 
           <div className="o-product-details__info--rating">

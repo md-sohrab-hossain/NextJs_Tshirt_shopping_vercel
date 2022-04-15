@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 0.5rem;
     color: $color-base-black;
     cursor: pointer;
     background: $color-base-whisper;
@@ -39,12 +39,12 @@
 
   &__menu {
     position: absolute;
-    top: 3em;
+    top: 3.4rem;
     left: 50%;
     z-index: $zindex-globalnavi;
     display: none;
     width: 100%;
-    padding: 0.2em 0;
+    padding: 0.1rem 0;
     color: $color-base-black;
     list-style: none;
     background: $color-base-ghostwhite;
@@ -64,7 +64,7 @@
     }
 
     li {
-      padding: 0.5em 0.9em;
+      padding: 0.5rem 0.9em;
       margin: 0.3em 0;
       cursor: pointer;
 

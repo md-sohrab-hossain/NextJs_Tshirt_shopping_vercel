@@ -31,6 +31,13 @@
       width: 80%;
     }
 
+    &--quantity {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 60%;
+    }
+
     &--rating {
       display: flex;
       align-items: center;

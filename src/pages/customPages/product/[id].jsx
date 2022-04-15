@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { clearErrors, getProductDetails } from 'redux/actions/productAction';
 import { NewProductOrder } from 'redux/actions/productOrderAction';
-function ProductDetailsPage({ props }) {
-  const dispatch = useDispatch();
-  const [quantity, setQuantity] = useState(1);
 
+const ProductDetailsPage = ({ props }) => {
+  const dispatch = useDispatch();
+  const options = [1, 2, 3, 4, 5, 6];
+  const [quantity, setQuantity] = useState(null);
   const { price, ratings, numOfReviews, name, error, description, images, _id } = props.product;
 
   const { error: orderError, loading, success } = useSelector(state => state.productOrder);
@@ -30,6 +31,10 @@ function ProductDetailsPage({ props }) {
   }, [orderError, error]);
 
   const handleOrder = useCallback(() => {
+    if (!quantity) {
+      toast.warning('Please Select Quantity!');
+      return;
+    }
     const order = {
       product: _id,
       quantity,
@@ -43,6 +48,10 @@ function ProductDetailsPage({ props }) {
 
     dispatch(NewProductOrder(order));
   }, [quantity]);
+
+  const handleQuantity = e => {
+    setQuantity(e.target.value);
+  };
 
   if (!props.product) return <Loading />;
 
@@ -58,10 +67,12 @@ function ProductDetailsPage({ props }) {
         reviews={numOfReviews}
         title="Product Details"
         onClick={handleOrder}
+        quantity={options}
+        handleQuantity={handleQuantity}
       />
     </div>
   );
-}
+};
 
 ProductDetailsPage.getInitialProps = async ({ req, query, store }) => {
   await store.dispatch(getProductDetails(req, query?.id));
