@@ -1,0 +1,35 @@
+/* stylelint-disable selector-class-pattern */
+.m-carousel {
+  $root: &;
+
+  width: 100%;
+  height: 200px;
+
+  .swiper {
+    width: 100%;
+    height: 100%;
+
+    &-slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-scrollbar {
+      display: none;
+    }
+
+    &-button {
+      &-next:after,
+      &-prev:after {
+        font-size: 15px !important;
+        font-weight: xd-font-weight('bold');
+        color: $color-base-whisper;
+
+        &:hover {
+          color: $color-base-silver;
+        }
+      }
+    }
+  }
+}

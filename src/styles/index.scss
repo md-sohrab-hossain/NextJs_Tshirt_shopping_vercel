@@ -45,12 +45,14 @@
 @import '../components/molecules/login-form/index.module.scss';
 @import '../components/molecules/register-form/index.module.scss';
 @import '../components/molecules/forgot-password/index.module.scss';
+@import '../components/molecules/carousel/index.module.scss';
 @import './components/molecules/cart-dropdown.module.scss';
 @import './components/molecules/productdetails.module.scss';
 
 // component/organism
 @import '../components/organisms/grid/index.module.scss';
 @import '../components/organisms/navbar/index.module.scss';
+@import '../components/organisms/product-details/index.module.scss';
 @import './components/organism/forgot_password.module.scss';
 @import './components/organism/new_password.module.scss';
 @import './components/organism/profile.module.scss';
@@ -62,6 +64,7 @@
 // pages
 @import '../pages/customPages/user/login/index.module.scss';
 @import '../pages/customPages/user/register/index.module.scss';
+@import '../pages/customPages/product/index.module.scss';
 @import '../pages/customPages/user/password/forgot/index.module.scss';
 
 .footer {

@@ -1,0 +1,12 @@
+.p-product-details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 520px;
+  padding: 0 2rem;
+
+  @include sp {
+    height: 600px;
+  }
+}
