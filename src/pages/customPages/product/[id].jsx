@@ -8,7 +8,7 @@ import { NewProductOrder } from 'redux/actions/productOrderAction';
 
 const ProductDetailsPage = ({ props }) => {
   const dispatch = useDispatch();
-  const options = [1, 2, 3, 4, 5, 6];
+  const options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const [quantity, setQuantity] = useState(null);
   const { price, ratings, numOfReviews, name, error, description, images, _id } = props.product;
 

@@ -44,7 +44,11 @@
     z-index: $zindex-globalnavi;
     display: none;
     width: 100%;
+    min-height: 5rem;
+    max-height: 18rem;
     padding: 0.1rem 0;
+    overflow-x: hidden;
+    overflow-y: auto;
     color: $color-base-black;
     list-style: none;
     background: $color-base-ghostwhite;
@@ -65,8 +69,8 @@
 
     li {
       padding: 0.5rem 0.9em;
-      margin: 0.3em 0;
       cursor: pointer;
+      border-bottom: 1px solid $color-base-white-overlay;
 
       &:hover {
         color: $color-primary-purple;
