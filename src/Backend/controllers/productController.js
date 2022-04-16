@@ -1,9 +1,8 @@
-import { Products } from '../models/product';
-import ErrorHandler from '../utils/errorHandler';
-import catchError from '../middlewares/catchAsyncError';
-import ApiFeatures from '../utils/apiFeature';
-
 import cloudinary from 'cloudinary';
+import catchError from '../middlewares/catchAsyncError';
+import { Products } from '../models/product';
+import ApiFeatures from '../utils/apiFeature';
+import ErrorHandler from '../utils/errorHandler';
 
 //TODO: --------------- Create new product => /api/products ---------------------//
 export const createNewProduct = catchError(async (req, res) => {

@@ -1,8 +1,7 @@
-import { ProductOrder } from '../models/productOrder';
-
-import ErrorHandler from '../utils/errorHandler';
-import catchError from '../middlewares/catchAsyncError';
 import mongoose from 'mongoose';
+import catchError from '../middlewares/catchAsyncError';
+import { ProductOrder } from '../models/productOrder';
+import ErrorHandler from '../utils/errorHandler';
 
 //! 👇 ------- order new Product -----------//
 export const newProductOrder = catchError(async (req, res) => {

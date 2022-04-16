@@ -50,6 +50,7 @@ const ProductDetailsPage = ({ props }) => {
   }, [quantity]);
 
   const handleQuantity = e => {
+    console.log('quantity -- ', e.target.value);
     setQuantity(e.target.value);
   };
 

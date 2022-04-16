@@ -1,0 +1,10 @@
+.p-shopping {
+  width: 60%;
+  height: 480px;
+  margin: 2rem auto;
+
+  @include sp {
+    width: 98%;
+    height: 600px;
+  }
+}

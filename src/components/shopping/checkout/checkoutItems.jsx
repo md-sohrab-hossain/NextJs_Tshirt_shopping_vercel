@@ -20,6 +20,7 @@ const CheckoutItem = ({ cartItem }) => {
       images,
       paymentInfo,
     };
+
     dispatch(NewProductOrder(order));
   }, []);
 

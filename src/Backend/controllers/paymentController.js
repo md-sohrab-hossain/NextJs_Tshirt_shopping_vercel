@@ -1,10 +1,8 @@
-import { ProductOrder } from '../models/productOrder';
-
-import mongoose from 'mongoose';
 import { buffer } from 'micro';
-
-import catchAsyncErrors from '../middlewares/catchAsyncError';
+import mongoose from 'mongoose';
 import absoluteUrl from 'next-absolute-url';
+import catchAsyncErrors from '../middlewares/catchAsyncError';
+import { ProductOrder } from '../models/productOrder';
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
