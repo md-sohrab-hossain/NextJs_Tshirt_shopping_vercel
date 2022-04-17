@@ -47,9 +47,12 @@ const userProfilePage = () => {
 
   const onChange = useCallback(
     e => {
+      var pattern = /image-*/;
+      const file = e.target?.files?.[0];
+      if (e.target?.files?.[0] && !file.type.match(pattern)) return;
+
       if (e.target.name === 'avatar') {
         const reader = new FileReader();
-
         reader.onload = () => {
           if (reader.readyState === 2) {
             setAvatar(reader.result);
@@ -57,7 +60,7 @@ const userProfilePage = () => {
           }
         };
 
-        reader.readAsDataURL(e.target.files[0]);
+        e.target?.files?.[0] && reader.readAsDataURL(e.target.files[0]);
       } else {
         setUser({ ...user, [e.target.name]: e.target.value });
       }

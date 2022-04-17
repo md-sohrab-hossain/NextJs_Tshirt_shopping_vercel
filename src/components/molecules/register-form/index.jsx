@@ -66,7 +66,7 @@ const RegisterForm = ({
             <Image draggable="false" onError={handleOnError} src={imgSrc} alt="avata img" layout="fill" />
           </div>
 
-          <InputFile dataText="Choose Avatar" name="avatar" accept="images/*" onChange={onChange} />
+          <InputFile dataText="Choose Avatar" name="avatar" accept="image/*" onChange={onChange} />
         </div>
       </div>
 
