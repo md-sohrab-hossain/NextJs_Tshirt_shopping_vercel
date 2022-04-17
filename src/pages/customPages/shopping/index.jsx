@@ -1,15 +1,17 @@
 import axios from 'axios';
 import getStripe from 'Backend/utils/getStripe';
 import Loading from 'components/atoms/Loading';
+import Modal from 'components/molecules/modal';
 import OrderList from 'components/molecules/order-item-list';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { getMyOrders, NewProductOrder, removeItems } from 'redux/actions/productOrderAction';
 
 const CheckoutPage = () => {
   const dispatch = useDispatch();
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [removeProduct, setRemoveProduct] = useState(null);
   const { order } = useSelector(state => state.getMyOrderList);
   const { success } = useSelector(state => state.productOrder);
   const { success: remove } = useSelector(state => state.removeItem);
@@ -61,20 +63,31 @@ const CheckoutPage = () => {
   }, []);
 
   const handleRemove = useCallback(id => {
-    dispatch(removeItems(id));
+    setRemoveProduct(id);
+    setIsModalOpen(true);
+  }, []);
+
+  const handleModal = useCallback((isRemoved, id) => {
+    setIsModalOpen(false);
+    isRemoved && dispatch(removeItems(id));
   }, []);
 
   if (!order) return <Loading />;
   return (
-    <div className="p-shopping">
-      <OrderList
-        orders={order?.orders}
-        totalPrice={totalPrice}
-        handleCheckout={handleCheckout}
-        handleRemove={handleRemove}
-        handleQuantity={handleQuantity}
-      />
-    </div>
+    <>
+      <div className="p-shopping">
+        <OrderList
+          orders={order?.orders}
+          totalPrice={totalPrice}
+          handleCheckout={handleCheckout}
+          handleRemove={handleRemove}
+          handleQuantity={handleQuantity}
+        />
+      </div>
+      {isModalOpen && (
+        <Modal message="Do you want to remove this item?" onClick={handleModal} removeProductId={removeProduct} />
+      )}
+    </>
   );
 };
 

@@ -1,0 +1,55 @@
+.m-modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: $zindex-modal;
+  width: 100%;
+  height: 100.5%;
+  background: rgba($color-base-pitch-black, 0.5);
+
+  &__body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 30%;
+    min-height: 18rem;
+    max-height: 18rem;
+    background: linear-gradient(to right, #c2e59c, #64b3f4);
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba($color-base-pitch-black, 0.6);
+    transform: translate(-50%, -50%);
+
+    @include sp {
+      width: 60%;
+    }
+
+    &--message {
+      width: 100%;
+      height: 3rem;
+
+      .a-text {
+        font-size: 1.8rem;
+        font-weight: xd-font-weight('medium');
+        text-align: center;
+      }
+    }
+
+    &--button {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+
+      .a-button {
+        height: 3rem;
+        margin-right: 1.8rem;
+      }
+    }
+  }
+}

@@ -13,11 +13,6 @@ body {
   background: linear-gradient(-45deg, #69ff97, #ffd3a5, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
-
-  @include sp {
-    min-width: 500px;
-    min-height: 1200px;
-  }
 }
 
 @keyframes gradient {
