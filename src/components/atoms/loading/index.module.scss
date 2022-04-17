@@ -1,0 +1,76 @@
+.a-loading {
+  $root: &;
+
+  display: flex;
+  width: 100%;
+  height: 60px;
+
+  &--overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: $zindex-loading-content;
+    align-items: center;
+    height: auto;
+    background: rgba($color-base-pitch-black, 0.5);
+  }
+
+  &--square {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    background: $color-primary-violet;
+    border-radius: 12px;
+    transform: translate(-50%, -50%);
+    animation: loading 2s linear infinite;
+    perspective: 6000px;
+
+    #{$root}__dot-grid {
+      display: none;
+    }
+  }
+
+  &__dot-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 4px;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    margin: 10px auto;
+
+    span {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background-color: $color-line-gray;
+      border-radius: 50%;
+      animation: loading-dots 0.75s ease-in-out 1s infinite;
+    }
+
+    @for $i from 1 through 9 {
+      span:nth-child(#{$i}) {
+        @if $i == 1 {
+          animation-delay: 0s;
+        } @else if $i == 2 or $i == 4 {
+          animation-delay: 0.15s;
+        } @else if $i == 3 or $i == 5 or $i == 7 {
+          animation-delay: 0.3s;
+        } @else if $i == 6 or $i == 8 {
+          animation-delay: 0.45s;
+        } @else if $i == 9 {
+          animation-delay: 0.6s;
+        }
+      }
+    }
+
+    #{$root}--square {
+      display: none;
+    }
+  }
+}
