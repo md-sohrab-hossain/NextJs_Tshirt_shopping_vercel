@@ -79,13 +79,15 @@ export default function RegisterPage() {
     <div className="p-register">
       <RegisterForm
         loading={loading}
-        onChange={onChange}
+        headingMessage="Join Us"
+        submitBtnMessage="Register"
         name={name}
         email={email}
         password={password}
         onSubmit={submitHandler}
         imgSrc={avatarPreview}
         setImgSrc={setAvatarPreview}
+        onChange={onChange}
       />
     </div>
   );

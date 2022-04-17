@@ -10,7 +10,18 @@ import React, { useCallback } from 'react';
 
 const avatarDefault = 'https://next-js-tshirt-shopping-7dltd6ofj-sajalkhan.vercel.app/images/default_avatar.jpg';
 
-const RegisterForm = ({ loading, name, email, password, imgSrc, setImgSrc, onChange, onSubmit }) => {
+const RegisterForm = ({
+  loading,
+  headingMessage,
+  submitBtnMessage,
+  name,
+  email,
+  password,
+  imgSrc,
+  setImgSrc,
+  onChange,
+  onSubmit,
+}) => {
   const { LOGIN } = ROUTES;
 
   const componentClassName = mapModifiers('m-register-form');
@@ -22,7 +33,7 @@ const RegisterForm = ({ loading, name, email, password, imgSrc, setImgSrc, onCha
 
   return (
     <form className={className} onSubmit={onSubmit}>
-      <Heading large>Join Us</Heading>
+      <Heading large={submitBtnMessage === 'Register' && true}>{headingMessage}</Heading>
 
       <div className="m-register-form__name">
         <label htmlFor="name">
@@ -61,13 +72,15 @@ const RegisterForm = ({ loading, name, email, password, imgSrc, setImgSrc, onCha
 
       <div className="m-register-form__register">
         <Button modifiers={loading ? 'loading' : 'success'} disabled={loading ? true : false} type="submit">
-          <span>Register</span>
+          <span>{submitBtnMessage}</span>
         </Button>
       </div>
 
-      <Link href={`${LOGIN}`}>
-        <a className="m-register-form__login">Already have an account?</a>
-      </Link>
+      {submitBtnMessage === 'Register' && (
+        <Link href={`${LOGIN}`}>
+          <a className="m-register-form__login">Already have an account?</a>
+        </Link>
+      )}
     </form>
   );
 };

@@ -71,7 +71,7 @@ export const updateProfile = catchError(async (req, res, next) => {
     user.name = req.body.name;
     user.email = req.body.email;
 
-    if (req.body.password) user.password = req.body.password;
+    if (req.body?.password) user.password = req.body.password;
 
     if (!user.name) {
       return next(new ErrorHandler('Please enter user name', 404));
