@@ -1,15 +1,12 @@
 import Heading from 'components/atoms/heading';
 import InputText from 'components/atoms/input-text';
-import Loading from 'components/atoms/Loading';
 import Pagination from 'components/atoms/pagination';
 import Card from 'components/molecules/card';
 import Section from 'components/molecules/section';
 import Grid from 'components/organisms/grid';
 import React from 'react';
 
-const DashBoard = ({ isLoading, products, totalProducts, activePage, searchItems, onChange }) => {
-  if (isLoading) return <Loading />;
-
+const DashBoard = ({ products, totalProducts, activePage, searchItems, onChange }) => {
   const pages = parseInt(totalProducts / 8) + (totalProducts % 8 > 0 ? 1 : 0);
 
   return (

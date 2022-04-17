@@ -1,10 +1,12 @@
+import Loading from 'components/atoms/loading/index';
 import DashBoard from 'components/templates/dashboard';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getAllProducts } from 'redux/actions/productAction';
 
 const App = ({ props }) => {
   const router = useRouter();
+  const [isRoutesChange, setIsRoutesChange] = useState(() => false);
   const [allProduct, setAllproducts] = useState(() => props.products);
   const { loading, products, productsCount } = allProduct;
 
@@ -12,6 +14,7 @@ const App = ({ props }) => {
   page = Number(page);
 
   const handlePagination = pageNumber => {
+    setIsRoutesChange(true);
     window.location.href = `/?page=${pageNumber}`;
   };
 
@@ -34,15 +37,31 @@ const App = ({ props }) => {
     }
   };
 
+  useEffect(() => {
+    const handleRouteChange = () => setIsRoutesChange(false);
+
+    router.events.on('routeChangeStart', handleRouteChange);
+    router.events.on('routeChangeError', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange);
+      router.events.off('routeChangeError', handleRouteChange);
+    };
+  }, [router.events]);
+
+  if (loading) return <Loading square />;
+
   return (
-    <DashBoard
-      products={products}
-      onChange={handlePagination}
-      totalProducts={productsCount}
-      activePage={page}
-      isLoading={loading}
-      searchItems={searchItems}
-    />
+    <>
+      <DashBoard
+        products={products}
+        onChange={handlePagination}
+        totalProducts={productsCount}
+        activePage={page}
+        searchItems={searchItems}
+      />
+      {isRoutesChange && <Loading overlay />}
+    </>
   );
 };
 
