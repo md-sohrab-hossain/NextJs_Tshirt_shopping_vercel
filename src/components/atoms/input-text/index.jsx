@@ -1,7 +1,7 @@
 import { mapModifiers } from 'libs/component';
 import React from 'react';
 
-const InputText = ({ placeholder = '', name = '', value = '', onChange, type = 'text' }) => {
+const InputText = ({ placeholder = '', name = '', value, onChange, type = 'text' }) => {
   const componentClassName = mapModifiers('a-input-text');
   const className = `${componentClassName}`.trim();
 
