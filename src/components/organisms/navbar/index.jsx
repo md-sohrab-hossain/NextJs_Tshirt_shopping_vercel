@@ -89,7 +89,13 @@ const Navbar = ({ products, user, loading, handleLogin, handleLogout, handleChec
 
           <ListItem>
             <Link href="/">
-              <a onClick={handleLogout} className="o-navbar__logout">
+              <a
+                onClick={() => {
+                  handleLogout();
+                  setIsMenuOpen(!isMenuOpen);
+                }}
+                className="o-navbar__logout"
+              >
                 Logout
               </a>
             </Link>

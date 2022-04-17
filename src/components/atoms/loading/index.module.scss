@@ -14,13 +14,13 @@
     z-index: $zindex-loading-content;
     align-items: center;
     height: auto;
-    background: rgba($color-base-pitch-black, 0.5);
+    background: rgba($color-base-pitch-black, 0.3);
   }
 
   &--square {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    position: relative;
+    top: 150%;
+    left: calc(100% - 55%);
     width: 100px;
     height: 100px;
     background: $color-primary-violet;
@@ -28,6 +28,10 @@
     transform: translate(-50%, -50%);
     animation: loading 2s linear infinite;
     perspective: 6000px;
+    /* stylelint-disable-next-line selector-no-qualifying-type */
+    & + div[class='a-footer'] {
+      display: none;
+    }
 
     #{$root}__dot-grid {
       display: none;

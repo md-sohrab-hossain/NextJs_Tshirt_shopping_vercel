@@ -12,8 +12,6 @@ const Loading = ({ className: additionalClassName = '', overlay, square }) => {
           <span key={i} />
         ))}
       </div>
-
-      <div className="a-loading__square"></div>
     </div>
   );
 };

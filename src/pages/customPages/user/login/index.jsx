@@ -1,12 +1,25 @@
+import Loading from 'components/atoms/loading/index';
 import Login from 'components/molecules/login-form';
 import { getSession, signIn } from 'next-auth/client';
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 const LoginPage = () => {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isRoutesChange, setIsRoutesChange] = useState(() => false);
+
+  useEffect(() => {
+    const handleRouteChange = () => setIsRoutesChange(false);
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
 
   const submitHandler = async e => {
     e.preventDefault();
@@ -23,6 +36,7 @@ const LoginPage = () => {
     if (result.error) {
       toast.error(result.error);
     } else {
+      setIsRoutesChange(true);
       window.location.href = '/';
     }
   };
@@ -37,6 +51,7 @@ const LoginPage = () => {
         loading={loading}
         onSubmit={submitHandler}
       />
+      {isRoutesChange && <Loading overlay />}
     </div>
   );
 };
