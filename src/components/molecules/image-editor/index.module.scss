@@ -1,36 +1,79 @@
 /* stylelint-disable selector-class-pattern */
 .m-image-editor {
   position: relative;
+  min-width: 450px;
+
+  .a-button--primary {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    width: 90px;
+
+    @include sp {
+      left: 50%;
+    }
+  }
 
   .tui-image-editor {
+    position: unset !important;
     width: 350px !important;
     height: 350px !important;
+
+    @include sp {
+      width: 300px !important;
+      height: 300px !important;
+    }
 
     &-header-logo {
       display: none !important;
     }
 
     &-header-buttons div {
+      right: 110px !important;
       width: 90px !important;
+      height: 30px !important;
+      font-weight: xd-font-weight('medium') !important;
+      line-height: 30px !important;
+      color: $color-white !important;
+      cursor: pointer;
+      background: $color-yellow !important;
     }
 
-    &-header-buttons button {
-      width: 90px !important;
+    &-header-buttons {
+      @include sp {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+    }
+
+    &-container {
+      position: relative;
+      min-height: 500px !important;
+
+      @include sp {
+        .svg_ic-menu {
+          transform: rotate(-90deg);
+        }
+      }
     }
 
     &-item {
       @include sp {
-        padding: 7px 2px 3px !important;
+        padding: 2px !important;
       }
     }
 
     &-help-menu {
-      left: 30% !important;
-      transform: translateX(-30%) !important;
+      left: 10% !important;
+      transform: translateX(-15%) !important;
 
       @include sp {
-        left: 0 !important;
-        transform: translateX(-15%) !important;
+        top: 5% !important;
+        left: 35px !important;
+        width: 0 !important;
+        transform: rotate(90deg) !important;
       }
     }
   }
