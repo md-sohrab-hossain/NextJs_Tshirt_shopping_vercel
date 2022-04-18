@@ -1,0 +1,37 @@
+/* stylelint-disable selector-class-pattern */
+.m-image-editor {
+  position: relative;
+
+  .tui-image-editor {
+    width: 350px !important;
+    height: 350px !important;
+
+    &-header-logo {
+      display: none !important;
+    }
+
+    &-header-buttons div {
+      width: 90px !important;
+    }
+
+    &-header-buttons button {
+      width: 90px !important;
+    }
+
+    &-item {
+      @include sp {
+        padding: 7px 2px 3px !important;
+      }
+    }
+
+    &-help-menu {
+      left: 30% !important;
+      transform: translateX(-30%) !important;
+
+      @include sp {
+        left: 0 !important;
+        transform: translateX(-15%) !important;
+      }
+    }
+  }
+}
