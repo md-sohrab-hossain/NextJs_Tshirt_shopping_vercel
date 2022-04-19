@@ -13,15 +13,18 @@ function MyApp({ Component, pageProps }) {
   const [isRoutesChange, setIsRoutesChange] = useState(() => false);
 
   useEffect(() => {
-    const handleRouteChange = () => setIsRoutesChange(false);
-    const handleChangeStart = () => setIsRoutesChange(true);
+    const handleRouteChangeStart = () => setIsRoutesChange(true);
+    const handleRouteChangeError = () => setIsRoutesChange(false);
+    const handleRouteChangeComplete = () => setIsRoutesChange(false);
 
-    router.events.on('routeChangeComplete', handleRouteChange);
-    router.events.on('routeChangeStart', handleChangeStart);
+    router.events.on('routeChangeStart', handleRouteChangeStart);
+    router.events.on('routeChangeError', handleRouteChangeError);
+    router.events.on('routeChangeComplete', handleRouteChangeComplete);
 
     return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-      router.events.off('routeChangeStart', handleChangeStart);
+      router.events.off('routeChangeStart', handleRouteChangeStart);
+      router.events.off('routeChangeError', handleRouteChangeError);
+      router.events.off('routeChangeComplete', handleRouteChangeComplete);
     };
   }, []);
 
