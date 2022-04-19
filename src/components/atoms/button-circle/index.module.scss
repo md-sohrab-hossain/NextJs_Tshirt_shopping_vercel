@@ -2,8 +2,8 @@
   $root: &;
 
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
   background: linear-gradient(#14ffe9, #ffeb3b, #ff00e0);
   border-radius: 50%;
@@ -27,9 +27,9 @@
     border-radius: 50%;
     animation: button-circle 0.5s linear infinite;
 
-    // &:nth-child(1) {
-    //   filter: blur(5px);
-    // }
+    &:nth-child(1) {
+      filter: blur(5px);
+    }
 
     &:nth-child(2) {
       filter: blur(10px);
@@ -41,53 +41,6 @@
 
     &:nth-child(4) {
       filter: blur(50px);
-    }
-  }
-
-  &:before {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    bottom: 10px;
-    left: 10px;
-  }
-
-  &:after {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    bottom: 10px;
-    left: 10px;
-    z-index: 1;
-    content: '';
-    border-radius: 50%;
-  }
-
-  &:hover {
-    &:after {
-      top: 30%;
-      left: 80px;
-      z-index: 1;
-      width: 50px;
-      height: 50px;
-      clip-path: polygon(100% 0, 31% 47%, 100% 100%);
-      background: $color-white;
-      transform: rotate(-14deg);
-    }
-
-    &:before {
-      top: 30%;
-      left: 105px;
-      z-index: 2;
-      width: 100px;
-      height: 40px;
-      font-family: $fontset-dancing;
-      font-weight: xd-font-weight('bold');
-      color: $color-yellow;
-      text-align: center;
-      content: 'Design Your Own Tshirt';
-      background: $color-white;
-      border-radius: 10px;
     }
   }
 }
