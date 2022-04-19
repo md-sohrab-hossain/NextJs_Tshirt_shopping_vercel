@@ -21,4 +21,5 @@ export const Normal = Template.bind({});
 Normal.args = {
   size: SIZE,
   quantity: QUANTITY,
+  imgSrc: 'https://res.cloudinary.com/sajal-cnq/image/upload/v1624538021/tshirt/products/ezafikjm5prqocue1fgl.png',
 };

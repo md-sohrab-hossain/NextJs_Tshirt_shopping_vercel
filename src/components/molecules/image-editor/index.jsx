@@ -16,7 +16,7 @@ const Editor = ({ setImgSrc }) => {
   const myTheme = {
     'common.bisize.width': '0',
     'common.bisize.height': '0',
-    'common.backgroundColor': '#F6F6F6',
+    'common.backgroundColor': '#f1c40f',
     'loadButton.display': 'none',
     // 'downloadButton.display': 'none',
   };

@@ -18,6 +18,12 @@
   }
 }
 
+@mixin sp-2() {
+  @media (max-width: $breakpoint-small-pc2) {
+    @content;
+  }
+}
+
 //  Media screen 1025 and above
 @mixin wide-pc {
   @media (min-width: ($breakpoint-small-pc + 1)) {

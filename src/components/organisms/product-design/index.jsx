@@ -5,14 +5,11 @@ import { mapModifiers } from 'libs/component';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React from 'react';
 
 const DynamicCustomImageEditor = dynamic(() => import('components/molecules/image-editor'), { ssr: false });
-const defaultImg =
-  'https://res.cloudinary.com/sajal-cnq/image/upload/v1624538021/tshirt/products/ezafikjm5prqocue1fgl.png';
 
-const ProductDesign = ({ loading, quantity, size, onClick, onChange }) => {
-  const [imgSrc, setImgSrc] = useState(defaultImg);
+const ProductDesign = ({ imgSrc, setImgSrc, loading, quantity, size, handleOrder, handleQuantity, handleSize }) => {
   const componentClassName = mapModifiers('o-product-design');
   const className = `${componentClassName}`.trim();
 
@@ -25,22 +22,25 @@ const ProductDesign = ({ loading, quantity, size, onClick, onChange }) => {
         <div className="o-product-design__img-preview">
           <DynamicCustomImageEditor setImgSrc={setImgSrc} />
         </div>
+
         <div className="o-product-design__info">
           <Heading>Your Choice</Heading>
-          <Heading tag="h4">BDT 1000 /=</Heading>
           <Image draggable="false" src={imgSrc} alt="avata img" height="180" width="180" />
+          <Heading tag="h3">BDT 1000 /=</Heading>
 
           <div className="o-product-design__info--quantity">
             <span className="o-product-design__info--quantity-text">Quantity:</span>
-            <Dropdown options={quantity} onChange={option => onChange && onChange(option.value)} />
+            <Dropdown options={quantity} onChange={option => handleQuantity && handleQuantity(option.value)} />
           </div>
 
           <div className="o-product-design__info--size">
             <span className="o-product-design__info--size-text">Size:</span>
-            <Dropdown options={size} onChange={option => onChange && onChange(option.value)} />
+            <Dropdown options={size} onChange={option => handleSize && handleSize(option.value)} />
           </div>
 
-          <Button modifiers={loading ? 'loading' : 'success'} disabled={loading ? true : false} onClick={onClick}>
+          <hr />
+
+          <Button modifiers={loading ? 'loading' : 'success'} disabled={loading ? true : false} onClick={handleOrder}>
             <span>Order</span>
           </Button>
         </div>

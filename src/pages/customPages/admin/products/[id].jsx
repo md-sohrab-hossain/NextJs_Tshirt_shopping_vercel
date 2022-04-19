@@ -1,7 +1,6 @@
-import React from 'react';
+import UpdateProduct from 'components/admin/updateProduct';
 import { getSession } from 'next-auth/client';
-
-import UpdateProduct from '../../../../components/admin/updateProduct';
+import React from 'react';
 
 const UpdateProductPage = () => {
   return <UpdateProduct />;

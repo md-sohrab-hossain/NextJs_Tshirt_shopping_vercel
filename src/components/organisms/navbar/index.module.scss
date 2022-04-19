@@ -44,9 +44,18 @@
         -webkit-text-fill-color: transparent;
         transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
 
+        @include sp {
+          top: -1.1rem;
+          font-size: 2rem;
+        }
+
         &:hover {
           background-image: linear-gradient(135deg, #ee9ae5 10%, #5961f9 100%);
           transform: scale(1.2, 1.2);
+
+          @include sp {
+            transform: scale(1);
+          }
         }
       }
     }

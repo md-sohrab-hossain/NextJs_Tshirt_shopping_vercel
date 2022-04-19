@@ -2,7 +2,7 @@ import React from 'react';
 import Editor from './';
 
 export default {
-  title: 'components/molecules/Editor',
+  title: 'components/molecules/ImageEditor',
   component: Editor,
   parameters: {
     paddings: {

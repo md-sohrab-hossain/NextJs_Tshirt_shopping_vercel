@@ -1,7 +1,6 @@
 /* stylelint-disable selector-class-pattern */
 .m-image-editor {
   position: relative;
-  min-width: 450px;
 
   .a-button--primary {
     position: absolute;
@@ -9,7 +8,7 @@
     right: 10px;
     width: 90px;
 
-    @include sp {
+    @include sp-2 {
       left: 50%;
     }
   }
@@ -19,7 +18,7 @@
     width: 350px !important;
     height: 350px !important;
 
-    @include sp {
+    @include sp-2 {
       width: 300px !important;
       height: 300px !important;
     }
@@ -36,11 +35,23 @@
       line-height: 30px !important;
       color: $color-white !important;
       cursor: pointer;
-      background: $color-yellow !important;
+      background: $color-primary-violet-dark !important;
+
+      &:hover {
+        background: $color-primary-violet !important;
+      }
+
+      @include sp-2 {
+        right: 10% !important;
+      }
+
+      @include sp {
+        right: 25% !important;
+      }
     }
 
     &-header-buttons {
-      @include sp {
+      @include sp-2 {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -51,16 +62,11 @@
     &-container {
       position: relative;
       min-height: 500px !important;
-
-      @include sp {
-        .svg_ic-menu {
-          transform: rotate(-90deg);
-        }
-      }
+      border-radius: 10px !important;
     }
 
     &-item {
-      @include sp {
+      @include sp-2 {
         padding: 2px !important;
       }
     }
@@ -69,11 +75,15 @@
       left: 10% !important;
       transform: translateX(-15%) !important;
 
-      @include sp {
+      @include sp-2 {
         top: 5% !important;
         left: 35px !important;
         width: 0 !important;
         transform: rotate(90deg) !important;
+
+        .svg_ic-menu {
+          transform: rotate(-90deg);
+        }
       }
     }
   }
