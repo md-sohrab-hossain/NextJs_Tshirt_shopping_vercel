@@ -1,7 +1,7 @@
 import Button from 'components/atoms/button';
-import Dropdown from 'components/atoms/dropdown';
 import Heading from 'components/atoms/heading';
 import Rating from 'components/atoms/rating';
+import Dropdown from 'components/atoms/react-select';
 import Text from 'components/atoms/text';
 import Carousel from 'components/molecules/carousel';
 import { mapModifiers } from 'libs/component';
@@ -51,7 +51,7 @@ const ProductDetails = ({
 
           <div className="o-product-details__info--quantity">
             <span>Quantity:</span>
-            <Dropdown quantity={quantity} handleQuantity={handleQuantity} />
+            <Dropdown options={quantity} onChange={option => handleQuantity && handleQuantity(option.value)} />
           </div>
 
           <div className="o-product-details__info--rating">

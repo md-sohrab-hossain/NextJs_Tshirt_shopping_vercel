@@ -28,29 +28,28 @@
     height: 100%;
 
     @include sp {
+      align-items: center;
       width: 80%;
+      margin-top: 2rem;
     }
 
-    &--quantity {
+    &--quantity,
+    &--size {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 60%;
-    }
-
-    &--rating {
-      display: flex;
-      align-items: center;
-
-      span {
-        font-size: 1.4rem;
-        font-weight: xd-font-weight('medium');
-      }
-    }
-
-    hr {
       width: 100%;
-      margin: 1rem 0;
+      margin: 0.5rem;
+
+      @include sp {
+        width: 60%;
+      }
+
+      &-text {
+        min-width: 5.5rem;
+        margin-right: 1rem;
+        text-align: right;
+      }
     }
   }
 }

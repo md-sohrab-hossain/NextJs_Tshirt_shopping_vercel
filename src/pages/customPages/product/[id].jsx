@@ -1,5 +1,6 @@
 import Loading from 'components/atoms/Loading';
 import ProductDetails from 'components/organisms/product-details';
+import { QUANTITY } from 'constants/options';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -8,7 +9,6 @@ import { NewProductOrder } from 'redux/actions/productOrderAction';
 
 const ProductDetailsPage = ({ props }) => {
   const dispatch = useDispatch();
-  const options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const [quantity, setQuantity] = useState(null);
   const { price, ratings, numOfReviews, name, error, description, images, _id } = props.product;
 
@@ -49,8 +49,8 @@ const ProductDetailsPage = ({ props }) => {
     dispatch(NewProductOrder(order));
   }, [quantity]);
 
-  const handleQuantity = e => {
-    setQuantity(e.target.value);
+  const handleQuantity = selectedItem => {
+    setQuantity(selectedItem);
   };
 
   if (!props.product) return <Loading />;
@@ -67,7 +67,7 @@ const ProductDetailsPage = ({ props }) => {
         reviews={numOfReviews}
         title="Product Details"
         onClick={handleOrder}
-        quantity={options}
+        quantity={QUANTITY}
         handleQuantity={handleQuantity}
       />
     </div>

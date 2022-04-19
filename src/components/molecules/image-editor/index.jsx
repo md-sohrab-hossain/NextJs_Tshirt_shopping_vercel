@@ -4,10 +4,10 @@ import { mapModifiers } from 'libs/component';
 import React, { useRef } from 'react';
 import 'tui-color-picker/dist/tui-color-picker.css';
 import 'tui-image-editor/dist/tui-image-editor.css';
-const download = require('downloadjs');
+// const download = require('downloadjs');
 
 //NOTE: https://thewebdev.info/2021/06/02/how-to-make-a-photo-editor-with-react/
-const Editor = () => {
+const Editor = ({ setImgSrc }) => {
   const componentClassName = mapModifiers('m-image-editor');
   const className = `${componentClassName}`.trim();
 
@@ -17,16 +17,22 @@ const Editor = () => {
     'common.bisize.width': '0',
     'common.bisize.height': '0',
     'common.backgroundColor': '#F6F6F6',
-    'downloadButton.display': 'none',
+    'loadButton.display': 'none',
+    // 'downloadButton.display': 'none',
+  };
+
+  const locale_zh = {
+    Download: 'Preview',
   };
 
   const saveImageToDisk = () => {
     const imageEditorInst = imageEditor.current.imageEditorInst;
     const data = imageEditorInst.toDataURL();
     if (data) {
-      const mimeType = data.split(';')[0];
-      const extension = data.split(';')[0].split('/')[1];
-      download(data, `image.${extension}`, mimeType);
+      // const mimeType = data.split(';')[0];
+      // const extension = data.split(';')[0].split('/')[1];
+      // download(data, `image.${extension}`, mimeType);
+      setImgSrc(data);
     }
   };
 
@@ -48,6 +54,7 @@ const Editor = () => {
             width: '100%',
             height: '500px',
           },
+          locale: locale_zh,
           menuBarPosition: 'bottom',
         }}
         cssMaxHeight={window.innerHeight}

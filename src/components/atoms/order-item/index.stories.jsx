@@ -18,8 +18,12 @@ const Template = args => <OrderItem {...args} />;
 
 export const Normal = Template.bind({});
 Normal.args = {
-  images: 'https://res.cloudinary.com/sajal-cnq/image/upload/v1632479979/tshirt/products/p4puuezmzup7wqtljavx.png',
-  name: 'Black T-shirt',
+  images: [
+    {
+      url: 'https://res.cloudinary.com/sajal-cnq/image/upload/v1632479979/tshirt/products/p4puuezmzup7wqtljavx.png',
+    },
+  ],
+  productInfo: [{ name: 'Black T-shirt' }],
   quantity: 3,
   price: 300,
 };

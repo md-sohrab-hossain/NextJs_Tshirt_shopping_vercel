@@ -1,3 +1,4 @@
+import { QUANTITY } from 'constants/options';
 import React from 'react';
 import ProductDetails from './';
 
@@ -20,7 +21,7 @@ export const Normal = Template.bind({});
 Normal.args = {
   title: 'Product Details',
   brandName: 'Black T-shirt',
-  quantity: [1, 2, 3, 4, 5, 6],
+  quantity: QUANTITY,
   price: 300,
   description: 'new arrival',
   rating: 3,

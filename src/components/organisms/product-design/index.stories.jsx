@@ -1,3 +1,4 @@
+import { QUANTITY, SIZE } from 'constants/options';
 import React from 'react';
 import ProductDesign from './';
 
@@ -18,5 +19,6 @@ const Template = args => <ProductDesign {...args} />;
 
 export const Normal = Template.bind({});
 Normal.args = {
-  children: 'new component',
+  size: SIZE,
+  quantity: QUANTITY,
 };
