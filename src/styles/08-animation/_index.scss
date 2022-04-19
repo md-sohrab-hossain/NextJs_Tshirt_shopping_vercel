@@ -111,3 +111,13 @@
     background-color: rgba($color-base-pitch-black, 0.4);
   }
 }
+
+@keyframes button-circle {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

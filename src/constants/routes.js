@@ -6,6 +6,7 @@ export const ROUTES = {
   REGISTER_NEW_USERS: '/customPages/user/register',
   FORGOT_PASSWORD: '/customPages/user/password/forgot',
   ALL_PRODUCTS: '/customPages/admin/products',
-  PRODUCT_DETAILS: '/customPages/product',
+  PRODUCT_DETAILS: '/customPages/product/product-details',
+  PRODUCT_DESIGN: '/customPages/product/product-design',
   MY_ORDERS: '/customPages/shopping',
 };

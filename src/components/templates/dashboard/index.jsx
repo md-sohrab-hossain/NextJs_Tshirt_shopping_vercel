@@ -1,3 +1,4 @@
+import ButtonCircle from 'components/atoms/button-circle';
 import Heading from 'components/atoms/heading';
 import InputText from 'components/atoms/input-text';
 import Pagination from 'components/atoms/pagination';
@@ -25,6 +26,10 @@ const DashBoard = ({ products, totalProducts, activePage, searchItems, onChange 
           products?.map(product => <Card key={product._id} product={product} />)
         )}
       </Grid>
+
+      <div className="t-dashboard__design-btn">
+        <ButtonCircle />
+      </div>
 
       <Pagination length={pages} currentIndex={activePage} onChange={onChange} />
     </div>

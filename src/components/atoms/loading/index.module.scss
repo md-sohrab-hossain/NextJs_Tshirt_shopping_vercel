@@ -14,7 +14,7 @@
     z-index: $zindex-loading-content;
     align-items: center;
     height: auto;
-    animation: background 3s ease-in-out;
+    animation: background 3s infinite;
   }
 
   &--square {

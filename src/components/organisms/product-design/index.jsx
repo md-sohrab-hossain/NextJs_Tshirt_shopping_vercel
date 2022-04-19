@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 
 const DynamicCustomImageEditor = dynamic(() => import('components/molecules/image-editor'), { ssr: false });
 const defaultImg =
-  'https://next-js-tshirt-shopping.vercel.app/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fsajal-cnq%2Fimage%2Fupload%2Fv1624538021%2Ftshirt%2Fproducts%2Fezafikjm5prqocue1fgl.png&w=1920&q=75';
+  'https://res.cloudinary.com/sajal-cnq/image/upload/v1624538021/tshirt/products/ezafikjm5prqocue1fgl.png';
 
 const ProductDesign = ({ loading, quantity, size, onClick, onChange }) => {
   const [imgSrc, setImgSrc] = useState(defaultImg);
