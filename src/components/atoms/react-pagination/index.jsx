@@ -1,6 +1,7 @@
 import { mapModifiers } from 'libs/component';
 import React from 'react';
 import Pagination from 'react-js-pagination';
+//Note: need to install react-bootstrap to view actual ui
 
 const ReactPaginations = ({ activePage, resultPerPage, itemsCount, onChange }) => {
   const componentClassName = mapModifiers('a-react-pagination');

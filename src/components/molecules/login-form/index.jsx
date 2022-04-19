@@ -20,7 +20,7 @@ const LoginForm = ({ email, setEmail, password, setPassword, loading, onSubmit }
         <label htmlFor="email">Email</label>
         <InputText
           type="email"
-          id="email"
+          name="email"
           placeholder="Enter Email"
           value={email}
           onChange={e => setEmail(e.target.value)}
@@ -31,7 +31,7 @@ const LoginForm = ({ email, setEmail, password, setPassword, loading, onSubmit }
         <label htmlFor="password">Password</label>
         <InputText
           type="password"
-          id="password"
+          name="password"
           placeholder="Enter Password"
           value={password}
           onChange={e => setPassword(e.target.value)}

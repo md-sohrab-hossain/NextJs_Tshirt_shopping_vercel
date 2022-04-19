@@ -2,7 +2,7 @@ import Loading from 'components/atoms/loading/index';
 import Login from 'components/molecules/login-form';
 import { getSession, signIn } from 'next-auth/client';
 import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 const LoginPage = () => {
@@ -22,7 +22,7 @@ const LoginPage = () => {
     };
   }, [router.events]);
 
-  const submitHandler = useCallback(async e => {
+  const submitHandler = async e => {
     e.preventDefault();
     setLoading(true);
 
@@ -32,15 +32,15 @@ const LoginPage = () => {
       password,
     });
 
+    setLoading(false);
+
     if (result.error) {
-      setLoading(false);
       toast.error(result.error);
     } else {
-      setLoading(false);
       setIsRoutesChange(true);
       window.location.href = '/';
     }
-  }, []);
+  };
 
   return (
     <div className="p-login">
