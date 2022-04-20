@@ -30,27 +30,26 @@ const AllProductsInfoList = ({ totalProducts, products, activePage, handlePagina
 
         <div className="o-all-products-info-list__details">
           <Table>
-            {products &&
-              products.map(item => (
-                <tr key={item._id}>
-                  <td>{item._id}</td>
-                  <td>{item.name}</td>
-                  <td>{item.price}/=</td>
-                  <td>{item.description}</td>
-                  <td>{item.ratings}</td>
-                  <td>
-                    {new Date(item.createdAt).toLocaleDateString([], {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
-                  </td>
-                  <td>
-                    <Icon name="edit" onClick={handleEdit} />
-                    <Icon name="delete" onClick={handleDelete} />
-                  </td>
-                </tr>
-              ))}
+            {products?.map(item => (
+              <tr key={item._id}>
+                <td>{item._id}</td>
+                <td>{item.name}</td>
+                <td>{item.price}/=</td>
+                <td>{item.description}</td>
+                <td>{item.ratings}</td>
+                <td>
+                  {new Date(item.createdAt).toLocaleDateString([], {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </td>
+                <td>
+                  <Icon name="edit" onClick={handleEdit} />
+                  <Icon name="delete" onClick={handleDelete} />
+                </td>
+              </tr>
+            ))}
           </Table>
         </div>
 
