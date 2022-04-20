@@ -26,15 +26,17 @@ const ProductsList = ({ totalProducts, products, activePage, handlePagination, h
 
       <div className={className}>
         <Section modifiers="side-by-side">
-          <Heading tag="h1">{totalProducts} Products</Heading>
+          <Heading large>{totalProducts} Products</Heading>
           <Link href={`${ROUTES.CREATE_NEW_PRODUCT}`}>
-            <Button modifiers="success" size="small">
-              Create New
-            </Button>
+            <a>
+              <Button modifiers="success" size="small">
+                Create New
+              </Button>
+            </a>
           </Link>
         </Section>
 
-        <div className="o-all-products-list__details">
+        <div className="o-products-list__details">
           <Table tHead={PRODUCTS_DETAILS_TABLE_COLUMN}>
             {products?.map(item => (
               <tr key={item._id}>
@@ -46,7 +48,9 @@ const ProductsList = ({ totalProducts, products, activePage, handlePagination, h
                 <td>{formatLocalDateString(item.createdAt)}</td>
                 <td>
                   <Link href={`${ROUTES.ADMIN_PRODUCT_EDIT}/${item._id}`}>
-                    <Icon name="edit" />
+                    <a>
+                      <Icon name="edit" />
+                    </a>
                   </Link>
 
                   <Icon name="delete" onClick={() => handleRemove && handleRemove(item._id)} />

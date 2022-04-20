@@ -1,7 +1,8 @@
 export const ROUTES = {
   HOME: '/',
   LOGIN: '/customPages/user/login',
-  ADMIN_USERS: '/customPages/admin/users',
+  ADMIN_USERS: '/customPages/admin/users/user-list',
+  ADMIN_USER_EDIT: '/customPages/admin/users/user-edit',
   ADMIN_PRODUCTS_LIST: '/customPages/admin/products/products-list',
   ADMIN_PRODUCT_EDIT: '/customPages/admin/products/product-edit',
   USER_PROFILE: '/customPages/user/profile',

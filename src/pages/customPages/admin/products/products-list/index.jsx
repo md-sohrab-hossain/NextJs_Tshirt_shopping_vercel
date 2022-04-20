@@ -1,4 +1,4 @@
-import Loading from 'components/atoms/Loading';
+import Loading from 'components/atoms/loading/index';
 import Modal from 'components/molecules/modal';
 import ProductsList from 'components/organisms/products-list';
 import { useSession } from 'next-auth/client';
@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import { clearErrors, deleteProduct, getAdminProducts } from 'redux/actions/productAction';
 import { DELETE_PRODUCT_RESET } from 'redux/types/productsType';
 
-const AllProductsList = ({ props }) => {
+const ProductListPage = ({ props }) => {
   const session = useSession();
   const router = useRouter();
   const dispatch = useDispatch();
@@ -77,7 +77,7 @@ const AllProductsList = ({ props }) => {
   );
 };
 
-AllProductsList.getInitialProps = async ({ req, query, store }) => {
+ProductListPage.getInitialProps = async ({ req, query, store }) => {
   await store.dispatch(getAdminProducts(req, query.page));
 
   const product = store.getState();
@@ -88,4 +88,4 @@ AllProductsList.getInitialProps = async ({ req, query, store }) => {
   };
 };
 
-export default AllProductsList;
+export default ProductListPage;

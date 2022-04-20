@@ -1,7 +1,6 @@
-import React from 'react';
+import UpdateUser from 'components/admin/updateUser';
 import { getSession } from 'next-auth/client';
-
-import UpdateUser from '../../../../components/admin/updateUser';
+import React from 'react';
 
 const UpdateUserPage = () => {
   return <UpdateUser />;

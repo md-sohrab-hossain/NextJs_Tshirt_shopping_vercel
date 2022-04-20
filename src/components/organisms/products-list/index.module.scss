@@ -1,15 +1,13 @@
 .o-products-list {
+  padding: 4rem;
+
   &__details {
-    padding: 2.5rem;
+    padding: 0 2rem 2rem;
   }
 
   .a-button--success {
     width: 15rem;
     font-size: 1.1rem;
     line-height: 12px;
-  }
-
-  .a-pagination {
-    margin-top: 2rem;
   }
 }
