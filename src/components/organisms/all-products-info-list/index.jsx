@@ -5,6 +5,7 @@ import Pagination from 'components/atoms/pagination';
 import Table from 'components/atoms/table';
 import Section from 'components/molecules/section';
 import { mapModifiers } from 'libs/component';
+import { formatLocalDateString } from 'libs/utils';
 import Head from 'next/head';
 import React from 'react';
 
@@ -37,13 +38,7 @@ const AllProductsInfoList = ({ totalProducts, products, activePage, handlePagina
                 <td>{item.price}/=</td>
                 <td>{item.description}</td>
                 <td>{item.ratings}</td>
-                <td>
-                  {new Date(item.createdAt).toLocaleDateString([], {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })}
-                </td>
+                <td>{formatLocalDateString(item.createdAt)}</td>
                 <td>
                   <Icon name="edit" onClick={handleEdit} />
                   <Icon name="delete" onClick={handleDelete} />
