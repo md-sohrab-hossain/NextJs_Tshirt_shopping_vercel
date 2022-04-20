@@ -1,23 +1,20 @@
 //? -- library -- */
+import { useSession } from 'next-auth/client';
 import Link from 'next/link';
-import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+import React, { useCallback, useEffect, useState } from 'react';
 import Pagination from 'react-js-pagination';
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useState, useEffect, useCallback } from 'react';
-import { useSession } from 'next-auth/client';
+import { toast } from 'react-toastify';
+//? -- components -- */
+//? -- redux -- */
+import { clearErrors, deleteProduct } from '../../redux/actions/productAction';
+import { DELETE_PRODUCT_RESET } from '../../redux/types/productsType';
+import DeleteModal from '../atoms/DeleteModal';
 //? -- library -- */
-
 //? -- components -- */
 import Loading from '../atoms/Loading';
-import DeleteModal from '../atoms/DeleteModal';
-//? -- components -- */
-
 //? -- redux -- */
-import { deleteProduct, clearErrors } from '../../redux/actions/productAction';
-import { DELETE_PRODUCT_RESET } from '../../redux/types/productsType';
-//? -- redux -- */
-
 //? -- css -- */
 import style from './allProducts.module.scss';
 //? -- css -- */
@@ -101,6 +98,7 @@ const AllProducts = ({ productsData }) => {
               </tr>
             </thead>
 
+            {console.log({ products })}
             <tbody>
               {products &&
                 products.map(item => (
