@@ -12,8 +12,8 @@ import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 
-const AllProductsList = ({ totalProducts, products, activePage, handlePagination, handleRemove }) => {
-  const componentClassName = mapModifiers('o-all-products-list');
+const ProductsList = ({ totalProducts, products, activePage, handlePagination, handleRemove }) => {
+  const componentClassName = mapModifiers('o-products-list');
   const className = `${componentClassName}`.trim();
 
   const totalPages = parseInt(totalProducts / 4) + (totalProducts % 4 > 0 ? 1 : 0);
@@ -62,4 +62,4 @@ const AllProductsList = ({ totalProducts, products, activePage, handlePagination
   );
 };
 
-export default AllProductsList;
+export default ProductsList;

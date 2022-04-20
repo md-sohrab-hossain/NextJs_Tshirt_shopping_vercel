@@ -1,4 +1,4 @@
-.o-all-products-list {
+.o-products-list {
   &__details {
     padding: 2.5rem;
   }
@@ -7,5 +7,9 @@
     width: 15rem;
     font-size: 1.1rem;
     line-height: 12px;
+  }
+
+  .a-pagination {
+    margin-top: 2rem;
   }
 }

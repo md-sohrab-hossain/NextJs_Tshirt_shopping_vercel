@@ -1,6 +1,6 @@
 import Loading from 'components/atoms/Loading';
 import Modal from 'components/molecules/modal';
-import AllProductsList from 'components/organisms/all-products-list';
+import ProductsList from 'components/organisms/products-list';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import { clearErrors, deleteProduct, getAdminProducts } from 'redux/actions/productAction';
 import { DELETE_PRODUCT_RESET } from 'redux/types/productsType';
 
-const ProductsList = ({ props }) => {
+const AllProductsList = ({ props }) => {
   const session = useSession();
   const router = useRouter();
   const dispatch = useDispatch();
@@ -63,7 +63,7 @@ const ProductsList = ({ props }) => {
 
   return (
     <div className="p-product-info-list">
-      <AllProductsList
+      <ProductsList
         products={products}
         totalProducts={productsCount}
         activePage={page}
@@ -77,7 +77,7 @@ const ProductsList = ({ props }) => {
   );
 };
 
-ProductsList.getInitialProps = async ({ req, query, store }) => {
+AllProductsList.getInitialProps = async ({ req, query, store }) => {
   await store.dispatch(getAdminProducts(req, query.page));
 
   const product = store.getState();
@@ -88,4 +88,4 @@ ProductsList.getInitialProps = async ({ req, query, store }) => {
   };
 };
 
-export default ProductsList;
+export default AllProductsList;
