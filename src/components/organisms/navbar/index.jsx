@@ -17,7 +17,7 @@ const Navbar = ({ products, user, loading, handleLogin, handleLogout, handleChec
   const cartItemsListRef = useRef();
   const [isOpenCart, setIsOpenCart] = useState(() => false);
   const [isMenuOpen, setIsMenuOpen] = useState(() => false);
-  const { HOME, ADMIN_USERS, ALL_PRODUCTS, MY_ORDERS, USER_PROFILE } = ROUTES;
+  const { HOME, ADMIN_USERS, ADMIN_PRODUCTS_LIST, MY_ORDERS, USER_PROFILE } = ROUTES;
 
   const componentClassName = mapModifiers('o-navbar');
   const className = `${componentClassName}`.trim();
@@ -69,7 +69,7 @@ const Navbar = ({ products, user, loading, handleLogin, handleLogout, handleChec
               </ListItem>
 
               <ListItem>
-                <Link href={`${ALL_PRODUCTS}`}>
+                <Link href={`${ADMIN_PRODUCTS_LIST}`}>
                   <a onClick={() => setIsMenuOpen(!isMenuOpen)}>Products</a>
                 </Link>
               </ListItem>

@@ -1,9 +1,9 @@
 import React from 'react';
-import AllProductsInfoList from './';
+import AllProductsList from '.';
 
 export default {
-  title: 'components/organisms/AllProductsInfoList',
-  component: AllProductsInfoList,
+  title: 'components/organisms/AllProductsList',
+  component: AllProductsList,
   parameters: {
     paddings: {
       default: 'small',
@@ -14,7 +14,7 @@ export default {
   },
 };
 
-const Template = args => <AllProductsInfoList {...args} />;
+const Template = args => <AllProductsList {...args} />;
 
 export const Normal = Template.bind({});
 Normal.args = {

@@ -60,7 +60,7 @@
 @import '../components/organisms/navbar/index.module.scss';
 @import '../components/organisms/product-details/index.module.scss';
 @import '../components/organisms/product-design/index.module.scss';
-@import '../components/organisms/all-products-info-list/index.module.scss';
+@import '../components/organisms/all-products-list/index.module.scss';
 @import './components/organism/new_password.module.scss';
 
 // component/template
@@ -75,6 +75,7 @@
 @import '../pages/customPages/product/product-design/index.module.scss';
 @import '../pages/customPages/user/password/forgot/index.module.scss';
 @import '../pages/customPages/shopping/index.module.scss';
+@import '../pages/customPages/admin/products/products-list/index.module.scss';
 
 .loading {
   display: flex;
