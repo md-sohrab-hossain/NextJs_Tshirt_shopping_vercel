@@ -1,0 +1,48 @@
+.a-table {
+  width: 100%;
+  min-height: 12rem;
+  max-height: 40rem;
+  overflow-y: auto;
+
+  &__container {
+    width: 100%;
+    border-collapse: collapse;
+
+    &--head {
+      background: $color-grey-1;
+    }
+
+    &--body,
+    &--head {
+      font-size: 1.5rem;
+      cursor: default;
+
+      td,
+      th {
+        max-width: 12ch;
+        padding: 8px;
+        overflow: hidden;
+        text-align: center;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        border: 1px solid $color-grey-6;
+      }
+
+      tr:nth-child(even) {
+        background-color: $color-primary-violet;
+      }
+
+      & > tr:hover {
+        background-color: $color-primary-dark;
+      }
+    }
+
+    .a-icon {
+      cursor: pointer;
+
+      &:first-child {
+        margin-right: 1rem;
+      }
+    }
+  }
+}

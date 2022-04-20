@@ -53,4 +53,6 @@
   @include icon('arrow-right-gray-active', 30px, 24px, true);
   @include icon('arrow-right-gray-inactive', 30px, 24px);
   @include icon('close', 24px, 24px, true);
+  @include icon('edit', 24px, 24px);
+  @include icon('delete', 24px, 24px);
 }

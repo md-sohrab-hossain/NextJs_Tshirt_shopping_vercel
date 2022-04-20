@@ -30,6 +30,8 @@ export const ArrowLeftGrayInactive = Template.bind({});
 export const ArrowRightGrayActive = Template.bind({});
 export const ArrowRightGrayInactive = Template.bind({});
 export const Close = Template.bind({});
+export const Edit = Template.bind({});
+export const Delete = Template.bind({});
 
 ArrowLeft.args = { name: 'arrow-left' };
 ArrowRight.args = { name: 'arrow-right' };
@@ -45,3 +47,5 @@ ShoppingBag.args = { name: 'shopping-bag' };
 LogIn.args = { name: 'login' };
 LogeOut.args = { name: 'logout' };
 Close.args = { name: 'close' };
+Edit.args = { name: 'edit' };
+Delete.args = { name: 'delete' };
