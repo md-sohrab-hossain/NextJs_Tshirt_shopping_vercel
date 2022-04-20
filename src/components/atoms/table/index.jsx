@@ -1,7 +1,7 @@
 import { mapModifiers } from 'libs/component';
 import React from 'react';
 
-const Table = ({ children }) => {
+const Table = ({ children, tHead }) => {
   const componentClassName = mapModifiers('a-table');
   const className = `${componentClassName}`.trim();
 
@@ -9,15 +9,7 @@ const Table = ({ children }) => {
     <div className={className}>
       <table className="a-table__container">
         <thead className="a-table__container--head">
-          <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Ratings</th>
-            <th>Created Date</th>
-            <th>Actions</th>
-          </tr>
+          <tr>{tHead && tHead.map(item => <th key={item}>{item}</th>)}</tr>
         </thead>
         <tbody className="a-table__container--body">{children}</tbody>
       </table>

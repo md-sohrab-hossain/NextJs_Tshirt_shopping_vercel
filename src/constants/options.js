@@ -59,3 +59,14 @@ export const QUANTITY = [
     label: 10,
   },
 ];
+
+export const ALL_USERS_TABLE_COLUMN = ['', 'Id', 'Name', 'Email', 'Role', 'Created At', 'Actions'];
+export const PRODUCTS_DETAILS_TABLE_COLUMN = [
+  'Id',
+  'Name',
+  'Price',
+  'Description',
+  'Ratings',
+  'Created Date',
+  'Actions',
+];

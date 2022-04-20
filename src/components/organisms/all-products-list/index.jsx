@@ -4,6 +4,7 @@ import Icon from 'components/atoms/icon';
 import Pagination from 'components/atoms/pagination';
 import Table from 'components/atoms/table';
 import Section from 'components/molecules/section';
+import { PRODUCTS_DETAILS_TABLE_COLUMN } from 'constants/options';
 import { ROUTES } from 'constants/routes';
 import { mapModifiers } from 'libs/component';
 import { formatLocalDateString } from 'libs/utils';
@@ -34,7 +35,7 @@ const AllProductsList = ({ totalProducts, products, activePage, handlePagination
         </Section>
 
         <div className="o-all-products-list__details">
-          <Table>
+          <Table tHead={PRODUCTS_DETAILS_TABLE_COLUMN}>
             {products?.map(item => (
               <tr key={item._id}>
                 <td>{item._id}</td>

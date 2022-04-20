@@ -1,4 +1,5 @@
 import Icon from 'components/atoms/icon';
+import { PRODUCTS_DETAILS_TABLE_COLUMN } from 'constants/options';
 import React from 'react';
 import Table from './';
 
@@ -19,6 +20,7 @@ const Template = args => <Table {...args} />;
 
 export const Normal = Template.bind({});
 Normal.args = {
+  tHead: PRODUCTS_DETAILS_TABLE_COLUMN,
   children: [
     <tr>
       <td>60d32c2f878c1d303</td>
