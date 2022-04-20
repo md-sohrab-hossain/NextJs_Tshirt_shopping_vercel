@@ -13,7 +13,14 @@ const ForgotPassword = ({ loading, email, onSubmit, onChange }) => {
       <Heading>Forgot Password</Heading>
       <div className="m-forgot-password__email">
         <label htmlFor="email">Email</label>
-        <InputText required type="email" id="email" placeholder="Enter Email" value={email} onChange={onChange} />
+        <InputText
+          required
+          type="email"
+          id="email"
+          placeholder="Please Enter Your Email.."
+          value={email}
+          onChange={onChange}
+        />
       </div>
 
       <div className="m-forgot-password__send">
