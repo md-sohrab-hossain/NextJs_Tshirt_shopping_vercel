@@ -37,7 +37,12 @@
 
     .a-heading {
       margin-top: 0;
+      margin-bottom: 1rem;
     }
+  }
+
+  &--update-profile {
+    min-height: 45rem;
   }
 
   &--forgot-password {
@@ -48,7 +53,7 @@
   &__email,
   &__password,
   &__avatar,
-  &__role {
+  &__dropdown {
     width: 100%;
     padding: 0 2rem;
     margin-top: 1rem;

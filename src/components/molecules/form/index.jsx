@@ -8,7 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useCallback } from 'react';
 
-const avatarDefault = 'https://next-js-tshirt-shopping-7dltd6ofj-sajalkhan.vercel.app/images/default_avatar.jpg';
+const avatarDefault = '/images/default_avatar.jpg';
 
 const Form = ({
   loading,
@@ -22,7 +22,7 @@ const Form = ({
   email,
   hasEmail = false,
   isEmailRequired = false,
-  modifiers = 'login' | 'register' | 'forgot-password' | 'update-user',
+  modifiers = 'login' | 'register' | 'forgot-password' | 'update-user' | 'update-profile',
   password,
   hasPassword = false,
   isForgotPassword = false,
@@ -107,8 +107,8 @@ const Form = ({
       )}
 
       {hasDropdown && (
-        <div className="m-form__role">
-          <label htmlFor="role">
+        <div className="m-form__dropdown">
+          <label>
             <span>Role</span>
           </label>
 

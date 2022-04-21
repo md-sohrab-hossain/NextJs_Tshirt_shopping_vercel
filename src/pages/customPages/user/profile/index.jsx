@@ -1,5 +1,6 @@
-import Loading from 'components/atoms/Loading';
-import ProfileForm from 'components/molecules/register-form';
+import Heading from 'components/atoms/heading';
+import Loading from 'components/atoms/loading/index';
+import Form from 'components/molecules/form';
 import { getSession } from 'next-auth/client';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -89,22 +90,31 @@ const userProfilePage = () => {
     [user, avatar, avatarPreview]
   );
 
-  if (loading) return <Loading />;
+  if (loading) return <Loading square />;
 
   return (
     <div className="p-profile">
-      <ProfileForm
+      <Form
         loading={isLoading}
-        headingMessage="Update Profile"
-        submitBtnMessage="Update"
+        modifiers="update-profile"
+        btnMessage="Update"
+        hasName
         name={name}
+        isNameRequired
+        hasEmail
         email={email}
+        isEmailRequired
+        hasPassword
         password={password}
+        isPasswordRequired
+        hasAvatar
         onSubmit={submitHandler}
         imgSrc={avatarPreview}
         setImgSrc={setAvatarPreview}
         onChange={onChange}
-      />
+      >
+        <Heading>Update Profile</Heading>
+      </Form>
     </div>
   );
 };
