@@ -23,7 +23,7 @@ LoginForm.args = {
   hasPassword: true,
   isForgotPassword: true,
   isNewUser: true,
-  children: <Heading large>Login</Heading>,
+  children: <Heading>Login</Heading>,
   btnMessage: 'Login',
   modifiers: 'login',
 };
@@ -39,7 +39,17 @@ RegisterForm.args = {
   hasAvatar: true,
   imgSrc: 'https://next-js-tshirt-shopping-7dltd6ofj-sajalkhan.vercel.app/images/default_avatar.jpg',
   btnMessage: 'Register',
-  children: <Heading large>Join Us</Heading>,
+  children: <Heading>Join Us</Heading>,
+};
+
+export const UpdateUser = Template.bind({});
+UpdateUser.args = {
+  hasName: true,
+  hasEmail: true,
+  hasRole: true,
+  children: <Heading>Update User</Heading>,
+  btnMessage: 'Update',
+  modifiers: 'update-user',
 };
 
 export const ForgotPassword = Template.bind({});

@@ -13,7 +13,7 @@ const DropdownIndicator = props => {
   );
 };
 
-const ReactSelect = ({ options, onChange, placeholder }) => {
+const ReactSelect = ({ options, onChange, placeholder, defaultValue = null }) => {
   const componentClassName = mapModifiers('a-react-select');
   const className = `${componentClassName}`.trim();
 
@@ -21,6 +21,7 @@ const ReactSelect = ({ options, onChange, placeholder }) => {
     <div className={className}>
       <Select
         className={className}
+        defaultValue={defaultValue}
         classNamePrefix={'a-react-select'}
         placeholder={placeholder}
         options={options}

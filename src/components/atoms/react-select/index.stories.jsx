@@ -22,3 +22,10 @@ Normal.args = {
   options: QUANTITY,
   placeholder: 'Select...',
 };
+
+export const WithDefaultValue = Template.bind({});
+WithDefaultValue.args = {
+  options: QUANTITY,
+  placeholder: 'Select...',
+  defaultValue: { label: '1', value: '1' },
+};

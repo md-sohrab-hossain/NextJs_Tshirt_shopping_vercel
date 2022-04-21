@@ -1,6 +1,7 @@
 import Button from 'components/atoms/button';
 import InputFile from 'components/atoms/input-file';
 import InputText from 'components/atoms/input-text';
+import Dropdown from 'components/atoms/react-select';
 import { ROUTES } from 'constants/routes';
 import { mapModifiers } from 'libs/component';
 import Image from 'next/image';
@@ -11,6 +12,8 @@ const avatarDefault = 'https://next-js-tshirt-shopping-7dltd6ofj-sajalkhan.verce
 
 const Form = ({
   loading,
+  imgSrc,
+  setImgSrc,
   children,
   btnMessage,
   name,
@@ -19,15 +22,17 @@ const Form = ({
   email,
   hasEmail = false,
   isEmailRequired = false,
-  modifiers = 'login' | 'register' | 'forgot-password',
+  modifiers = 'login' | 'register' | 'forgot-password' | 'update-user',
   password,
   hasPassword = false,
   isForgotPassword = false,
   isPasswordRequired = false,
-  imgSrc,
-  setImgSrc,
   hasAvatar = false,
   isNewUser = false,
+  hasDropdown = false,
+  dropdownOptions,
+  handleDropdownOption,
+  selectedDropdownValue,
   onChange,
   onSubmit,
 }) => {
@@ -101,7 +106,21 @@ const Form = ({
         </div>
       )}
 
-      <div className="m-form__button">
+      {hasDropdown && (
+        <div className="m-form__role">
+          <label htmlFor="role">
+            <span>Role</span>
+          </label>
+
+          <Dropdown
+            options={dropdownOptions}
+            defaultValue={{ label: selectedDropdownValue, value: selectedDropdownValue }}
+            onChange={option => handleDropdownOption && handleDropdownOption(option.value)}
+          />
+        </div>
+      )}
+
+      <div className="m-form__button-submit">
         <Button modifiers={loading ? 'loading' : 'success'} disabled={loading ? true : false} type="submit">
           <span>{btnMessage}</span>
         </Button>
