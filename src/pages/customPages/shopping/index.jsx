@@ -1,6 +1,6 @@
 import axios from 'axios';
 import getStripe from 'Backend/utils/getStripe';
-import Loading from 'components/atoms/loading/index';
+import Loading from 'components/atoms/loading';
 import Modal from 'components/molecules/modal';
 import OrderList from 'components/molecules/order-item-list';
 import { useRouter } from 'next/router';

@@ -1,4 +1,4 @@
-import Loading from 'components/atoms/loading/index';
+import Loading from 'components/atoms/loading';
 import Modal from 'components/molecules/modal';
 import UsersList from 'components/organisms/users-list';
 import { ROUTES } from 'constants/routes';

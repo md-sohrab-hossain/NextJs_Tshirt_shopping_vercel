@@ -1,4 +1,4 @@
-import Loading from 'components/atoms/Loading';
+import Loading from 'components/atoms/loading';
 import ProductDetails from 'components/organisms/product-details';
 import { QUANTITY } from 'constants/options';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -53,7 +53,7 @@ const ProductDetailsPage = ({ props }) => {
     setQuantity(selectedItem);
   };
 
-  if (!props.product) return <Loading />;
+  if (!props.product) return <Loading square />;
 
   return (
     <div className="p-product-details">

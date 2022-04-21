@@ -26,7 +26,7 @@
     background: $color-primary-violet;
     border-radius: 12px;
     transform: translate(-50%, -50%);
-    animation: loading 2s linear infinite;
+    animation: loading-square 2s linear infinite;
     perspective: 6000px;
     /* stylelint-disable-next-line selector-no-qualifying-type */
     & + div[class='a-footer'] {

@@ -1,4 +1,4 @@
-import Loading from 'components/atoms/loading/index';
+import Loading from 'components/atoms/loading';
 import Modal from 'components/molecules/modal';
 import ProductsList from 'components/organisms/products-list';
 import { useSession } from 'next-auth/client';

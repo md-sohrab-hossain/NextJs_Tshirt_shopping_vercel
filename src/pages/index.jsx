@@ -1,4 +1,4 @@
-import Loading from 'components/atoms/loading/index';
+import Loading from 'components/atoms/loading';
 import DashBoard from 'components/templates/dashboard';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';

@@ -1,5 +1,5 @@
 import Heading from 'components/atoms/heading';
-import Loading from 'components/atoms/loading/index';
+import Loading from 'components/atoms/loading';
 import Form from 'components/molecules/form';
 import { getSession } from 'next-auth/client';
 import React, { useCallback, useEffect, useState } from 'react';

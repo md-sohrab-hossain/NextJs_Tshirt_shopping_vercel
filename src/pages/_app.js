@@ -1,5 +1,5 @@
 //!👇 here we customize our page default behaviour
-import Loading from 'components/atoms/loading/index';
+import Loading from 'components/atoms/loading';
 import Layout from 'components/templates/layout';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';

@@ -1,5 +1,5 @@
 import Heading from 'components/atoms/heading';
-import Loading from 'components/atoms/loading/index';
+import Loading from 'components/atoms/loading';
 import Form from 'components/molecules/form';
 import { ROUTES } from 'constants/routes';
 import { getSession } from 'next-auth/client';

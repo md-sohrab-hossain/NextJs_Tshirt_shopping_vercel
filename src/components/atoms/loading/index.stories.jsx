@@ -1,5 +1,5 @@
 import React from 'react';
-import Loading from './';
+import Loading from '.';
 
 export default {
   title: 'components/atoms/Loading',
