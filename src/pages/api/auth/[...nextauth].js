@@ -1,8 +1,7 @@
+import dbConnect from 'Backend/config/dbConfig';
+import { User } from 'Backend/models/user';
 import NextAuth from 'next-auth';
 import Providers from 'next-auth/providers';
-
-import { User } from '../../../Backend/models/user';
-import dbConnect from '../../../Backend/config/dbConfig';
 
 export default NextAuth({
   providers: [

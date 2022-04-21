@@ -1,9 +1,7 @@
+import dbConnect from 'Backend/config/dbConfig';
+import { webhookCheckout } from 'Backend/controllers/paymentController';
+import onError from 'Backend/middlewares/errors';
 import nc from 'next-connect';
-import dbConnect from '../../../Backend/config/dbConfig';
-
-import { webhookCheckout } from '../../../Backend/controllers/paymentController';
-
-import onError from '../../../Backend/middlewares/errors';
 
 const handler = nc({ onError });
 

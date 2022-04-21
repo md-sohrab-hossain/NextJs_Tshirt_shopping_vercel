@@ -1,10 +1,8 @@
+import dbConnect from 'Backend/config/dbConfig';
+import { createNewProduct, getAllProductsAdmin } from 'Backend/controllers/productController';
+import { authorizeRoles, isAuthenticatedUser } from 'Backend/middlewares/auth';
+import onError from 'Backend/middlewares/errors';
 import nc from 'next-connect';
-import dbConnect from '../../../../Backend/config/dbConfig';
-
-import onError from '../../../../Backend/middlewares/errors';
-import { isAuthenticatedUser, authorizeRoles } from '../../../../Backend/middlewares/auth';
-
-import { createNewProduct, getAllProductsAdmin } from '../../../../Backend/controllers/productController';
 
 const handler = nc({ onError });
 

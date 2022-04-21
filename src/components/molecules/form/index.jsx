@@ -26,6 +26,8 @@ const Form = ({
   modifiers = 'login' | 'register' | 'forgot-password' | 'update-user' | 'update-profile' | 'create-new-product',
   password,
   hasPassword = false,
+  confirmPassword,
+  hasResetPassword = false,
   isForgotPassword = false,
   isPasswordRequired = false,
   price,
@@ -97,6 +99,24 @@ const Form = ({
               <a className="m-form__forgot-password">Forgot Password?</a>
             </Link>
           )}
+        </>
+      )}
+
+      {hasResetPassword && (
+        <>
+          <div className="m-form__reset-password">
+            <label htmlFor="confirm-password">
+              <span>Confirm Password</span>
+            </label>
+
+            <InputText
+              type="password"
+              name="confirm-password"
+              placeholder="Enter Password Again"
+              value={confirmPassword}
+              onChange={onChange}
+            />
+          </div>
         </>
       )}
 

@@ -1,11 +1,11 @@
+import dbConnect from 'Backend/config/dbConfig';
+import { deleteProduct, getSingleProduct, updateProductInfo } from 'Backend/controllers/productController';
+import { authorizeRoles, isAuthenticatedUser } from 'Backend/middlewares/auth';
+import onError from 'Backend/middlewares/errors';
 import nc from 'next-connect';
-import dbConnect from '../../../../Backend/config/dbConfig';
-import { getSingleProduct, updateProductInfo, deleteProduct } from '../../../../Backend/controllers/productController';
-import onError from '../../../../Backend/middlewares/errors';
 
 //?---------------------👇 here we add onError middleware
 const handler = nc({ onError });
-import { isAuthenticatedUser, authorizeRoles } from '../../../../Backend/middlewares/auth';
 
 dbConnect();
 

@@ -1,10 +1,8 @@
+import dbConnect from 'Backend/config/dbConfig';
+import { deleteUser, getUserDetails, updateUser } from 'Backend/controllers/authController';
+import { authorizeRoles, isAuthenticatedUser } from 'Backend/middlewares/auth';
+import onError from 'Backend/middlewares/errors';
 import nc from 'next-connect';
-import dbConnect from '../../../../Backend/config/dbConfig';
-import onError from '../../../../Backend/middlewares/errors';
-
-import { getUserDetails, updateUser, deleteUser } from '../../../../Backend/controllers/authController';
-
-import { isAuthenticatedUser, authorizeRoles } from '../../../../Backend/middlewares/auth';
 
 const handler = nc({ onError });
 

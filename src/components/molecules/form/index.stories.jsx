@@ -70,3 +70,11 @@ ForgotPassword.args = {
   btnMessage: 'Send Email',
   modifiers: 'forgot-password',
 };
+
+export const ResetPassword = Template.bind({});
+ResetPassword.args = {
+  hasPassword: true,
+  hasResetPassword: true,
+  children: <Heading>New Password</Heading>,
+  btnMessage: 'Set Password',
+};

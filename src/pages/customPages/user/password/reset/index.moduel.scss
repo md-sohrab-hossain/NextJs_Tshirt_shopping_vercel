@@ -1,0 +1,11 @@
+.p-reset-password {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 520px;
+
+  @include sp {
+    height: 600px;
+  }
+}
