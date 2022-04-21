@@ -10,6 +10,6 @@ export const ROUTES = {
   FORGOT_PASSWORD: '/customPages/user/password/forgot',
   PRODUCT_DETAILS: '/customPages/product/product-details',
   PRODUCT_DESIGN: '/customPages/product/product-design',
-  CREATE_NEW_PRODUCT: '/customPages/admin/products/createNew',
+  CREATE_NEW_PRODUCT: '/customPages/admin/products/product-create',
   MY_ORDERS: '/customPages/shopping',
 };

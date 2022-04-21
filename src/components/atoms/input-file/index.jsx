@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 // NOTE: --https://codes4education.com/custom-file-upload-button-in-html-css-javascript/
 // NOTE: --https://www.youtube.com/watch?v=WEJMYNK-rj4
 
-const InputFile = ({ dataText, name, accept = 'image/*', onChange }) => {
+const InputFile = ({ dataText, name, accept = 'image/*', multiple = false, onChange }) => {
   const componentClassName = mapModifiers('a-input-file');
   const className = `${componentClassName}`.trim();
 
@@ -24,7 +24,14 @@ const InputFile = ({ dataText, name, accept = 'image/*', onChange }) => {
   return (
     <div className={className}>
       <div className="a-input-file__container" data-text={dataText}>
-        <input name={name} type="file" accept={accept} onChange={onChange} className="a-input-file__container--input" />
+        <input
+          multiple={multiple}
+          name={name}
+          type="file"
+          accept={accept}
+          onChange={onChange}
+          className="a-input-file__container--input"
+        />
       </div>
     </div>
   );

@@ -45,6 +45,15 @@
     min-height: 45rem;
   }
 
+  &--create-new-product {
+    min-height: 48rem;
+
+    .a-heading {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+  }
+
   &--forgot-password {
     min-width: 40rem;
   }
@@ -52,7 +61,10 @@
   &__name,
   &__email,
   &__password,
+  &__price,
+  &__description,
   &__avatar,
+  &__multi-images,
   &__dropdown {
     width: 100%;
     padding: 0 2rem;
@@ -82,6 +94,15 @@
           border-radius: 50%;
         }
       }
+    }
+
+    &--preview {
+      display: flex;
+      flex-direction: row;
+      /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
+      flex-wrap: wrap;
+      width: 100%;
+      margin-top: 1rem;
     }
   }
 

@@ -2,6 +2,7 @@ import Button from 'components/atoms/button';
 import InputFile from 'components/atoms/input-file';
 import InputText from 'components/atoms/input-text';
 import Dropdown from 'components/atoms/react-select';
+import TextArea from 'components/atoms/text-area';
 import { ROUTES } from 'constants/routes';
 import { mapModifiers } from 'libs/component';
 import Image from 'next/image';
@@ -22,12 +23,18 @@ const Form = ({
   email,
   hasEmail = false,
   isEmailRequired = false,
-  modifiers = 'login' | 'register' | 'forgot-password' | 'update-user' | 'update-profile',
+  modifiers = 'login' | 'register' | 'forgot-password' | 'update-user' | 'update-profile' | 'create-new-product',
   password,
   hasPassword = false,
   isForgotPassword = false,
   isPasswordRequired = false,
+  price,
+  hasPrice = false,
+  description,
+  hasDescription = false,
   hasAvatar = false,
+  imagesPreview,
+  hasMultipleImages = false,
   isNewUser = false,
   hasDropdown = false,
   dropdownOptions,
@@ -51,7 +58,7 @@ const Form = ({
         <div className="m-form__name">
           <label htmlFor="name">
             {isNameRequired && <span className="m-form__name--required">*</span>}
-            <span>Full Name</span>
+            <span>Name</span>
           </label>
           <InputText type="text" id="name" placeholder="Enter Name" name="name" value={name} onChange={onChange} />
         </div>
@@ -92,6 +99,24 @@ const Form = ({
         </>
       )}
 
+      {hasPrice && (
+        <div className="m-form__price">
+          <label htmlFor="price">
+            <span>Price</span>
+          </label>
+          <InputText type="number" name="price" placeholder="Enter Price" value={price} onChange={onChange} />
+        </div>
+      )}
+
+      {hasDescription && (
+        <div className="m-form__description">
+          <label htmlFor="description">
+            <span>Description</span>
+          </label>
+          <TextArea name="description" placeholder="Enter Description" value={description} onChange={onChange} />
+        </div>
+      )}
+
       {hasAvatar && (
         <div className="m-form__avatar">
           <span className="m-form__avatar--required">*</span>
@@ -102,6 +127,29 @@ const Form = ({
             </div>
 
             <InputFile dataText="Choose Avatar" name="avatar" accept="image/*" onChange={onChange} />
+          </div>
+        </div>
+      )}
+
+      {hasMultipleImages && (
+        <div className="m-form__multi-images">
+          <label htmlFor="images">Images</label>
+          <div className="m-form__multi-images--details">
+            <InputFile multiple dataText="Choose Images" name="images" accept="image/*" onChange={onChange} />
+          </div>
+
+          <div className="m-form__multi-images--preview">
+            {imagesPreview?.map((img, indx) => (
+              <Image
+                key={indx}
+                draggable="false"
+                onError={handleOnError}
+                src={img}
+                alt="image"
+                height="50"
+                width="50"
+              />
+            ))}
           </div>
         </div>
       )}

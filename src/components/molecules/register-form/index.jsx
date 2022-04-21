@@ -8,7 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useCallback } from 'react';
 
-const avatarDefault = 'https://next-js-tshirt-shopping-7dltd6ofj-sajalkhan.vercel.app/images/default_avatar.jpg';
+const avatarDefault = '/images/default_avatar.jpg';
 
 const RegisterForm = ({
   loading,
@@ -22,8 +22,6 @@ const RegisterForm = ({
   onChange,
   onSubmit,
 }) => {
-  const { LOGIN } = ROUTES;
-
   const componentClassName = mapModifiers('m-register-form');
   const className = `${componentClassName}`.trim();
 
@@ -77,7 +75,7 @@ const RegisterForm = ({
       </div>
 
       {submitBtnMessage === 'Register' && (
-        <Link href={`${LOGIN}`}>
+        <Link href={`${ROUTES.LOGIN}`}>
           <a className="m-register-form__login">Already have an account?</a>
         </Link>
       )}

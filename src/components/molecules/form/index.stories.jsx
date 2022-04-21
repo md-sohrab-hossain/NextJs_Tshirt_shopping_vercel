@@ -52,6 +52,17 @@ UpdateUser.args = {
   modifiers: 'update-user',
 };
 
+export const NewProduct = Template.bind({});
+NewProduct.args = {
+  hasName: true,
+  hasPrice: true,
+  hasDescription: true,
+  hasMultipleImages: true,
+  children: <Heading>New Product</Heading>,
+  btnMessage: 'Create',
+  modifiers: 'create-new-product',
+};
+
 export const ForgotPassword = Template.bind({});
 ForgotPassword.args = {
   hasEmail: true,

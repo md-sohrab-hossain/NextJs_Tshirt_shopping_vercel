@@ -28,7 +28,7 @@ const LoginPage = () => {
     };
   }, [router.events]);
 
-  const onChange = useCallback(
+  const handleInputChanges = useCallback(
     e => {
       setUser({ ...user, [e.target.name]: e.target.value });
     },
@@ -67,7 +67,7 @@ const LoginPage = () => {
         isForgotPassword
         isNewUser
         btnMessage="Login"
-        onChange={onChange}
+        onChange={handleInputChanges}
         onSubmit={submitHandler}
       >
         <Heading large>Login</Heading>
