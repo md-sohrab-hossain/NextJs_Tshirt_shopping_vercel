@@ -34,6 +34,7 @@ const Form = ({
   hasDescription = false,
   hasAvatar = false,
   imagesPreview,
+  hasOldImagesPreview,
   hasMultipleImages = false,
   isNewUser = false,
   hasDropdown = false,
@@ -150,6 +151,19 @@ const Form = ({
                 width="50"
               />
             ))}
+
+            {!imagesPreview.length &&
+              hasOldImagesPreview?.map(img => (
+                <Image
+                  key={img.public_id}
+                  draggable="false"
+                  onError={handleOnError}
+                  src={img.url}
+                  alt="image"
+                  height="50"
+                  width="50"
+                />
+              ))}
           </div>
         </div>
       )}
