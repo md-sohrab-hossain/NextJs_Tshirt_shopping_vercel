@@ -1,4 +1,6 @@
-import RegisterForm from 'components/molecules/register-form';
+import Heading from 'components/atoms/heading';
+import Form from 'components/molecules/form';
+import { ROUTES } from 'constants/routes';
 import { getSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -25,7 +27,7 @@ export default function RegisterPage() {
   useEffect(() => {
     if (success) {
       toast.success('User register successfully!');
-      router.push('/customPages/user/login');
+      router.push(`${ROUTES.LOGIN}`);
     }
 
     if (error) {
@@ -68,7 +70,7 @@ export default function RegisterPage() {
         avatar,
       };
 
-      if (!userData.name || !userData.email || !userData.password) {
+      if (!userData.name || !userData.email || !userData.password || !userData.avatar) {
         toast.error('Please provide all required information !!');
         return;
       }
@@ -80,18 +82,26 @@ export default function RegisterPage() {
 
   return (
     <div className="p-register">
-      <RegisterForm
+      <Form
         loading={loading}
-        headingMessage="Join Us"
-        submitBtnMessage="Register"
+        btnMessage="Register"
+        hasName
         name={name}
+        isNameRequired
+        hasEmail
         email={email}
+        isEmailRequired
+        hasPassword
         password={password}
+        isPasswordRequired
+        hasAvatar
         onSubmit={submitHandler}
         imgSrc={avatarPreview}
         setImgSrc={setAvatarPreview}
         onChange={onChange}
-      />
+      >
+        <Heading large>Join Us</Heading>
+      </Form>
     </div>
   );
 }

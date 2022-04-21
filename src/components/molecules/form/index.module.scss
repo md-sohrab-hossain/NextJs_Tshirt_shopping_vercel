@@ -1,0 +1,111 @@
+.m-form {
+  $root: &;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 35rem;
+  max-width: 35rem;
+  min-height: 24rem;
+  max-height: 48rem;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: rgb(50 50 93 / 25%) 0 50px 100px -20px, rgb(0 0 0 / 30%) 0 30px 60px -30px,
+    rgb(10 37 64 / 35%) 0 -2px 6px 0 inset;
+
+  .a-heading {
+    margin-top: 3rem;
+  }
+
+  .a-input-text {
+    padding: 5px;
+    color: $color-base-pitch-black;
+    border-radius: 3px;
+  }
+
+  &--login {
+    min-height: 40rem;
+
+    .a-heading {
+      margin-top: 0;
+    }
+  }
+
+  &--forgot-password {
+    min-width: 40rem;
+  }
+
+  &__name,
+  &__email,
+  &__password,
+  &__avatar {
+    width: 100%;
+    padding: 0 2rem;
+    margin-top: 1rem;
+
+    &--required {
+      margin-right: 2px;
+      font-size: 1.4rem;
+      font-weight: xd-font-weight('medium');
+      color: $color-red-pigment;
+    }
+
+    &--details {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 5px;
+
+      &-img {
+        position: relative;
+        width: 5rem;
+        height: 4.5rem;
+        object-fit: cover;
+        margin-right: 5px;
+
+        img {
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+
+  &__forgot-password {
+    width: 100%;
+    padding-left: 2rem;
+    margin-top: 1px;
+    font-weight: xd-font-weight('medium');
+    color: $color-space-cadet;
+
+    &:hover {
+      color: $color-indigo;
+    }
+  }
+
+  &__button {
+    width: 100%;
+    padding: 1.5rem 2rem;
+  }
+
+  &__new-user {
+    font-size: 1.4rem;
+    font-weight: xd-font-weight('bold');
+    color: $color-space-cadet;
+
+    &:hover {
+      color: $color-indigo;
+    }
+  }
+
+  &__login {
+    margin-bottom: 5rem;
+    font-size: 1.4rem;
+    font-weight: xd-font-weight('bold');
+    color: $color-space-cadet;
+
+    &:hover {
+      color: $color-indigo;
+    }
+  }
+}

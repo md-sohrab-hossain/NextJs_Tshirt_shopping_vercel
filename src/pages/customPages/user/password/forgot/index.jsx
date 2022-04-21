@@ -1,5 +1,6 @@
-import ForgotPassword from 'components/molecules/forgot-password';
-import React, { useEffect, useState } from 'react';
+import Heading from 'components/atoms/heading';
+import Form from 'components/molecules/form';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { clearErrors, forgotPassword } from 'redux/actions/userAction';
@@ -19,6 +20,13 @@ const ForgotPasswordPage = () => {
     message && toast.success(message);
   }, [dispatch, message, error]);
 
+  const onChange = useCallback(
+    e => {
+      setEmail(e.target.value);
+    },
+    [email]
+  );
+
   const submitHandler = e => {
     e.preventDefault();
     const userData = { email };
@@ -32,12 +40,17 @@ const ForgotPasswordPage = () => {
 
   return (
     <div className="p-forgot-password">
-      <ForgotPassword
-        onSubmit={submitHandler}
+      <Form
+        modifiers="forgot-password"
         loading={loading}
+        hasEmail
         email={email}
-        onChange={e => setEmail(e.target.value)}
-      />
+        btnMessage="Send Email"
+        onChange={onChange}
+        onSubmit={submitHandler}
+      >
+        <Heading large>Forgot Password</Heading>
+      </Form>
     </div>
   );
 };

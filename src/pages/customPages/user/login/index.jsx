@@ -1,14 +1,20 @@
+import Heading from 'components/atoms/heading';
 import Loading from 'components/atoms/loading/index';
-import Login from 'components/molecules/login-form';
+import Form from 'components/molecules/form';
 import { getSession, signIn } from 'next-auth/client';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 const LoginPage = () => {
   const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+  });
+
+  const { email, password } = user;
   const [loading, setLoading] = useState(() => false);
   const [isRoutesChange, setIsRoutesChange] = useState(() => false);
 
@@ -21,6 +27,13 @@ const LoginPage = () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router.events]);
+
+  const onChange = useCallback(
+    e => {
+      setUser({ ...user, [e.target.name]: e.target.value });
+    },
+    [user]
+  );
 
   const submitHandler = async e => {
     e.preventDefault();
@@ -44,14 +57,21 @@ const LoginPage = () => {
 
   return (
     <div className="p-login">
-      <Login
-        email={email}
-        setEmail={setEmail}
-        password={password}
-        setPassword={setPassword}
+      <Form
+        modifiers="login"
         loading={loading}
+        hasEmail
+        email={email}
+        hasPassword
+        password={password}
+        isForgotPassword
+        isNewUser
+        btnMessage="Login"
+        onChange={onChange}
         onSubmit={submitHandler}
-      />
+      >
+        <Heading large>Login</Heading>
+      </Form>
       {isRoutesChange && <Loading overlay />}
     </div>
   );
