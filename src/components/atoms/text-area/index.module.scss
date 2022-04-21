@@ -1,0 +1,18 @@
+.a-text-area {
+  width: 100%;
+  min-height: 3rem;
+  max-height: auto;
+  padding: 0.5rem 1rem;
+  margin: 2rem;
+  font-size: 1.4rem;
+  color: $color-grey-6;
+  resize: none;
+  border: 1.5px solid $color-base-lightgray;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: box-shadow 0.1s ease;
+
+  &:focus {
+    box-shadow: 0 0 0 1.6px $color-secondary-blue;
+  }
+}
