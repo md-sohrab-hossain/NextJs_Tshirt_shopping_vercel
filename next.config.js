@@ -1,4 +1,3 @@
-const globImporter = require('node-sass-glob-importer');
 const path = require('path');
 
 module.exports = {
