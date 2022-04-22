@@ -2,6 +2,7 @@ import Heading from 'components/atoms/heading';
 import Form from 'components/molecules/form';
 import { ROUTES } from 'constants/routes';
 import { getSession } from 'next-auth/client';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,7 +10,11 @@ import { toast } from 'react-toastify';
 import { clearErrors, createNewProduct } from 'redux/actions/productAction';
 import { NEW_PRODUCT_RESET } from 'redux/types/productsType';
 
+const defaultImg = '/images/white_tshirt.png';
+const DynamicCustomImageEditor = dynamic(() => import('components/molecules/image-editor'), { ssr: false });
+
 const CreateNewProductPage = () => {
+  const [imgSrc, setImgSrc] = useState(defaultImg);
   const [productInfo, setProductInfo] = useState({
     name: '',
     price: '',
@@ -41,17 +46,23 @@ const CreateNewProductPage = () => {
     }
   }, [dispatch, error, success]);
 
+  useEffect(() => {
+    if (imgSrc.match(/\/images\/white_tshirt/g)) return;
+    setImages(item => [...item, imgSrc]);
+    setImagesPreview(item => [...item, imgSrc]);
+  }, [imgSrc]);
+
   const handleInputChanges = useCallback(
     e => {
       var pattern = /image-*/;
       const file = e.target?.files?.[0];
       if (e.target?.files?.[0] && !file.type.match(pattern)) return;
 
-      setImages([]);
-      setImagesPreview([]);
-
       if (e.target.name === 'images') {
+        setImages([]);
+        setImagesPreview([]);
         const files = Array.from(e.target.files);
+
         files.forEach(file => {
           const reader = new FileReader();
 
@@ -90,20 +101,26 @@ const CreateNewProductPage = () => {
 
   return (
     <div className="p-create-new-product">
-      <Form
-        loading={loading}
-        hasName
-        hasPrice
-        hasDescription
-        hasMultipleImages
-        btnMessage="Create"
-        modifiers="create-new-product"
-        imagesPreview={imagesPreview}
-        onChange={handleInputChanges}
-        onSubmit={submitHandler}
-      >
-        <Heading>New Product</Heading>
-      </Form>
+      <div className="p-create-new-product__img-preview">
+        <DynamicCustomImageEditor setImgSrc={setImgSrc} />
+      </div>
+
+      <div className="p-create-new-product__form">
+        <Form
+          loading={loading}
+          hasName
+          hasPrice
+          hasDescription
+          hasMultipleImages
+          btnMessage="Create"
+          modifiers="create-new-product"
+          imagesPreview={imagesPreview}
+          onChange={handleInputChanges}
+          onSubmit={submitHandler}
+        >
+          <Heading>New Product</Heading>
+        </Form>
+      </div>
     </div>
   );
 };

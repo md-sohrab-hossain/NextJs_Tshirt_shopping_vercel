@@ -1,21 +1,18 @@
 import ProductDesign from 'components/organisms/product-design';
 import { QUANTITY, SIZE } from 'constants/options';
 import React, { useState } from 'react';
-const defaultImg =
-  'https://res.cloudinary.com/sajal-cnq/image/upload/v1624538021/tshirt/products/ezafikjm5prqocue1fgl.png';
+import { toast } from 'react-toastify';
+const defaultImg = '/images/white_tshirt.png';
 
 const ProductDesignPage = () => {
   const [imgSrc, setImgSrc] = useState(defaultImg);
 
-  const handleQuantity = quantity => {
-    console.log('quantity-- ', quantity);
-  };
+  const handleSize = size => {};
+  const handleQuantity = quantity => {};
 
-  const handleSize = size => {
-    console.log('size-- ', size);
+  const handleOrder = () => {
+    return toast.warning('This feature is under development!');
   };
-
-  const handleOrder = () => {};
 
   return (
     <div className="p-product-design">
