@@ -1,16 +1,24 @@
+import { useGetProductDetails } from 'api/useGetProductDetails';
 import Loading from 'components/atoms/loading';
 import ProductDetails from 'components/organisms/product-details';
 import { QUANTITY } from 'constants/options';
+import { useGetAbsoluteUrl } from 'libs/utils';
+import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { clearErrors, getProductDetails } from 'redux/actions/productAction';
+import { clearErrors } from 'redux/actions/productAction';
 import { NewProductOrder } from 'redux/actions/productOrderAction';
 
-const ProductDetailsPage = ({ props }) => {
+const ProductDetailsPage = () => {
+  const router = useRouter();
+
   const dispatch = useDispatch();
+  const absoluteUrl = useGetAbsoluteUrl();
   const [quantity, setQuantity] = useState(null);
-  const { price, ratings, numOfReviews, name, error, description, images, _id } = props.product;
+
+  const { data, isLoading } = useGetProductDetails(absoluteUrl, router.query.id);
+  const { price, ratings, numOfReviews, name, error, description, images, _id } = data || {};
 
   const { error: orderError, loading, success } = useSelector(state => state.productOrder);
 
@@ -53,7 +61,7 @@ const ProductDetailsPage = ({ props }) => {
     setQuantity(selectedItem);
   };
 
-  if (!props.product) return <Loading square />;
+  if (isLoading) return <Loading square />;
 
   return (
     <div className="p-product-details">
@@ -72,17 +80,6 @@ const ProductDetailsPage = ({ props }) => {
       />
     </div>
   );
-};
-
-ProductDetailsPage.getInitialProps = async ({ req, query, store }) => {
-  await store.dispatch(getProductDetails(req, query?.id));
-
-  const item = store.getState();
-  const product = item?.getProductDetails?.product;
-
-  return {
-    props: { product },
-  };
 };
 
 export default ProductDetailsPage;

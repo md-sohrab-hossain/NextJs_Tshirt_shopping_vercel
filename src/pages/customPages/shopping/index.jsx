@@ -1,30 +1,30 @@
+import { useGetOrderList } from 'api/useGetOrderList';
 import axios from 'axios';
 import getStripe from 'Backend/utils/getStripe';
 import Loading from 'components/atoms/loading';
 import Modal from 'components/molecules/modal';
 import OrderList from 'components/molecules/order-item-list';
+import { useGetAbsoluteUrl } from 'libs/utils';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { getMyOrders, NewProductOrder, removeItems } from 'redux/actions/productOrderAction';
+import { NewProductOrder, removeItems } from 'redux/actions/productOrderAction';
 
 const CheckoutPage = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const [totalPrice, setTotalPrice] = useState(() => 0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [removeProduct, setRemoveProduct] = useState(null);
+  const [isShowLoading, setIsShowLoading] = useState(() => false);
   const [isRoutesChange, setIsRoutesChange] = useState(() => false);
 
-  const { order } = useSelector(state => state.getMyOrderList);
+  const absoluteUrl = useGetAbsoluteUrl();
+  const { data: orderList, isLoading, refetch } = useGetOrderList(absoluteUrl);
+
   const { success } = useSelector(state => state.productOrder);
   const { success: remove } = useSelector(state => state.removeItem);
-
-  const getRecentOrder = useCallback(() => {
-    dispatch(getMyOrders());
-  }, [success, remove]);
-
-  let totalPrice = 0;
 
   useEffect(() => {
     const handleRouteChange = () => setIsRoutesChange(false);
@@ -40,16 +40,23 @@ const CheckoutPage = () => {
   }, []);
 
   useEffect(async () => {
-    if (success) getRecentOrder();
-    if (remove) getRecentOrder();
+    if (success || remove) {
+      refetch();
+      setIsShowLoading(false);
+    }
+
+    remove && toast.warning('🚀Order remove successfully!!');
   }, [success, remove]);
 
-  const totalOrder = order?.orders;
-  if (totalOrder?.length) {
-    totalPrice = totalOrder.reduce((sum, number) => {
-      return sum + number.totalPrice;
-    }, 0);
-  }
+  useEffect(() => {
+    const totalOrder = orderList?.orders;
+    if (totalOrder?.length) {
+      const price = totalOrder.reduce((sum, number) => {
+        return sum + number.totalPrice;
+      }, 0);
+      setTotalPrice(price);
+    }
+  }, [orderList]);
 
   const handleCheckout = async (orderImg, priceTotal) => {
     try {
@@ -77,7 +84,7 @@ const CheckoutPage = () => {
       images,
       paymentInfo,
     };
-
+    setIsShowLoading(true);
     dispatch(NewProductOrder(order));
   }, []);
 
@@ -91,12 +98,12 @@ const CheckoutPage = () => {
     isRemoved && dispatch(removeItems(id));
   }, []);
 
-  if (!order) return <Loading square />;
+  if (isLoading) return <Loading square />;
   return (
     <>
       <div className="p-shopping">
         <OrderList
-          orders={order?.orders}
+          orders={orderList?.orders}
           totalPrice={totalPrice}
           handleCheckout={handleCheckout}
           handleRemove={handleRemove}
@@ -106,7 +113,7 @@ const CheckoutPage = () => {
       {isModalOpen && (
         <Modal message="Do you want to remove this item?" onClick={handleModal} removeProductId={removeProduct} />
       )}
-      {isRoutesChange && <Loading overlay />}
+      {(isRoutesChange || isShowLoading) && <Loading overlay />}
     </>
   );
 };

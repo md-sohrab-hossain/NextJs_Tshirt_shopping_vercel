@@ -1,79 +1,46 @@
+import { useGetAllProducts } from 'api/useGetAllProducts';
 import Loading from 'components/atoms/loading';
 import DashBoard from 'components/templates/dashboard';
-import { useRouter } from 'next/router';
+import { useGetAbsoluteUrl } from 'libs/utils';
 import React, { useEffect, useState } from 'react';
-import { getAllProducts } from 'redux/actions/productAction';
 
-const App = ({ props }) => {
-  const router = useRouter();
-  const [isRoutesChange, setIsRoutesChange] = useState(() => false);
-  const [allProduct, setAllproducts] = useState(() => props.products);
-  const { loading, products, productsCount } = allProduct;
+const App = () => {
+  const [pageNumber, setPageNumber] = useState(() => 1);
+  const [allProducts, setAllproducts] = useState(() => []);
 
-  let { page = 1 } = router.query;
-  page = Number(page);
+  const absoluteUrl = useGetAbsoluteUrl();
+  const { data, isLoading } = useGetAllProducts(absoluteUrl, pageNumber);
 
-  const handlePagination = pageNumber => {
-    setIsRoutesChange(true);
-    window.location.href = `/?page=${pageNumber}`;
-  };
+  useEffect(() => {
+    !isLoading && setAllproducts(data.products);
+  }, [data, isLoading]);
 
   const searchItems = e => {
     if (e.target.value.trim() == '') {
-      setAllproducts({
-        ...allProduct,
-        products: props.products.products,
-      });
+      setAllproducts(data.products);
     } else {
-      const totalProducts = products;
-      const filterProduct = totalProducts.filter(item =>
+      const productsList = data.products;
+      const filterProduct = productsList.filter(item =>
         item.name.toLowerCase().includes(e.target.value.trim().toLowerCase())
       );
-
-      setAllproducts({
-        ...allProduct,
-        products: filterProduct.length ? filterProduct : props.products.products,
-      });
+      setAllproducts(filterProduct.length ? filterProduct : data.products);
     }
   };
 
-  useEffect(() => {
-    const handleRouteChange = () => setIsRoutesChange(false);
-
-    router.events.on('routeChangeStart', handleRouteChange);
-    router.events.on('routeChangeError', handleRouteChange);
-
-    return () => {
-      router.events.off('routeChangeStart', handleRouteChange);
-      router.events.off('routeChangeError', handleRouteChange);
-    };
-  }, [router.events]);
-
-  if (loading) return <Loading square />;
+  const handlePagination = pageNumber => setPageNumber(pageNumber);
+  if (isLoading) return <Loading square />;
 
   return (
     <>
       <DashBoard
-        products={products}
+        products={allProducts}
         onChange={handlePagination}
-        totalProducts={productsCount}
-        activePage={page}
+        totalProducts={data.productsCount}
+        activePage={pageNumber}
         searchItems={searchItems}
       />
-      {isRoutesChange && <Loading overlay />}
     </>
   );
-};
-
-App.getInitialProps = async ({ req, query, store }) => {
-  await store.dispatch(getAllProducts(req, query.page));
-
-  const product = store.getState();
-  const products = product.getAllProducts;
-
-  return {
-    props: { products },
-  };
 };
 
 export default App;

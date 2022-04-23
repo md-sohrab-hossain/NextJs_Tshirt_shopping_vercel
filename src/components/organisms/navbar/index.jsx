@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useRef, useState } from 'react';
 
-const Navbar = ({ products, user, loading, handleLogin, handleLogout, handleCheckout }) => {
+const Navbar = ({ products, user, handleLogin, handleLogout, handleCheckout }) => {
   const router = useRouter();
   const menuListRef = useRef();
   const cartItemsListRef = useRef();
@@ -47,12 +47,11 @@ const Navbar = ({ products, user, loading, handleLogin, handleLogout, handleChec
               imgUrl={user?.avatar?.url}
             />
           ) : (
-            !loading && (
-              <Button size="small" modifiers="icon-text" icon="login" onClick={handleLogin}>
-                Login
-              </Button>
-            )
+            <Button size="small" modifiers="icon-text" icon="login" onClick={handleLogin}>
+              Login
+            </Button>
           )}
+
           <ShoppingCart onClick={() => setIsOpenCart(!isOpenCart)} products={products} />
           {isOpenCart && <ShoppingCartItemsList onClick={handleCheckout} products={products} ref={cartItemsListRef} />}
         </div>
