@@ -16,3 +16,10 @@ export const useGetAbsoluteUrl = () => {
 
   return state;
 };
+
+export const ScrollTop = ({ href }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [href]);
+  return null;
+};

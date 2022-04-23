@@ -1,3 +1,4 @@
+import { useGetUserDetails } from 'api/useGetUserDetails';
 import Heading from 'components/atoms/heading';
 import Loading from 'components/atoms/loading';
 import Form from 'components/molecules/form';
@@ -22,17 +23,17 @@ const userProfilePage = () => {
 
   const { name, email, password } = user;
 
-  const { user: loadedUser, loading } = useSelector(state => state.loadedUser);
-
-  const { error, isUpdated, loading: isLoading } = useSelector(state => state.user);
+  const { data: userDetails, isLoading, refetch } = useGetUserDetails();
+  const { error, isUpdated } = useSelector(state => state.user);
 
   useEffect(() => {
-    if (loadedUser) {
+    if (userDetails) {
       setUser({
-        name: loadedUser.name,
-        email: loadedUser.email,
+        name: userDetails?.user.name,
+        email: userDetails?.user.email,
+        password: '',
       });
-      setAvatarPreview(loadedUser.avatar.url);
+      setAvatarPreview(userDetails?.user.avatar.url);
     }
 
     if (error) {
@@ -41,10 +42,11 @@ const userProfilePage = () => {
     }
 
     if (isUpdated) {
+      refetch();
       dispatch({ type: UPDATE_PROFILE_RESET });
       toast.success('Profile Update Successfully!');
     }
-  }, [isUpdated, error, loadedUser]);
+  }, [error, isUpdated, userDetails]);
 
   const onChange = useCallback(
     e => {
@@ -90,7 +92,7 @@ const userProfilePage = () => {
     [user, avatar, avatarPreview]
   );
 
-  if (loading) return <Loading square />;
+  if (isLoading) return <Loading square />;
 
   return (
     <div className="p-profile">
