@@ -3,11 +3,14 @@ import Loading from 'components/atoms/loading';
 import Layout from 'components/templates/layout';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { Provider } from 'react-redux';
 import { initStore, wrapper } from 'redux/store';
 import 'styles/index.scss';
 
 const store = initStore();
+const queryClient = new QueryClient();
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const [isRoutesChange, setIsRoutesChange] = useState(() => false);
@@ -29,12 +32,15 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
-    <Provider store={store}>
-      <Layout>
-        <Component {...pageProps} />
-        {isRoutesChange && <Loading overlay />}
-      </Layout>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <Layout>
+          <Component {...pageProps} />
+          {isRoutesChange && <Loading overlay />}
+        </Layout>
+      </Provider>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
 }
 

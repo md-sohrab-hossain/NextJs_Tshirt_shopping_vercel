@@ -1,4 +1,6 @@
 import * as NextImage from 'next/image';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import '../src/styles/index.scss';
 
 // Storybook can't load static path issue: https://dev.to/jonasmerlin/how-to-use-the-next-js-image-component-in-storybook-1415
@@ -7,6 +9,17 @@ const OriginalNextImage = NextImage.default;
 Object.defineProperty(NextImage, 'default', {
   configurable: true,
   value: props => <OriginalNextImage {...props} unoptimized />,
+});
+
+// configure react-query with storybook
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+      staleTime: Infinity,
+    },
+  },
 });
 
 const MINIMAL_VIEWPORTS = {
@@ -77,3 +90,12 @@ export const parameters = {
     },
   },
 };
+
+export const decorators = [
+  story => (
+    <QueryClientProvider client={queryClient}>
+      {story()}
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  ),
+];
