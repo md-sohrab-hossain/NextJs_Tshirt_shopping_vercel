@@ -1,6 +1,7 @@
 //!👇 here we customize our page default behaviour
 import Loading from 'components/atoms/loading';
 import Layout from 'components/templates/layout';
+import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -13,6 +14,7 @@ const store = initStore();
 const queryClient = new QueryClient();
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
+  const session = useSession();
   const [isRoutesChange, setIsRoutesChange] = useState(() => false);
 
   useEffect(() => {
@@ -34,7 +36,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <Layout>
+        <Layout userDetails={session[0]?.user}>
           <Component {...pageProps} />
           {isRoutesChange && <Loading overlay />}
         </Layout>

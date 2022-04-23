@@ -8,6 +8,7 @@ const fetOrderList = Url => {
 
 export const useGetOrderList = Url => {
   return useQuery(['productOrders'], () => fetOrderList(Url), {
+    enabled: false,
     staleTime: 5000, // stel time used for stop recall api request
     refetchOnMount: false,
     refetchOnWindowFocus: false,
