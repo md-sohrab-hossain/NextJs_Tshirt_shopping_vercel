@@ -6,7 +6,7 @@ const fetchProductsData = (Url, pageNumber) => {
   return axios.get(link);
 };
 
-export const useGetAllProducts = (Url, pageNumber = 1) => {
+export const useGetProductsList = (Url, pageNumber = 1) => {
   return useQuery(['products', pageNumber], () => fetchProductsData(Url, pageNumber), {
     staleTime: 5000, // stel time used for stop recall api request
     refetchOnMount: false,

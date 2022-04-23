@@ -1,4 +1,4 @@
-import { useGetAllProducts } from 'api/useGetAllProducts';
+import { useGetProductsList } from 'api/useGetProductsList';
 import Loading from 'components/atoms/loading';
 import DashBoard from 'components/templates/dashboard';
 import { useGetAbsoluteUrl } from 'libs/utils';
@@ -9,7 +9,7 @@ const App = () => {
   const [allProducts, setAllproducts] = useState(() => []);
 
   const absoluteUrl = useGetAbsoluteUrl();
-  const { data, isLoading } = useGetAllProducts(absoluteUrl, pageNumber);
+  const { data, isLoading } = useGetProductsList(absoluteUrl, pageNumber);
 
   useEffect(() => {
     !isLoading && setAllproducts(data.products);
