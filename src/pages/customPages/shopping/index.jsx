@@ -46,6 +46,8 @@ const CheckoutPage = () => {
     }
 
     remove && toast.warning('🚀Order remove successfully!!');
+
+    return () => setIsShowLoading(false);
   }, [success, remove]);
 
   useEffect(() => {

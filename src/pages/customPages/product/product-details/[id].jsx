@@ -1,48 +1,28 @@
+import { useGetOrderList } from 'api/useGetOrderList';
 import { useGetProductDetails } from 'api/useGetProductDetails';
+import { usePostNewOrder } from 'api/usePostNewOrder';
 import Loading from 'components/atoms/loading';
 import ProductDetails from 'components/organisms/product-details';
 import { QUANTITY } from 'constants/options';
 import { useGetAbsoluteUrl } from 'libs/utils';
 import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
-import { clearErrors } from 'redux/actions/productAction';
-import { NewProductOrder } from 'redux/actions/productOrderAction';
 
 const ProductDetailsPage = () => {
   const router = useRouter();
-
-  const dispatch = useDispatch();
-  const absoluteUrl = useGetAbsoluteUrl();
   const [quantity, setQuantity] = useState(null);
+  const { mutate: newProductOrder } = usePostNewOrder();
 
-  const { data, isLoading } = useGetProductDetails(absoluteUrl, router.query.id);
-  const { price, ratings, numOfReviews, name, error, description, images, _id } = data || {};
+  const absoluteUrl = useGetAbsoluteUrl();
+  const { refetch } = useGetOrderList(absoluteUrl);
 
-  const { error: orderError, loading, success } = useSelector(state => state.productOrder);
-
-  useEffect(() => {
-    if (success) {
-      toast.success('Product Added Successfully!');
-    }
-  }, [success]);
-
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-    }
-    if (orderError) {
-      toast.error(orderError);
-    }
-    dispatch(clearErrors());
-  }, [orderError, error]);
+  const { data: productDetails, isLoading } = useGetProductDetails(absoluteUrl, router.query.id);
+  const { price, ratings, numOfReviews, name, description, images, _id } = productDetails || {};
 
   const handleOrder = useCallback(() => {
-    if (!quantity) {
-      toast.warning('Please Select Quantity!');
-      return;
-    }
+    if (!quantity) return toast.warning('Please Select Quantity!');
+
     const order = {
       product: _id,
       quantity,
@@ -54,19 +34,22 @@ const ProductDetailsPage = () => {
       },
     };
 
-    dispatch(NewProductOrder(order));
+    newProductOrder(order, {
+      onSuccess: ({ data }) => {
+        refetch();
+        toast.success(data.message);
+      },
+      onError: ({ data }) => toast.error(data.message),
+    });
   }, [quantity]);
 
-  const handleQuantity = selectedItem => {
-    setQuantity(selectedItem);
-  };
-
+  const handleQuantity = selectedItem => setQuantity(selectedItem);
   if (isLoading) return <Loading square />;
 
   return (
     <div className="p-product-details">
       <ProductDetails
-        loading={loading}
+        loading={isLoading}
         images={images}
         brandName={name}
         price={price}
