@@ -83,8 +83,7 @@ const userProfilePage = () => {
       };
 
       if (!userData.name || !userData.email || !userData.password) {
-        toast.error('Please provide all required information !!');
-        return;
+        return toast.error('Please provide all required information !!');
       }
 
       dispatch(updateProfile(userData));
