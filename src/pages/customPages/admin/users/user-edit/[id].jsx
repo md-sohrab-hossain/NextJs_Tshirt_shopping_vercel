@@ -1,3 +1,6 @@
+import { useGetUserDetails } from 'api/useGetUserDetails';
+import { useGetUserDetailsById } from 'api/useGetUserDetailsById';
+import { usePutUserInfo } from 'api/usePutUserInfo';
 import Heading from 'components/atoms/heading';
 import Loading from 'components/atoms/loading';
 import Form from 'components/molecules/form';
@@ -6,53 +9,32 @@ import { ROUTES } from 'constants/routes';
 import { getSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { clearErrors, getUserDetails, updateUser } from 'redux/actions/userAction';
-import { UPDATE_USER_RESET } from 'redux/types/userTypes';
 
 const UpdateUserPage = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isUpdate, setIsUpdate] = useState(false);
   const [userInfo, setUserInfo] = useState(() => ({
     name: '',
     email: '',
     role: '',
   }));
 
-  const { name, email, role } = userInfo;
-  const dispatch = useDispatch();
   const router = useRouter();
-
-  const { error, isUpdated } = useSelector(state => state.user);
-  const { user, loading } = useSelector(state => state.userDetails);
   const userId = router.query.id;
+  const { name, email, role } = userInfo;
+
+  const { refetch } = useGetUserDetails();
+  const { mutate: updateUserInfo } = usePutUserInfo();
+  const { data: userData, isSuccess, isLoading } = useGetUserDetailsById(userId);
 
   useEffect(() => {
-    if (user && user._id !== userId) {
-      dispatch(getUserDetails(userId));
-    } else {
+    if (isSuccess) {
+      const { user } = userData;
       setUserInfo({ ...userInfo, name: user.name, email: user.email, role: user.role });
     }
+  }, [userData, isSuccess]);
 
-    if (error) {
-      toast.error(error);
-      setIsLoading(false);
-      dispatch(clearErrors());
-    }
-
-    if (isUpdated) {
-      setIsLoading(false);
-      router.push(`${ROUTES.ADMIN_USERS}`);
-      dispatch({ type: UPDATE_USER_RESET });
-    }
-  }, [dispatch, isUpdated, userId, user, error]);
-
-  const handleUserInfo = useCallback(
-    e => {
-      setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
-    },
-    [userInfo]
-  );
+  const handleUserInfo = useCallback(e => setUserInfo({ ...userInfo, [e.target.name]: e.target.value }), [userInfo]);
 
   const handleDropdownOption = selectedValue => {
     setUserInfo({ ...userInfo, role: selectedValue });
@@ -60,7 +42,7 @@ const UpdateUserPage = () => {
 
   const submitHandler = e => {
     e.preventDefault();
-    setIsLoading(true);
+    setIsUpdate(true);
 
     const userData = {
       name,
@@ -69,20 +51,33 @@ const UpdateUserPage = () => {
     };
 
     if (!userData.name || !userData.email || !userData.role) {
-      setIsLoading(false);
-      toast.error('Please provide all the necessary information!');
-      return;
+      setIsUpdate(false);
+      return toast.error('Please provide all the necessary information!');
     }
 
-    dispatch(updateUser(user._id, userData));
+    updateUserInfo(
+      { data: [userId, userData] },
+      {
+        onSuccess: ({ data }) => {
+          refetch();
+          setIsUpdate(false);
+          toast.success(data.message);
+          router.push(`${ROUTES.ADMIN_USERS}`);
+        },
+        onError: () => {
+          setIsUpdate(false);
+          toast.error('Something went wrong!!');
+        },
+      }
+    );
   };
 
-  if (loading) return <Loading square />;
+  if (isLoading) return <Loading square />;
 
   return (
     <div className="p-update-user">
       <Form
-        loading={isLoading}
+        loading={isUpdate}
         hasName
         name={name}
         hasEmail
@@ -92,7 +87,7 @@ const UpdateUserPage = () => {
         modifiers="update-user"
         dropdownOptions={ROLE}
         handleDropdownOption={handleDropdownOption}
-        selectedDropdownValue={user.role}
+        selectedDropdownValue={userData?.user.role}
         onChange={handleUserInfo}
         onSubmit={submitHandler}
       >

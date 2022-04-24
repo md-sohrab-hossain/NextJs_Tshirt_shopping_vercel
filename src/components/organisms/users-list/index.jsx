@@ -1,14 +1,12 @@
 import Icon from 'components/atoms/icon';
 import Table from 'components/atoms/table';
 import { ALL_USERS_TABLE_COLUMN } from 'constants/options';
-import { ROUTES } from 'constants/routes';
 import { mapModifiers } from 'libs/component';
 import { formatLocalDateString } from 'libs/utils';
 import Head from 'next/head';
-import Link from 'next/link';
 import React from 'react';
 
-const UsersList = ({ users, handleRemove }) => {
+const UsersList = ({ users, handleRemove, handleEdit }) => {
   const componentClassName = mapModifiers('o-users-list');
   const className = `${componentClassName}`.trim();
 
@@ -31,12 +29,7 @@ const UsersList = ({ users, handleRemove }) => {
               <td>{item.role}</td>
               <td>{formatLocalDateString(item.createdAt)}</td>
               <td>
-                <Link href={`${ROUTES.ADMIN_USER_EDIT}/${item._id}`}>
-                  <a>
-                    <Icon name="edit" />
-                  </a>
-                </Link>
-
+                <Icon name="edit" onClick={() => handleEdit && handleEdit(item._id)} />
                 <Icon name="delete" onClick={() => handleRemove && handleRemove(item._id)} />
               </td>
             </tr>

@@ -3,17 +3,24 @@ import { useGetUsersList } from 'api/useGetUsersList';
 import Loading from 'components/atoms/loading';
 import Modal from 'components/molecules/modal';
 import UsersList from 'components/organisms/users-list';
+import { ROUTES } from 'constants/routes';
 import { getSession } from 'next-auth/client';
+import { useRouter } from 'next/router';
 import React, { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 
 const UserListPage = () => {
+  const router = useRouter();
   const [isDeleted, setIsDeleted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [removeProduct, setRemoveProduct] = useState(null);
 
   const { data: usersList, isLoading, refetch } = useGetUsersList();
   const { mutate: removeUser } = useDeleteUser();
+
+  const handleEdit = useCallback(id => {
+    router.push(`${ROUTES.ADMIN_USER_EDIT}/${id}`);
+  }, []);
 
   const handleRemove = useCallback(id => {
     setRemoveProduct(id);
@@ -43,7 +50,7 @@ const UserListPage = () => {
 
   return (
     <div className="p-users-list">
-      <UsersList users={usersList?.users} handleRemove={handleRemove} />
+      <UsersList users={usersList?.users} handleRemove={handleRemove} handleEdit={handleEdit} />
       {isModalOpen && (
         <Modal message="Do you want to remove this item?" onClick={handleModal} removeProductId={removeProduct} />
       )}
