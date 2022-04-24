@@ -1,4 +1,3 @@
-import Heading from 'components/atoms/heading';
 import Icon from 'components/atoms/icon';
 import Table from 'components/atoms/table';
 import { ALL_USERS_TABLE_COLUMN } from 'constants/options';
@@ -9,7 +8,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 
-const UsersList = ({ users, totalUsers, handleRemove }) => {
+const UsersList = ({ users, handleRemove }) => {
   const componentClassName = mapModifiers('o-users-list');
   const className = `${componentClassName}`.trim();
 
@@ -20,8 +19,6 @@ const UsersList = ({ users, totalUsers, handleRemove }) => {
       </Head>
 
       <div className={className}>
-        <Heading>{totalUsers} Products</Heading>
-
         <Table tHead={ALL_USERS_TABLE_COLUMN}>
           {users?.map(item => (
             <tr key={item._id}>

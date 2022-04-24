@@ -1,43 +1,19 @@
+import { useDeleteUser } from 'api/useDeleteUser';
+import { useGetUsersList } from 'api/useGetUsersList';
 import Loading from 'components/atoms/loading';
 import Modal from 'components/molecules/modal';
 import UsersList from 'components/organisms/users-list';
-import { ROUTES } from 'constants/routes';
 import { getSession } from 'next-auth/client';
-import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
-import { clearErrors, deleteUser, getAdminUsers } from 'redux/actions/userAction';
-import { DELETE_USER_RESET } from 'redux/types/userTypes';
 
 const UserListPage = () => {
-  const router = useRouter();
-  const dispatch = useDispatch();
+  const [isDeleted, setIsDeleted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [removeProduct, setRemoveProduct] = useState(null);
 
-  const { loading, error, users } = useSelector(state => state.allUsers);
-  const { error: deleteError, isDeleted } = useSelector(state => state.user);
-
-  useEffect(() => {
-    dispatch(getAdminUsers());
-
-    if (error) {
-      toast.error(error);
-      dispatch(clearErrors());
-    }
-
-    if (deleteError) {
-      toast.error(deleteError);
-      dispatch(clearErrors());
-    }
-
-    if (isDeleted) {
-      toast.success('User Deleted Successfully!');
-      router.push(`${ROUTES.ADMIN_USERS}`);
-      dispatch({ type: DELETE_USER_RESET });
-    }
-  }, [dispatch, error, deleteError, isDeleted]);
+  const { data: usersList, isLoading, refetch } = useGetUsersList();
+  const { mutate: removeUser } = useDeleteUser();
 
   const handleRemove = useCallback(id => {
     setRemoveProduct(id);
@@ -46,17 +22,32 @@ const UserListPage = () => {
 
   const handleModal = useCallback((isRemoved, id) => {
     setIsModalOpen(false);
-    isRemoved && dispatch(deleteUser(id));
+    if (isRemoved) {
+      setIsDeleted(true);
+
+      removeUser(id, {
+        onSuccess: () => {
+          refetch();
+          setIsDeleted(false);
+          toast.success('User Deleted Successfully!');
+        },
+        onError: () => {
+          setIsDeleted(false);
+          toast.error('Something went wrong!!');
+        },
+      });
+    }
   }, []);
 
-  if (loading) return <Loading square />;
+  if (isLoading) return <Loading square />;
 
   return (
     <div className="p-users-list">
-      <UsersList users={users} totalUsers={users?.length} handleRemove={handleRemove} />
+      <UsersList users={usersList?.users} handleRemove={handleRemove} />
       {isModalOpen && (
         <Modal message="Do you want to remove this item?" onClick={handleModal} removeProductId={removeProduct} />
       )}
+      {isDeleted && <Loading overlay />}
     </div>
   );
 };
