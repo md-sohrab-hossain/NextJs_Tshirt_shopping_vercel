@@ -1,4 +1,5 @@
 import { useGetOrderList } from 'api/useGetOrderList';
+import { useGetUserDetails } from 'api/useGetUserDetails';
 import Footer from 'components/atoms/footer';
 import Navbar from 'components/organisms/navbar';
 import { ROUTES } from 'constants/routes';
@@ -11,11 +12,12 @@ import { useSelector } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Layout = ({ children, userDetails, title = 'Tshirt shopping' }) => {
+const Layout = ({ children, title = 'Tshirt shopping' }) => {
   const router = useRouter();
   const { LOGIN, MY_ORDERS } = ROUTES;
 
   const absoluteUrl = useGetAbsoluteUrl();
+  const { data: userDetails } = useGetUserDetails();
   const { data: orderList, refetch } = useGetOrderList(absoluteUrl);
   const { success } = useSelector(state => state.productOrder);
 
@@ -24,9 +26,9 @@ const Layout = ({ children, userDetails, title = 'Tshirt shopping' }) => {
   };
 
   useEffect(() => {
-    if (success || userDetails) refetch();
+    if (success) refetch();
     return () => refetch();
-  }, [success, userDetails]);
+  }, [success]);
 
   const handleLogout = () => {
     signOut({ redirect: true, callbackUrl: '/' });
@@ -48,7 +50,7 @@ const Layout = ({ children, userDetails, title = 'Tshirt shopping' }) => {
 
       <Navbar
         products={orderList}
-        user={userDetails}
+        user={userDetails?.user}
         handleCheckout={handleCheckout}
         handleLogin={handleLogin}
         handleLogout={handleLogout}

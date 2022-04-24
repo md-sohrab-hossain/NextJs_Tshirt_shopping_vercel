@@ -21,7 +21,7 @@ const CheckoutPage = () => {
 
   const absoluteUrl = useGetAbsoluteUrl();
   const { mutate: deleteProduct } = useDeleteProduct();
-  const { mutate: newProductOrder } = usePostNewOrder();
+  const { mutate: updateQuantity } = usePostNewOrder();
   const { data: orderList, isLoading, refetch } = useGetOrderList(absoluteUrl);
 
   useEffect(() => {
@@ -76,7 +76,7 @@ const CheckoutPage = () => {
       paymentInfo,
     };
 
-    newProductOrder(order, {
+    updateQuantity(order, {
       onSuccess: () => {
         refetch();
         setIsShowLoading(false);

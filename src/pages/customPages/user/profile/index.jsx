@@ -1,18 +1,15 @@
 import { useGetUserDetails } from 'api/useGetUserDetails';
+import { usePutUserProfile } from 'api/usePutUserProfile';
 import Heading from 'components/atoms/heading';
 import Loading from 'components/atoms/loading';
 import Form from 'components/molecules/form';
 import { getSession } from 'next-auth/client';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { clearErrors, updateProfile } from 'redux/actions/userAction';
-import { UPDATE_PROFILE_RESET } from 'redux/types/userTypes';
 
 const userProfilePage = () => {
-  const dispatch = useDispatch();
-
   const [avatar, setAvatar] = useState('');
+  const [isUpdated, setIsUpdated] = useState(() => false);
   const [avatarPreview, setAvatarPreview] = useState('/images/default_avatar.jpg');
 
   const [user, setUser] = useState({
@@ -22,9 +19,8 @@ const userProfilePage = () => {
   });
 
   const { name, email, password } = user;
-
+  const { mutate: updateProfile } = usePutUserProfile();
   const { data: userDetails, isLoading, refetch } = useGetUserDetails();
-  const { error, isUpdated } = useSelector(state => state.user);
 
   useEffect(() => {
     if (userDetails) {
@@ -35,18 +31,7 @@ const userProfilePage = () => {
       });
       setAvatarPreview(userDetails?.user.avatar.url);
     }
-
-    if (error) {
-      toast.error(error);
-      dispatch(clearErrors());
-    }
-
-    if (isUpdated) {
-      refetch();
-      dispatch({ type: UPDATE_PROFILE_RESET });
-      toast.success('Profile Update Successfully!');
-    }
-  }, [error, isUpdated, userDetails]);
+  }, [userDetails]);
 
   const onChange = useCallback(
     e => {
@@ -74,6 +59,7 @@ const userProfilePage = () => {
   const submitHandler = useCallback(
     e => {
       e.preventDefault();
+      setIsUpdated(true);
 
       const userData = {
         name,
@@ -86,7 +72,17 @@ const userProfilePage = () => {
         return toast.error('Please provide all required information !!');
       }
 
-      dispatch(updateProfile(userData));
+      updateProfile(userData, {
+        onSuccess: () => {
+          refetch();
+          setIsUpdated(false);
+          toast.success('Profile Updated Successfully!');
+        },
+        onError: () => {
+          setIsUpdated(false);
+          toast.error('Something went wrong!');
+        },
+      });
     },
     [user, avatar, avatarPreview]
   );
@@ -96,7 +92,7 @@ const userProfilePage = () => {
   return (
     <div className="p-profile">
       <Form
-        loading={isLoading}
+        loading={isUpdated}
         modifiers="update-profile"
         btnMessage="Update"
         hasName
