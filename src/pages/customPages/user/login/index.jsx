@@ -1,6 +1,10 @@
+import { useGetOrderList } from 'api/useGetOrderList';
+import { useGetUserDetails } from 'api/useGetUserDetails';
 import Heading from 'components/atoms/heading';
 import Loading from 'components/atoms/loading';
 import Form from 'components/molecules/form';
+import { ROUTES } from 'constants/routes';
+import { useGetAbsoluteUrl } from 'libs/utils';
 import { getSession, signIn } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -8,12 +12,14 @@ import { toast } from 'react-toastify';
 
 const LoginPage = () => {
   const router = useRouter();
+  const absoluteUrl = useGetAbsoluteUrl();
+  const { refetch: refetchUserDetails } = useGetUserDetails();
+  const { refetch: refetchOrderList } = useGetOrderList(absoluteUrl);
 
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
-
   const { email, password } = user;
   const [loading, setLoading] = useState(() => false);
   const [isRoutesChange, setIsRoutesChange] = useState(() => false);
@@ -50,8 +56,10 @@ const LoginPage = () => {
     if (result.error) {
       toast.error(result.error);
     } else {
+      refetchOrderList();
+      refetchUserDetails();
       setIsRoutesChange(true);
-      window.location.href = '/';
+      router.push(`${ROUTES.HOME}`);
     }
   };
 

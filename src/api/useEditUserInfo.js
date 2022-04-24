@@ -11,7 +11,7 @@ const updateInformation = async userData => {
   return await axios.put(`/api/admin/users/${userData[0]}`, userData[1], config);
 };
 
-export const usePutUserInfo = () => {
+export const useEditUserInfo = () => {
   return useMutation(async ({ data: userData }) => await updateInformation(userData), {
     onSuccess: async data => {
       return data;

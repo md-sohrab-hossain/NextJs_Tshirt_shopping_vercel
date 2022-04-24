@@ -1,4 +1,4 @@
-import { usePostRegisterUser } from 'api/usePostRegisterUser';
+import { useRegisterUser } from 'api/useRegisterUser';
 import Heading from 'components/atoms/heading';
 import Form from 'components/molecules/form';
 import { ROUTES } from 'constants/routes';
@@ -13,7 +13,7 @@ export default function RegisterPage() {
   const [isRegisterComplete, setIsRegisterComplete] = useState(() => false);
   const [avatarPreview, setAvatarPreview] = useState('/images/default_avatar.jpg');
 
-  const { mutate: registerUser } = usePostRegisterUser();
+  const { mutate: registerUser } = useRegisterUser();
   const [user, setUser] = useState({
     name: '',
     email: '',

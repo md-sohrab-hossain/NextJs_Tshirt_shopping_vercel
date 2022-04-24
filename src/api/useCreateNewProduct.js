@@ -1,18 +1,18 @@
 import axios from 'axios';
 import { useMutation } from 'react-query';
 
-const addNewProduct = async productData => {
+const createNew = async productData => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
 
-  return await axios.post('/api/productOrder', productData, config);
+  return await axios.post('/api/admin/products', productData, config);
 };
 
-export const usePostNewOrder = () => {
-  return useMutation(addNewProduct, {
+export const useCreateNewProduct = () => {
+  return useMutation(createNew, {
     onSuccess: async data => {
       return data;
     },

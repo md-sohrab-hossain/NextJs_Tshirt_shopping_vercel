@@ -1,18 +1,18 @@
 import axios from 'axios';
 import { useMutation } from 'react-query';
 
-const forgotPassword = async email => {
+const registerUser = async userData => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
 
-  return await axios.post('/api/user/password/forgot', email, config);
+  return await axios.post('/api/user/register', userData, config);
 };
 
-export const usePostForgotPassword = () => {
-  return useMutation(forgotPassword, {
+export const useRegisterUser = () => {
+  return useMutation(registerUser, {
     onSuccess: async data => {
       return data;
     },

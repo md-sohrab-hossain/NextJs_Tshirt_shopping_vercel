@@ -1,18 +1,18 @@
 import axios from 'axios';
 import { useMutation } from 'react-query';
 
-const registerUser = async userData => {
+const updateInformation = async userData => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
 
-  return await axios.post('/api/user/register', userData, config);
+  return await axios.put('/api/user/updateUserInfo', userData, config);
 };
 
-export const usePostRegisterUser = () => {
-  return useMutation(registerUser, {
+export const useEditUserProfile = () => {
+  return useMutation(updateInformation, {
     onSuccess: async data => {
       return data;
     },

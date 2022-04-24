@@ -1,6 +1,6 @@
 import { useGetOrderList } from 'api/useGetOrderList';
 import { useGetProductDetails } from 'api/useGetProductDetails';
-import { usePostNewOrder } from 'api/usePostNewOrder';
+import { useOrderNewProduct } from 'api/useOrderNewProduct';
 import Loading from 'components/atoms/loading';
 import ProductDetails from 'components/organisms/product-details';
 import { QUANTITY } from 'constants/options';
@@ -12,7 +12,8 @@ import { toast } from 'react-toastify';
 const ProductDetailsPage = () => {
   const router = useRouter();
   const [quantity, setQuantity] = useState(null);
-  const { mutate: orderProduct } = usePostNewOrder();
+  const [isOrderComplete, setIsOrderComplete] = useState(false);
+  const { mutate: orderProduct } = useOrderNewProduct();
 
   const absoluteUrl = useGetAbsoluteUrl();
   const { refetch } = useGetOrderList(absoluteUrl);
@@ -22,6 +23,7 @@ const ProductDetailsPage = () => {
 
   const handleOrder = useCallback(() => {
     if (!quantity) return toast.warning('Please Select Quantity!');
+    setIsOrderComplete(true);
 
     const order = {
       product: _id,
@@ -37,9 +39,13 @@ const ProductDetailsPage = () => {
     orderProduct(order, {
       onSuccess: ({ data }) => {
         refetch();
+        setIsOrderComplete(false);
         toast.success(data.message);
       },
-      onError: ({ data }) => toast.error(data.message),
+      onError: () => {
+        setIsOrderComplete(false);
+        toast.error('Something went wrong!!');
+      },
     });
   }, [quantity]);
 
@@ -49,7 +55,7 @@ const ProductDetailsPage = () => {
   return (
     <div className="p-product-details">
       <ProductDetails
-        loading={isLoading}
+        loading={isOrderComplete}
         images={images}
         brandName={name}
         price={price}

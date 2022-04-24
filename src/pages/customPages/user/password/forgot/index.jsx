@@ -1,4 +1,4 @@
-import { usePostForgotPassword } from 'api/usePostForgotPassword';
+import { useForgotPassword } from 'api/useForgotPassword';
 import Heading from 'components/atoms/heading';
 import Form from 'components/molecules/form';
 import React, { useCallback, useState } from 'react';
@@ -8,7 +8,7 @@ const ForgotPasswordPage = () => {
   const [email, setEmail] = useState('');
 
   const [isLoading, setIsLoading] = useState(() => false);
-  const { mutate: forgotPassword } = usePostForgotPassword();
+  const { mutate: forgotPassword } = useForgotPassword();
 
   const onChange = useCallback(
     e => {

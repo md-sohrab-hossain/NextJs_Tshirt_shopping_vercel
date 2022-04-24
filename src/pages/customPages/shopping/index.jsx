@@ -1,6 +1,6 @@
 import { useDeleteOrder } from 'api/useDeleteOrder';
 import { useGetOrderList } from 'api/useGetOrderList';
-import { usePostNewOrder } from 'api/usePostNewOrder';
+import { useOrderNewProduct } from 'api/useOrderNewProduct';
 import axios from 'axios';
 import getStripe from 'Backend/utils/getStripe';
 import Loading from 'components/atoms/loading';
@@ -21,7 +21,7 @@ const CheckoutPage = () => {
 
   const absoluteUrl = useGetAbsoluteUrl();
   const { mutate: removeOrder } = useDeleteOrder();
-  const { mutate: updateQuantity } = usePostNewOrder();
+  const { mutate: updateQuantity } = useOrderNewProduct();
   const { data: orderList, isLoading, refetch } = useGetOrderList(absoluteUrl);
 
   useEffect(() => {
@@ -109,6 +109,7 @@ const CheckoutPage = () => {
     }
   }, []);
 
+  console.log('order list --', orderList?.orders);
   if (isLoading) return <Loading square />;
   return (
     <>

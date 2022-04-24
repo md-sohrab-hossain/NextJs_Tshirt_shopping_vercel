@@ -5,11 +5,8 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { Provider } from 'react-redux';
-import { initStore, wrapper } from 'redux/store';
 import 'styles/index.scss';
 
-const store = initStore();
 const queryClient = new QueryClient();
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -33,12 +30,10 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <Layout>
-          <Component {...pageProps} />
-          {isRoutesChange && <Loading overlay />}
-        </Layout>
-      </Provider>
+      <Layout>
+        <Component {...pageProps} />
+        {isRoutesChange && <Loading overlay />}
+      </Layout>
       <ReactQueryDevtools />
     </QueryClientProvider>
   );
@@ -52,4 +47,4 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
   return { pageProps };
 };
 
-export default wrapper.withRedux(MyApp);
+export default MyApp;

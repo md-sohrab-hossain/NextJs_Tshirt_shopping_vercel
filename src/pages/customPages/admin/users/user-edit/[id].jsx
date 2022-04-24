@@ -1,6 +1,6 @@
+import { useEditUserInfo } from 'api/useEditUserInfo';
 import { useGetUserDetails } from 'api/useGetUserDetails';
 import { useGetUserDetailsById } from 'api/useGetUserDetailsById';
-import { usePutUserInfo } from 'api/usePutUserInfo';
 import Heading from 'components/atoms/heading';
 import Loading from 'components/atoms/loading';
 import Form from 'components/molecules/form';
@@ -24,7 +24,7 @@ const UpdateUserPage = () => {
   const { name, email, role } = userInfo;
 
   const { refetch } = useGetUserDetails();
-  const { mutate: updateUserInfo } = usePutUserInfo();
+  const { mutate: updateUserInfo } = useEditUserInfo();
   const { data: userData, isSuccess, isLoading } = useGetUserDetailsById(userId);
 
   useEffect(() => {

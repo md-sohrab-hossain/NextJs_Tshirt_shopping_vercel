@@ -1,3 +1,4 @@
+import { useCreateNewProduct } from 'api/useCreateNewProduct';
 import { useGetUserDetails } from 'api/useGetUserDetails';
 import Heading from 'components/atoms/heading';
 import Form from 'components/molecules/form';
@@ -6,16 +7,17 @@ import { getSession } from 'next-auth/client';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { clearErrors, createNewProduct } from 'redux/actions/productAction';
-import { NEW_PRODUCT_RESET } from 'redux/types/productsType';
 
 const defaultImg = '/images/white_tshirt.png';
 const DynamicCustomImageEditor = dynamic(() => import('components/molecules/image-editor'), { ssr: false });
 
 const CreateNewProductPage = () => {
+  const router = useRouter();
+  const [images, setImages] = useState([]);
   const [imgSrc, setImgSrc] = useState(defaultImg);
+  const [isCreated, setIsCreated] = useState(() => false);
+  const [imagesPreview, setImagesPreview] = useState([]);
   const [productInfo, setProductInfo] = useState({
     name: '',
     price: '',
@@ -23,29 +25,8 @@ const CreateNewProductPage = () => {
   });
 
   const { name, price, description } = productInfo;
-
-  const [images, setImages] = useState([]);
-  const [imagesPreview, setImagesPreview] = useState([]);
-
-  const dispatch = useDispatch();
-  const router = useRouter();
-
-  const { loading, error, success } = useSelector(state => state.createNewProduct);
-  const { data: userDetails, isSuccess } = useGetUserDetails();
-  // const { user } = useSelector(state => state.loadedUser);
-
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-      dispatch(clearErrors());
-    }
-
-    if (success) {
-      toast.success('Product Created successfully!');
-      router.push(`${ROUTES.ADMIN_PRODUCTS_LIST}`);
-      dispatch({ type: NEW_PRODUCT_RESET });
-    }
-  }, [dispatch, error, success]);
+  const { mutate: createNewProduct } = useCreateNewProduct();
+  const { data: userDetails } = useGetUserDetails();
 
   useEffect(() => {
     if (imgSrc.match(/\/images\/white_tshirt/g)) return;
@@ -85,6 +66,7 @@ const CreateNewProductPage = () => {
 
   const submitHandler = e => {
     e.preventDefault();
+    setIsCreated(true);
 
     const productData = {
       name,
@@ -97,7 +79,17 @@ const CreateNewProductPage = () => {
     if (images.length === 0) return toast.error('Please upload images.');
     if (!productData.name || !productData.price) return toast.error('Please provide name and price!');
 
-    dispatch(createNewProduct(productData));
+    createNewProduct(productData, {
+      onSuccess: () => {
+        setIsCreated(false);
+        toast.success('Product Created successfully!');
+        router.push(`${ROUTES.ADMIN_PRODUCTS_LIST}`);
+      },
+      onError: () => {
+        setIsCreated(false);
+        toast.error('Something went wrong!');
+      },
+    });
   };
 
   return (
@@ -108,7 +100,7 @@ const CreateNewProductPage = () => {
 
       <div className="p-create-new-product__form">
         <Form
-          loading={loading}
+          loading={isCreated}
           hasName
           hasPrice
           hasDescription

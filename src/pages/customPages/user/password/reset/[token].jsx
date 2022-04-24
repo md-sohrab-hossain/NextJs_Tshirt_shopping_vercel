@@ -1,4 +1,4 @@
-import { usePutResetPassword } from 'api/usePutResetPassword';
+import { useResetPassword } from 'api/useResetPassword';
 import Heading from 'components/atoms/heading';
 import Form from 'components/molecules/form';
 import { ROUTES } from 'constants/routes';
@@ -16,7 +16,7 @@ const NewPasswordPage = () => {
   const { password, confirmPassword } = userPassword;
 
   const [isLoading, setIsLoading] = useState(() => false);
-  const { mutate: resetPassword } = usePutResetPassword();
+  const { mutate: resetPassword } = useResetPassword();
 
   const handleInputChanges = useCallback(
     e => {

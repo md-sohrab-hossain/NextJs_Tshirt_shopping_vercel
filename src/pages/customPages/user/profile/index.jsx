@@ -1,5 +1,5 @@
+import { useEditUserProfile } from 'api/useEditUserProfile';
 import { useGetUserDetails } from 'api/useGetUserDetails';
-import { usePutUserProfile } from 'api/usePutUserProfile';
 import Heading from 'components/atoms/heading';
 import Loading from 'components/atoms/loading';
 import Form from 'components/molecules/form';
@@ -19,7 +19,7 @@ const userProfilePage = () => {
   });
 
   const { name, email, password } = user;
-  const { mutate: updateProfile } = usePutUserProfile();
+  const { mutate: updateProfile } = useEditUserProfile();
   const { data: userDetails, isLoading, refetch } = useGetUserDetails();
 
   useEffect(() => {

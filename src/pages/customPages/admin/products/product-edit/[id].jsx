@@ -1,5 +1,5 @@
+import { useEditProductInfo } from 'api/useEditProductInfo';
 import { useGetProductDetails } from 'api/useGetProductDetails';
-import { usePutProductInfo } from 'api/usePutProductInfo';
 import Heading from 'components/atoms/heading';
 import Loading from 'components/atoms/loading';
 import Form from 'components/molecules/form';
@@ -27,7 +27,7 @@ const EditProductPage = () => {
 
   const absoluteUrl = useGetAbsoluteUrl();
   const { data: productDetails, isLoading, isSuccess } = useGetProductDetails(absoluteUrl, router.query.id);
-  const { mutate: updateProductInfo } = usePutProductInfo();
+  const { mutate: updateProductInfo } = useEditProductInfo();
 
   useEffect(() => {
     if (isSuccess) {

@@ -8,7 +8,6 @@ import { signOut } from 'next-auth/client';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -19,16 +18,12 @@ const Layout = ({ children, title = 'Tshirt shopping' }) => {
   const absoluteUrl = useGetAbsoluteUrl();
   const { data: userDetails } = useGetUserDetails();
   const { data: orderList, refetch } = useGetOrderList(absoluteUrl);
-  const { success } = useSelector(state => state.productOrder);
 
   const handleLogin = () => {
     router.push(LOGIN);
   };
 
-  useEffect(() => {
-    if (success) refetch();
-    return () => refetch();
-  }, [success]);
+  useEffect(() => refetch(), []);
 
   const handleLogout = () => {
     signOut({ redirect: true, callbackUrl: '/' });

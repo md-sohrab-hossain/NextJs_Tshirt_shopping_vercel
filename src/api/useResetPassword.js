@@ -11,7 +11,7 @@ const resetPassword = async resetData => {
   return await axios.put(`/api/user/password/reset/${resetData[0]}`, resetData[1], config);
 };
 
-export const usePutResetPassword = () => {
+export const useResetPassword = () => {
   return useMutation(async ({ data: resetData }) => await resetPassword(resetData), {
     onSuccess: async data => {
       return data;
