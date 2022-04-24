@@ -1,24 +1,14 @@
+import { usePostForgotPassword } from 'api/usePostForgotPassword';
 import Heading from 'components/atoms/heading';
 import Form from 'components/molecules/form';
-import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
-import { clearErrors, forgotPassword } from 'redux/actions/userAction';
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState('');
 
-  const dispatch = useDispatch();
-  const { error, loading, message } = useSelector(state => state.forgotPassword);
-
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-      dispatch(clearErrors());
-    }
-
-    message && toast.success(message);
-  }, [dispatch, message, error]);
+  const [isLoading, setIsLoading] = useState(() => false);
+  const { mutate: forgotPassword } = usePostForgotPassword();
 
   const onChange = useCallback(
     e => {
@@ -29,20 +19,31 @@ const ForgotPasswordPage = () => {
 
   const submitHandler = e => {
     e.preventDefault();
+    setIsLoading(true);
     const userData = { email };
 
     if (!userData.email) {
-      toast.error('Please provide an Email address!');
-      return;
+      setIsLoading(false);
+      return toast.error('Please provide an Email address!');
     }
-    dispatch(forgotPassword(userData));
+
+    forgotPassword(userData, {
+      onSuccess: ({ data }) => {
+        setIsLoading(false);
+        toast.success(data?.message);
+      },
+      onError: () => {
+        setIsLoading(false);
+        toast.error('Something went wrong!!');
+      },
+    });
   };
 
   return (
     <div className="p-forgot-password">
       <Form
         modifiers="forgot-password"
-        loading={loading}
+        loading={isLoading}
         hasEmail
         email={email}
         btnMessage="Send Email"
