@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
 const ProductDetailsPage = () => {
   const router = useRouter();
   const [quantity, setQuantity] = useState(null);
-  const { mutate: newProductOrder } = usePostNewOrder();
+  const { mutate: orderProduct } = usePostNewOrder();
 
   const absoluteUrl = useGetAbsoluteUrl();
   const { refetch } = useGetOrderList(absoluteUrl);
@@ -34,7 +34,7 @@ const ProductDetailsPage = () => {
       },
     };
 
-    newProductOrder(order, {
+    orderProduct(order, {
       onSuccess: ({ data }) => {
         refetch();
         toast.success(data.message);

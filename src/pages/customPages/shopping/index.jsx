@@ -1,4 +1,6 @@
+import { useDeleteProduct } from 'api/useDeleteProduct';
 import { useGetOrderList } from 'api/useGetOrderList';
+import { usePostNewOrder } from 'api/usePostNewOrder';
 import axios from 'axios';
 import getStripe from 'Backend/utils/getStripe';
 import Loading from 'components/atoms/loading';
@@ -7,24 +9,20 @@ import OrderList from 'components/molecules/order-item-list';
 import { useGetAbsoluteUrl } from 'libs/utils';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { NewProductOrder, removeItems } from 'redux/actions/productOrderAction';
 
 const CheckoutPage = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
   const [totalPrice, setTotalPrice] = useState(() => 0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [removeProduct, setRemoveProduct] = useState(null);
+  const [removeProductId, setRemoveProductId] = useState(null);
   const [isShowLoading, setIsShowLoading] = useState(() => false);
   const [isRoutesChange, setIsRoutesChange] = useState(() => false);
 
   const absoluteUrl = useGetAbsoluteUrl();
+  const { mutate: deleteProduct } = useDeleteProduct();
+  const { mutate: newProductOrder } = usePostNewOrder();
   const { data: orderList, isLoading, refetch } = useGetOrderList(absoluteUrl);
-
-  const { success } = useSelector(state => state.productOrder);
-  const { success: remove } = useSelector(state => state.removeItem);
 
   useEffect(() => {
     const handleRouteChange = () => setIsRoutesChange(false);
@@ -38,17 +36,6 @@ const CheckoutPage = () => {
       router.events.off('routeChangeStart', handleChangeStart);
     };
   }, []);
-
-  useEffect(async () => {
-    if (success || remove) {
-      refetch();
-      setIsShowLoading(false);
-    }
-
-    remove && toast.warning('🚀Order remove successfully!!');
-
-    return () => setIsShowLoading(false);
-  }, [success, remove]);
 
   useEffect(() => {
     const totalOrder = orderList?.orders;
@@ -79,6 +66,8 @@ const CheckoutPage = () => {
   };
 
   const handleQuantity = useCallback((quantity, product, price, images, paymentInfo) => {
+    setIsShowLoading(true);
+
     const order = {
       product,
       quantity,
@@ -86,18 +75,37 @@ const CheckoutPage = () => {
       images,
       paymentInfo,
     };
-    setIsShowLoading(true);
-    dispatch(NewProductOrder(order));
+
+    newProductOrder(order, {
+      onSuccess: () => {
+        refetch();
+        setIsShowLoading(false);
+      },
+      onError: ({ data }) => toast.error(data.message),
+    });
   }, []);
 
   const handleRemove = useCallback(id => {
-    setRemoveProduct(id);
+    setRemoveProductId(id);
     setIsModalOpen(true);
   }, []);
 
   const handleModal = useCallback((isRemoved, id) => {
     setIsModalOpen(false);
-    isRemoved && dispatch(removeItems(id));
+    setIsShowLoading(true);
+
+    isRemoved &&
+      deleteProduct(id, {
+        onSuccess: () => {
+          refetch();
+          setIsShowLoading(false);
+          toast.warning('🚀Order remove successfully!!');
+        },
+        onError: ({ data }) => {
+          setIsShowLoading(false);
+          toast.error(data.message);
+        },
+      });
   }, []);
 
   if (isLoading) return <Loading square />;
@@ -113,7 +121,7 @@ const CheckoutPage = () => {
         />
       </div>
       {isModalOpen && (
-        <Modal message="Do you want to remove this item?" onClick={handleModal} removeProductId={removeProduct} />
+        <Modal message="Do you want to remove this item?" onClick={handleModal} removeProductId={removeProductId} />
       )}
       {(isRoutesChange || isShowLoading) && <Loading overlay />}
     </>
