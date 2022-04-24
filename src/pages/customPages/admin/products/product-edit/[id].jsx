@@ -1,16 +1,19 @@
+import { useGetProductDetails } from 'api/useGetProductDetails';
+import { usePutProductInfo } from 'api/usePutProductInfo';
 import Heading from 'components/atoms/heading';
 import Loading from 'components/atoms/loading';
 import Form from 'components/molecules/form';
 import { ROUTES } from 'constants/routes';
+import { useGetAbsoluteUrl } from 'libs/utils';
 import { getSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { clearErrors, getProductDetails, updateProduct } from 'redux/actions/productAction';
-import { UPDATE_PRODUCT_RESET } from 'redux/types/productsType';
 
 const EditProductPage = () => {
+  const router = useRouter();
+  const { id } = router.query;
+  const [isUpdated, setIsUpdated] = useState(false);
   const [productInfo, setProductInfo] = useState({
     name: '',
     price: '',
@@ -22,35 +25,20 @@ const EditProductPage = () => {
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const { id } = router.query;
-
-  const { loading, error, isUpdated } = useSelector(state => state.product);
-  const { product, error: productDetailsError } = useSelector(state => state.getProductDetails);
+  const absoluteUrl = useGetAbsoluteUrl();
+  const { data: productDetails, isLoading, isSuccess } = useGetProductDetails(absoluteUrl, router.query.id);
+  const { mutate: updateProductInfo } = usePutProductInfo();
 
   useEffect(() => {
-    if (!product || product?._id !== id) {
-      dispatch(getProductDetails('', id));
-    } else {
-      setProductInfo({ ...productInfo, name: product?.name, price: product?.price, description: product?.description });
+    if (isSuccess) {
+      setProductInfo({
+        ...productInfo,
+        name: productDetails?.name,
+        price: productDetails?.price,
+        description: productDetails?.description,
+      });
     }
-    if (error) {
-      toast.error(error);
-      dispatch(clearErrors());
-    }
-
-    if (productDetailsError) {
-      toast.productDetailsError(productDetailsError);
-      dispatch(clearErrors());
-    }
-    if (isUpdated) {
-      dispatch(getProductDetails('', id));
-      toast.success('Product Updated Successfully!');
-      router.push(`${ROUTES.ADMIN_PRODUCT_EDIT}/${id}`);
-      dispatch({ type: UPDATE_PRODUCT_RESET });
-    }
-  }, [dispatch, error, productDetailsError, isUpdated, product, id]);
+  }, [isSuccess]);
 
   const handleInputChanges = useCallback(
     e => {
@@ -84,6 +72,7 @@ const EditProductPage = () => {
 
   const submitHandler = e => {
     e.preventDefault();
+    setIsUpdated(true);
 
     const productData = {
       name,
@@ -95,15 +84,28 @@ const EditProductPage = () => {
     if (images.length !== 0) productData.images = images;
     if (!productData.name || !productData.price) return toast.error('Please provide name and price!');
 
-    dispatch(updateProduct(product._id, productData));
+    updateProductInfo(
+      { data: [id, productData] },
+      {
+        onSuccess: () => {
+          setIsUpdated(false);
+          toast.success('Product Updated Successfully!');
+          router.push(`${ROUTES.ADMIN_PRODUCT_EDIT}/${id}`);
+        },
+        onError: () => {
+          setIsUpdated(false);
+          toast.error('Something went wrong!!');
+        },
+      }
+    );
   };
 
-  if (!product) return <Loading square />;
+  if (isLoading) return <Loading square />;
 
   return (
     <div className="p-edit-product">
       <Form
-        loading={loading}
+        loading={isUpdated}
         hasName
         name={name}
         hasPrice
@@ -114,7 +116,7 @@ const EditProductPage = () => {
         btnMessage="Update"
         modifiers="create-new-product"
         imagesPreview={imagesPreview}
-        hasOldImagesPreview={product?.images}
+        hasOldImagesPreview={productDetails?.images}
         onChange={handleInputChanges}
         onSubmit={submitHandler}
       >

@@ -1,4 +1,4 @@
-import { useDeleteProduct } from 'api/useDeleteProduct';
+import { useDeleteOrder } from 'api/useDeleteOrder';
 import { useGetOrderList } from 'api/useGetOrderList';
 import { usePostNewOrder } from 'api/usePostNewOrder';
 import axios from 'axios';
@@ -20,7 +20,7 @@ const CheckoutPage = () => {
   const [isRoutesChange, setIsRoutesChange] = useState(() => false);
 
   const absoluteUrl = useGetAbsoluteUrl();
-  const { mutate: deleteProduct } = useDeleteProduct();
+  const { mutate: removeOrder } = useDeleteOrder();
   const { mutate: updateQuantity } = usePostNewOrder();
   const { data: orderList, isLoading, refetch } = useGetOrderList(absoluteUrl);
 
@@ -92,10 +92,10 @@ const CheckoutPage = () => {
 
   const handleModal = useCallback((isRemoved, id) => {
     setIsModalOpen(false);
-    setIsShowLoading(true);
 
-    isRemoved &&
-      deleteProduct(id, {
+    if (isRemoved) {
+      setIsShowLoading(true);
+      removeOrder(id, {
         onSuccess: () => {
           refetch();
           setIsShowLoading(false);
@@ -106,6 +106,7 @@ const CheckoutPage = () => {
           toast.error(data.message);
         },
       });
+    }
   }, []);
 
   if (isLoading) return <Loading square />;

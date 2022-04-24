@@ -1,18 +1,17 @@
 import axios from 'axios';
 import { useMutation } from 'react-query';
 
-const resetPassword = async resetData => {
+const updateProduct = async productInfo => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
-
-  return await axios.put(`/api/user/password/reset/${resetData[0]}`, resetData[1], config);
+  return await axios.put(`/api/user/products/${productInfo[0]}`, productInfo[1], config);
 };
 
-export const usePutResetPassword = () => {
-  return useMutation(async ({ data: resetData }) => await resetPassword(resetData), {
+export const usePutProductInfo = () => {
+  return useMutation(async ({ data: productInfo }) => await updateProduct(productInfo), {
     onSuccess: async data => {
       return data;
     },

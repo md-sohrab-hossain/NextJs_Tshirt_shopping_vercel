@@ -1,3 +1,4 @@
+import { useGetUserDetails } from 'api/useGetUserDetails';
 import Heading from 'components/atoms/heading';
 import Form from 'components/molecules/form';
 import { ROUTES } from 'constants/routes';
@@ -30,8 +31,8 @@ const CreateNewProductPage = () => {
   const router = useRouter();
 
   const { loading, error, success } = useSelector(state => state.createNewProduct);
-
-  const { user } = useSelector(state => state.loadedUser);
+  const { data: userDetails, isSuccess } = useGetUserDetails();
+  // const { user } = useSelector(state => state.loadedUser);
 
   useEffect(() => {
     if (error) {
@@ -90,7 +91,7 @@ const CreateNewProductPage = () => {
       price,
       description,
       images,
-      user,
+      user: userDetails?.user,
     };
 
     if (images.length === 0) return toast.error('Please upload images.');

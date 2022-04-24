@@ -1,91 +1,70 @@
+import { useDeleteProduct } from 'api/useDeleteProduct';
+import { useGetAdminProductsList } from 'api/useGetAdminProductsList';
 import Loading from 'components/atoms/loading';
 import Modal from 'components/molecules/modal';
 import ProductsList from 'components/organisms/products-list';
+import { useGetAbsoluteUrl } from 'libs/utils';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
-import { clearErrors, deleteProduct, getAdminProducts } from 'redux/actions/productAction';
-import { DELETE_PRODUCT_RESET } from 'redux/types/productsType';
 
-const ProductListPage = ({ props }) => {
+const ProductListPage = () => {
   const session = useSession();
   const router = useRouter();
-  const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [removeProduct, setRemoveProduct] = useState(null);
+  const [removeProductId, setRemoveProductId] = useState(null);
+  const [isShowLoading, setIsShowLoading] = useState(() => false);
+  const [pageNumber, setPageNumber] = useState(() => 1);
 
-  let { page = 1 } = router.query;
-  page = Number(page);
+  const absoluteUrl = useGetAbsoluteUrl();
+  const { mutate: removeProduct } = useDeleteProduct();
+  const { data, isLoading, refetch } = useGetAdminProductsList(absoluteUrl, pageNumber);
 
-  const { loading, products, productsCount, error } = props.products;
-  const { error: deleteError, isDeleted } = useSelector(state => state.product);
-
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-      dispatch(clearErrors());
-    }
-    if (deleteError) {
-      toast.error(deleteError);
-      dispatch(clearErrors());
-    }
-
-    if (isDeleted) {
-      toast.warning('🚀 Product Deleted!');
-      router.push(window.location.href);
-      dispatch({ type: DELETE_PRODUCT_RESET });
-    }
-  }, [dispatch, deleteError, error, isDeleted]);
-
-  const handlePagination = pageNumber => {
-    let url = window.location.href + `/?page=${pageNumber}`;
-    url = url.replace(/\b\?page=([1-9])(\/)?/g, '');
-    router.push(url);
-  };
+  const handlePagination = pageNumber => setPageNumber(pageNumber);
 
   const handleRemove = useCallback(id => {
-    setRemoveProduct(id);
+    setRemoveProductId(id);
     setIsModalOpen(true);
   }, []);
 
   const handleModal = useCallback((isRemoved, id) => {
     setIsModalOpen(false);
-    isRemoved && dispatch(deleteProduct(id));
+
+    if (isRemoved) {
+      setIsShowLoading(true);
+      removeProduct(id, {
+        onSuccess: () => {
+          refetch();
+          setIsShowLoading(false);
+          toast.warning('🚀 Product Deleted!!');
+        },
+        onError: ({ data }) => {
+          setIsShowLoading(false);
+          toast.error(data.message);
+        },
+      });
+    }
   }, []);
 
-  if (!session) {
-    router.push('/');
-  }
-
-  if (loading) return <Loading square />;
+  if (!session) router.push('/');
+  if (isLoading) return <Loading square />;
 
   return (
     <div className="p-product-info-list">
       <ProductsList
-        products={products}
-        totalProducts={productsCount}
-        activePage={page}
+        products={data?.products}
+        totalProducts={data?.productsCount}
+        activePage={pageNumber}
         handlePagination={handlePagination}
         handleRemove={handleRemove}
       />
       {isModalOpen && (
-        <Modal message="Do you want to remove this item?" onClick={handleModal} removeProductId={removeProduct} />
+        <Modal message="Do you want to remove this item?" onClick={handleModal} removeProductId={removeProductId} />
       )}
+      {isShowLoading && <Loading overlay />}
     </div>
   );
-};
-
-ProductListPage.getInitialProps = async ({ req, query, store }) => {
-  await store.dispatch(getAdminProducts(req, query.page));
-
-  const product = store.getState();
-  const products = product.getAllProductsAdmin;
-
-  return {
-    props: { products },
-  };
 };
 
 export default ProductListPage;

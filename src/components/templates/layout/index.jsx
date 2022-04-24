@@ -35,7 +35,7 @@ const Layout = ({ children, title = 'Tshirt shopping' }) => {
   };
 
   const handleCheckout = () => {
-    if (!orderList.orders.length) {
+    if (!orderList?.orders.length) {
       return toast.warning('Your cart is empty!');
     }
     router.push(MY_ORDERS);

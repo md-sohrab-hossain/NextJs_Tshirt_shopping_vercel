@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useMutation } from 'react-query';
 
 const removeProduct = async productId => {
-  return await axios.delete(`/api/productOrder/myOrder/${productId}`);
+  return await axios.delete(`/api/user/products/${productId}`);
 };
 
 export const useDeleteProduct = () => {
