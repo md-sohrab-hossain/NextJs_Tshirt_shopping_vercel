@@ -1,11 +1,10 @@
+import { usePutResetPassword } from 'api/usePutResetPassword';
 import Heading from 'components/atoms/heading';
 import Form from 'components/molecules/form';
 import { ROUTES } from 'constants/routes';
 import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
-import { clearErrors, resetPassword } from 'redux/actions/userAction';
 
 const NewPasswordPage = () => {
   const [userPassword, setUserPassword] = useState({
@@ -13,22 +12,11 @@ const NewPasswordPage = () => {
     confirmPassword: '',
   });
 
-  const dispatch = useDispatch();
   const router = useRouter();
-
   const { password, confirmPassword } = userPassword;
-  const { error, loading, success } = useSelector(state => state.forgotPassword);
 
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-      dispatch(clearErrors());
-    }
-
-    if (success) {
-      router.push(`${ROUTES.LOGIN}`);
-    }
-  }, [dispatch, success, error]);
+  const [isLoading, setIsLoading] = useState(() => false);
+  const { mutate: resetPassword } = usePutResetPassword();
 
   const handleInputChanges = useCallback(
     e => {
@@ -39,20 +27,38 @@ const NewPasswordPage = () => {
 
   const submitHandler = e => {
     e.preventDefault();
+    setIsLoading(true);
 
     const passwords = {
       password,
       confirmPassword,
     };
 
-    if (!passwords.password || !passwords.confirmPassword) return toast.error('Please provide all information!');
-    dispatch(resetPassword(router.query.token, passwords));
+    if (!passwords.password || !passwords.confirmPassword) {
+      setIsLoading(false);
+      return toast.error('Please provide all information!');
+    }
+
+    resetPassword(
+      { data: [router.query.token, passwords] },
+      {
+        onSuccess: ({ data }) => {
+          setIsLoading(false);
+          toast.success(data.message);
+          router.push(`${ROUTES.LOGIN}`);
+        },
+        onError: () => {
+          setIsLoading(false);
+          toast.error('Something went wrong!!');
+        },
+      }
+    );
   };
 
   return (
     <div className="p-reset-password">
       <Form
-        loading={loading}
+        loading={isLoading}
         hasPassword
         hasResetPassword
         btnMessage="Set Password"

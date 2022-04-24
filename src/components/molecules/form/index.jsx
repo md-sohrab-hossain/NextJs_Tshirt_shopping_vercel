@@ -105,13 +105,13 @@ const Form = ({
       {hasResetPassword && (
         <>
           <div className="m-form__reset-password">
-            <label htmlFor="confirm-password">
+            <label htmlFor="confirmPassword">
               <span>Confirm Password</span>
             </label>
 
             <InputText
               type="password"
-              name="confirm-password"
+              name="confirmPassword"
               placeholder="Enter Password Again"
               value={confirmPassword}
               onChange={onChange}
