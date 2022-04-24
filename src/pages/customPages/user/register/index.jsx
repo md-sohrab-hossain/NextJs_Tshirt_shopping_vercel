@@ -1,20 +1,19 @@
+import { usePostRegisterUser } from 'api/usePostRegisterUser';
 import Heading from 'components/atoms/heading';
 import Form from 'components/molecules/form';
 import { ROUTES } from 'constants/routes';
 import { getSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
-import { clearErrors, registerUser } from 'redux/actions/userAction';
 
 export default function RegisterPage() {
-  const dispatch = useDispatch();
   const router = useRouter();
-
   const [avatar, setAvatar] = useState('');
+  const [isRegisterComplete, setIsRegisterComplete] = useState(() => false);
   const [avatarPreview, setAvatarPreview] = useState('/images/default_avatar.jpg');
 
+  const { mutate: registerUser } = usePostRegisterUser();
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -22,19 +21,6 @@ export default function RegisterPage() {
   });
 
   const { name, email, password } = user;
-  const { success, error, loading } = useSelector(state => state.auth);
-
-  useEffect(() => {
-    if (success) {
-      toast.success('User register successfully!');
-      router.push(`${ROUTES.LOGIN}`);
-    }
-
-    if (error) {
-      toast.error(error);
-      dispatch(clearErrors());
-    }
-  }, [dispatch, success, error]);
 
   const onChange = useCallback(
     e => {
@@ -62,6 +48,7 @@ export default function RegisterPage() {
   const submitHandler = useCallback(
     e => {
       e.preventDefault();
+      setIsRegisterComplete(true);
 
       const userData = {
         name,
@@ -71,11 +58,21 @@ export default function RegisterPage() {
       };
 
       if (!userData.name || !userData.email || !userData.password || !userData.avatar) {
-        toast.error('Please provide all required information !!');
-        return;
+        setIsRegisterComplete(false);
+        return toast.error('Please provide all required information !!');
       }
 
-      dispatch(registerUser(userData));
+      registerUser(userData, {
+        onSuccess: () => {
+          setIsRegisterComplete(false);
+          toast.success('User register successfully!');
+          router.push(`${ROUTES.LOGIN}`);
+        },
+        onError: () => {
+          setIsRegisterComplete(false);
+          toast.error('Something went wrong!!');
+        },
+      });
     },
     [user, avatar, avatarPreview]
   );
@@ -83,7 +80,7 @@ export default function RegisterPage() {
   return (
     <div className="p-register">
       <Form
-        loading={loading}
+        loading={isRegisterComplete}
         btnMessage="Register"
         hasName
         name={name}
