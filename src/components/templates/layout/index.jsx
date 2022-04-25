@@ -23,7 +23,10 @@ const Layout = ({ children, title = 'Tshirt shopping' }) => {
     router.push(LOGIN);
   };
 
-  useEffect(() => refetchOrderList(), refetchUserInfo(), []);
+  useEffect(() => {
+    !userDetails?.user && refetchUserInfo();
+    userDetails?.user && refetchOrderList();
+  }, [userDetails]);
 
   const handleLogout = () => {
     signOut({ redirect: true, callbackUrl: '/' });
