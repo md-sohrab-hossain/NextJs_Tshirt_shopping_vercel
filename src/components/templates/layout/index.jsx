@@ -16,14 +16,14 @@ const Layout = ({ children, title = 'Tshirt shopping' }) => {
   const { LOGIN, MY_ORDERS } = ROUTES;
 
   const absoluteUrl = useGetAbsoluteUrl();
-  const { data: userDetails } = useGetUserDetails();
-  const { data: orderList, refetch } = useGetOrderList(absoluteUrl);
+  const { data: userDetails, refetch: refetchUserInfo } = useGetUserDetails();
+  const { data: orderList, refetch: refetchOrderList } = useGetOrderList(absoluteUrl);
 
   const handleLogin = () => {
     router.push(LOGIN);
   };
 
-  useEffect(() => refetch(), []);
+  useEffect(() => refetchOrderList(), refetchUserInfo(), []);
 
   const handleLogout = () => {
     signOut({ redirect: true, callbackUrl: '/' });

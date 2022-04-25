@@ -7,6 +7,7 @@ const fetchUserDetails = async () => {
 
 export const useGetUserDetails = () => {
   return useQuery(['userDetails'], fetchUserDetails, {
+    enabled: false,
     staleTime: 5000, // stel time used for stop recall api request
     refetchOnMount: false,
     refetchOnWindowFocus: false,
