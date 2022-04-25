@@ -19,23 +19,16 @@ const Layout = ({ children, title = 'Tshirt shopping' }) => {
   const { data: userDetails, refetch: refetchUserInfo } = useGetUserDetails();
   const { data: orderList, refetch: refetchOrderList } = useGetOrderList(absoluteUrl);
 
-  const handleLogin = () => {
-    router.push(LOGIN);
-  };
-
   useEffect(() => {
     !userDetails?.user && refetchUserInfo();
     userDetails?.user && refetchOrderList();
   }, [userDetails]);
 
-  const handleLogout = () => {
-    signOut({ redirect: true, callbackUrl: '/' });
-  };
+  const handleLogin = () => router.push(LOGIN);
+  const handleLogout = () => signOut({ redirect: true, callbackUrl: '/' });
 
   const handleCheckout = () => {
-    if (!orderList?.orders.length) {
-      return toast.warning('Your cart is empty!');
-    }
+    if (!orderList?.orders.length) return toast.warning('Your cart is empty!');
     router.push(MY_ORDERS);
   };
 
