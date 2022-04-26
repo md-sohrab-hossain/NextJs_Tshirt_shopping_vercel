@@ -1,0 +1,16 @@
+.a-error-message {
+  $root: &;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60%;
+
+  &__message {
+    margin: 2rem;
+    font-size: 1.8rem;
+    line-height: 22px;
+    color: $color-base-darkmagenta;
+  }
+}

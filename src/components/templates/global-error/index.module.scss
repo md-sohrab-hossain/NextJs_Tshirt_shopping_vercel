@@ -1,0 +1,32 @@
+.t-global-error {
+  &__section {
+    position: absolute;
+    top: 250%;
+    left: 25%;
+    width: 50%;
+    height: 20rem;
+    border: 1px solid $color-secondary-grey;
+    border-radius: 16px;
+
+    .a-icon {
+      left: 10%;
+      float: right;
+      margin: 1rem;
+      cursor: pointer;
+    }
+
+    .m-section__container {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      margin: 48px 65px;
+      @include sp {
+        margin: 32px 24px;
+      }
+    }
+    /* stylelint-disable-next-line selector-no-qualifying-type */
+    & + div[class='a-footer'] {
+      display: none;
+    }
+  }
+}

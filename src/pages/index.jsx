@@ -35,7 +35,7 @@ const App = () => {
       <DashBoard
         products={allProducts}
         onChange={handlePagination}
-        totalProducts={data.productsCount}
+        totalProducts={data?.productsCount}
         activePage={pageNumber}
         searchItems={searchItems}
       />

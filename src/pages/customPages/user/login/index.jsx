@@ -21,7 +21,7 @@ const LoginPage = () => {
     password: '',
   });
   const { email, password } = user;
-  const [loading, setLoading] = useState(() => false);
+  const [isLoading, setIsLoading] = useState(() => false);
   const [isRoutesChange, setIsRoutesChange] = useState(() => false);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const LoginPage = () => {
     router.events.on('routeChangeComplete', handleRouteChange);
 
     return () => {
-      setLoading(false);
+      setIsLoading(false);
       router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router.events]);
@@ -43,7 +43,7 @@ const LoginPage = () => {
 
   const submitHandler = async e => {
     e.preventDefault();
-    setLoading(true);
+    setIsLoading(true);
 
     const result = await signIn('credentials', {
       redirect: false,
@@ -51,7 +51,7 @@ const LoginPage = () => {
       password,
     });
 
-    setLoading(false);
+    setIsLoading(false);
 
     if (result.error) {
       toast.error(result.error);
@@ -67,7 +67,7 @@ const LoginPage = () => {
     <div className="p-login">
       <Form
         modifiers="login"
-        loading={loading}
+        loading={isLoading}
         hasEmail
         email={email}
         hasPassword

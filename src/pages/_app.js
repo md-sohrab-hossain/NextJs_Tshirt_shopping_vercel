@@ -1,5 +1,7 @@
 //!👇 here we customize our page default behaviour
+import * as Sentry from '@sentry/react';
 import Loading from 'components/atoms/loading';
+import GlobalError from 'components/templates/global-error';
 import Layout from 'components/templates/layout';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -30,10 +32,12 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Layout>
-        <Component {...pageProps} />
-        {isRoutesChange && <Loading overlay />}
-      </Layout>
+      <Sentry.ErrorBoundary fallback={({ error, resetError }) => <GlobalError error={error} onReset={resetError} />}>
+        <Layout>
+          <Component {...pageProps} />
+          {isRoutesChange && <Loading overlay />}
+        </Layout>
+      </Sentry.ErrorBoundary>
       <ReactQueryDevtools />
     </QueryClientProvider>
   );
